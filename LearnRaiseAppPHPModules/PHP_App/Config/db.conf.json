@@ -1,0 +1,7 @@
+{
+  "dbname": "bomba",
+  "host": "localhost",
+  "username": "root",
+  "password": "root",
+  "port": 8889
+}

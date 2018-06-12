@@ -1,0 +1,43 @@
+<div class="container-fluid main"
+     style="background: #ffffff url('../../assets/background/night.jpg') no-repeat center">
+
+  <!--Status Bars-->
+  <div class="bars-containner">
+    <app-tool-bar></app-tool-bar>
+  </div>
+
+  <!--Content-->
+  <div class="content-container" >
+    <router-outlet ></router-outlet>
+  </div>
+
+  <!--Extra Navigation-->
+  <!--<button class="dropup-btn btn-shadow" (click)="onViewExtraNav()">-->
+    <!--<i class="fa fa-angle-double-up fa-2x" aria-hidden="true" *ngIf="!extraNavActivated"></i>-->
+    <!--<i class="fa fa-times fa-2x" aria-hidden="true"*ngIf="extraNavActivated"></i>-->
+  <!--</button>-->
+  <!--<div class="extraNav-container opening" *ngIf="extraNavActivated">-->
+    <!--<app-extra-nav></app-extra-nav>-->
+  <!--</div>-->
+  <!--<div class="modal-backdrop fade show extraNav-shadow" *ngIf="extraNavActivated" (click)="closeModalBox()"></div>-->
+
+
+  <!--Main navigation-->
+  <div class="navbar-container">
+    <app-nav-bar></app-nav-bar>
+  </div>
+
+  <!--Feed button-->
+  <button class="btn btn-primary feed-btn btn-shadow" (click)="onFeed()"><span class="feed-text">+</span></button>
+  <button class="btn btn-primary logOut-btn btn-shadow" (click)="onLogOut()"><i class="fa fa-sign-out"></i></button>
+
+
+  <div class="feed-container openingFeed" *ngIf="isFeeding" >
+    <app-feed ></app-feed>
+  </div>
+  <div class="modal-backdrop fade show feed-shadow" *ngIf="isFeeding" (click)="closeModalBox()"></div>
+
+
+
+
+</div>

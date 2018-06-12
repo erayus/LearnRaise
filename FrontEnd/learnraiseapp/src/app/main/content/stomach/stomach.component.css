@@ -1,0 +1,65 @@
+.stomach-container{
+  height: 100% !important;
+  margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+.food-des-container{
+  height: 39%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 12px;
+  border: 1px solid darkblue;
+  word-wrap: break-word;
+  background-color: black;
+  opacity: 0.8;
+}
+.food-list-container{
+  height: 101%; /*prevent showing scroll bar*/
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0px 5px;
+  border-radius: 12px;
+  border: 1px solid darkblue;
+}
+.edit-container{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 9999999;
+  height: 275px;
+  min-width: 300px;
+}
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  min-width: 300px;
+  height: auto;
+  z-index: 99999999999999999;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+}
+@media screen and (min-width: 768px){
+  .food-des-container,.food-list-container{
+    height: 101%;
+    max-width:48%;
+  }
+  .food-list-container{
+    margin-left: 10px;
+  }
+  .food-des-container{
+    margin-left: 8px;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .food-des-container,.food-list-container{
+    margin-right: 8px;
+  }
+}
+
+
+

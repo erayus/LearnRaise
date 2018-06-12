@@ -1,0 +1,35 @@
+<div class="petchoose-wrapper text-center mt-5" *ngIf = "pet; else searchingTempl">
+  <div class="stage" *ngIf="currentStage === 'settingName'">
+    <div class="pet-pic" >
+      <img class="img-fluid " style="width: 100%" src="{{pet.curPic}}" />
+    </div>
+    <div class="row">
+      <a class="mx-auto">
+        <h6 class=" text-center" style="font-family: VT323; font-size: 1.3rem"> Here he is ! Let's give him a nickname </h6>
+        <input class="petname-input" name="petname" [(ngModel)]="petName"/>
+        <button class="btn btn-primary " (click)="moveToNextStage('communityAccess')" [disabled]="!petName">Set</button>
+      </a>
+    </div>
+  </div>
+
+  <div class="stage text-center mt-5" *ngIf="currentStage === 'communityAccess'">
+    <h1 style="font-family: Orbitron"> Join The Pack!!!</h1>
+    <p class="info-text" style="font-family: VT323; font-size: 1.5rem; width: 300px; margin: auto">
+      {{owner.nickName}}, you now are one of us.
+      Click <a href="https://www.facebook.com/groups/158649758099381/?ref=bookmarks" target="_blank">here</a> to join us!!
+    </p>
+    <button class="btn-block btn btn-outline-primary mt-3" style="width: 300px; margin: auto" (click)="moveToNextStage('InfoAnnouncement')" >Continue</button>
+  </div>
+
+  <div class="stage text-center mt-5" *ngIf="currentStage === 'InfoAnnouncement'">
+    <h1 style="font-family: Orbitron"> Adoption Completed</h1>
+    <p class="info-text" style="font-family: VT323; font-size: 1.5rem; width: 300px; margin: auto">{{pet.name}} now officially
+      become your pet. His destiny as well as AliCrea's destiny are now in your hands.
+      Raise him and train him to get ready for the battle with the Conquerors.
+    </p>
+    <button class="btn-block btn btn-outline-primary mt-3" style="width: 300px; margin: auto" (click)="navigateToMain()" >Let's start</button>
+  </div>
+
+</div>
+
+<ng-template #searchingTempl> Searching for him...</ng-template>

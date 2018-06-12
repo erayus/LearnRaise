@@ -1,0 +1,16 @@
+<div class="rank-board" *ngIf= "viewRankBoard" >
+  <div class="header">
+    <h3> Rank Board </h3>
+  </div>
+  <div class="rank-list">
+    <div class="rank-item" *ngFor="let rankItem of rankList">
+      <div class="rank-item-picture">
+        <img src=" {{rankItem.avatar}}" class="img-fluid avatar" >
+      </div>
+      <div class="rank-item-info">
+        <div><strong>Nickname:</strong> {{ rankItem.nickName}}</div>
+        <div><strong>Score:</strong> {{ rankItem.score}}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+h6{
+  font-family: Orbitron;
+}
+.authentication-wrapper{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  color: black;
+}
+
+
+.authentication-form{
+  position: absolute;
+  min-width: 300px;
+  max-width: 450px;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%,-33%);
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 576px) {
+  h6{
+    font-size: 1.7rem;
+  }
+}

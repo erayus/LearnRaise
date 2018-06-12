@@ -1,0 +1,9 @@
+<div class="col-md-12 food-item text-left" [ngClass]="{'cooked': isCooked, 'uncooked': !isCooked} ">
+  <div class="food-name" (click)="onSelect()" >
+    <div style="width: 100%"><strong>{{food.name | nameShorten}}({{food.type | typeShorten}})</strong></div>
+  </div>
+  <div class="icons">
+    <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true" (click)= "edit()" ></i>
+    <i class="fa fa-window-close delete-icon" aria-hidden="true" (click)="delete()" ></i>
+  </div>
+</div>

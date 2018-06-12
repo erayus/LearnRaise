@@ -1,0 +1,110 @@
+.extraNavs-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.extraNav {
+text-align: center;
+height: 50px;
+width: 50px;
+border-radius: 50%;
+margin-top: 8px;
+border: 1px solid darkblue;
+background-color: dodgerblue;
+cursor: pointer;
+-webkit-box-shadow: 0px 12px 5px -6px rgba(0, 0, 0, 0.75);
+-moz-box-shadow: 0px 12px 5px -6px rgba(0, 0, 0, 0.75);
+box-shadow: 0px 12px 5px -6px rgba(0, 0, 0, 0.75);
+}
+
+.extraNav:active{
+-webkit-box-shadow: 0px 12px 5px -6px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 12px 5px -6px rgba(0,0,0,0.75);
+box-shadow: 0px 12px 5px -8px rgba(0,0,0,0.75);
+transform: translateY(4px);
+background-color: darkblue;
+
+}
+.extraNav:hover{
+background-color: darkblue;
+color: white;
+}
+
+.extraNav-icon{
+  padding-top: 8px;
+  font-size: 1.8rem;
+}
+/*Rank Board*/
+.rank-board{
+  position: absolute;
+  width: 250px;
+  transform: translate(-50%,-115%);
+  border-radius: 12px;
+  background-color: lightblue;
+
+}
+.rank-board .header{
+  background-color: darkblue;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-top-right-radius: 12px ;
+  border-top-left-radius: 12px ;
+}
+
+.rank-list{
+  background-color: lightblue;
+  overflow-y: auto;
+  max-height: 280px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.rank-item{
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: white;
+  margin: 8px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 12px 5px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 12px 5px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 12px 5px -6px rgba(0, 0, 0, 0.75);
+}
+.rank-item:last-child{
+  margin-bottom: 20px;
+}
+.rank-item-picture{
+  width: 25%;
+  padding: 5px;
+  background-color: darkblue;
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+  display: flex;
+  justify-content: center;
+}
+.rank-item-info{
+  width: 75%;
+  padding: 5px;
+}
+.avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+@media screen and (min-width: 576px) {
+  .extraNav{
+    height: 70px;
+    width: 70px;
+  }
+  .extraNav-icon{
+    padding-top:19px;
+  }
+  .rank-board{
+    width: 450px;
+  }
+  .rank-list{
+    max-height: 400px;
+  }
+
+}

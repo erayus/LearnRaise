@@ -1,0 +1,35 @@
+<div class="row stomach-container pt-3 ">
+  <div class=" modal-content  hidden-md-up food-des-container" *ngIf="selectedFood && displayDes && isSelecting">
+    <app-food-des
+      [food]="selectedFood"
+    ></app-food-des>
+    <!--<ng-template #infoText>-->
+      <!--Click on the food to see how it was made;-->
+    <!--</ng-template>-->
+  </div>
+  <div class="modal-backdrop fade show hidden-md-up" *ngIf="isSelecting" (click)="closeEditingModalBox()"></div>
+  <div class=" col-md-3 food-list-container">
+    <app-food-list></app-food-list>
+  </div>
+
+  <div class=" col-md-9 hidden-sm-down food-des-container">
+    <app-food-des
+      [food]="selectedFood "
+      *ngIf="selectedFood && displayDes; else infoText"
+    ></app-food-des>
+    <ng-template #infoText >
+      <p style="color: white">Click on the food to see how it was made;</p>
+    </ng-template>
+  </div>
+  <!-- The Modal -->
+</div>
+
+
+<div class="modal-backdrop fade show" *ngIf="isEditing" (click)="closeEditingModalBox()"></div>
+<div class="edit-container" *ngIf="isEditing">
+  <app-food-edit [editingFoodIndex]="editingFoodIndex"></app-food-edit>
+</div>
+
+
+
+

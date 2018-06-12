@@ -1,0 +1,64 @@
+.food-item{
+  display: flex;
+  flex-wrap: nowrap;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+}
+
+.food-item.cooked{
+  background-color: dodgerblue;
+}
+.food-item.cooked:hover{
+  background-color: darkblue;
+  color: white;
+}
+.food-item.cooked.active{
+  background-color: darkblue;
+  color: white;
+}
+
+.food-item.uncooked{
+  color: white;
+  background-color: #E74B37;
+}
+.food-item.uncooked:hover{
+  color: white;
+  background-color: #BB3F30;
+}
+
+.food-name{
+  font-size: 0.9rem;
+  width: 65%;
+  margin-right: 10px;
+  word-wrap: break-word;
+  padding: 10px 0 10px 10px;
+}
+
+.icons{
+  width: 28%;
+  font-size: 1.1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 10px 0;
+  margin-right: 5px;
+}
+.delete-icon{
+  padding: 4px;
+
+}
+.edit-icon{
+  padding: 4px;
+}
+
+@media only screen and (min-width: 576px){
+  .food-name{
+    font-size: 0.9rem;
+    padding: 10px 0 10px 10px;
+  }
+}
+@media only screen and (min-width: 768px){
+}
+

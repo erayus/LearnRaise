@@ -1,0 +1,49 @@
+<div class="edit-box" xmlns="">
+  <div class="header p-2">
+    <h4>How would you like to cook the food? </h4>
+  </div>
+  <div class="edit-content">
+    <form (ngSubmit)= " onEdit(f) " #f="ngForm">
+      <div id="word-data">
+        <div class="form-group">
+          <label for="word"><strong>Food name*:</strong></label>
+          <input class="word-input form-control"
+                 id="word"
+                 name="foodName"
+                 autofocus="on"
+                 ngModel
+                 required>
+        </div>
+
+        <div class="form-group">
+          <label  for="wordType"><strong>Food type:</strong></label>
+          <select class="custom-select form-control wordType-input" id="wordType" name="foodType" ngModel>
+            <option value="none">None</option>
+            <option value="noun">Noun</option>
+            <option value="verb">Verb</option>
+            <option value="adjective">Adjective</option>
+            <option value="adverb">Adverb</option>
+            <option value="pronoun">Pronoun</option>
+            <option value="preposition">Preposition</option>
+            <option value="conjunction">Conjunction</option>
+            <option value="determiner">Determiner</option>
+            <option value="exclamation">Exclamation</option>
+            <option value="sentence">Sentence</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label  for="wordDes"><strong>Food description:</strong> </label>
+          <textarea  class="autoExpand form-control" id="wordDes" rows="1" data-min-rows='1' name="foodDes" ngModel></textarea>
+        </div>
+
+        <div class="form-group">
+          <label  for="wordDes"><strong>Food example:</strong> </label>
+          <textarea  class="autoExpand form-control" id="wordExample" rows="1" data-min-rows='1' name="foodExample" ngModel></textarea>
+        </div>
+      </div>
+      <button class="btn  btn-block edit-btn" [disabled]="!f.valid">Cook/Update</button>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,187 @@
+.main{
+  position: relative;
+  height: 100vh;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-size: cover;
+}
+
+.content-container{
+  height: 68vh;
+  position: relative;
+}
+
+.dropup-btn{
+  position: absolute;
+  left: 50%;
+  bottom: 13%;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%,-13%);
+  background-color: dodgerblue;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  z-index: 100;
+}
+.navbar-container{
+  height: 10vh;
+  position: fixed;
+  bottom: 0;
+  left:50%;
+  transform: translate(-50%,0);
+  width: 100vw;
+}
+
+
+.feed-btn{
+  position: fixed;
+  border-radius: 50%;
+  cursor: pointer;
+  bottom: 60px;
+  right: 15px;
+  height: 53px;
+  width: 50px;
+  background-color: dodgerblue;
+  font-size: 30px;
+}
+.logOut-btn{
+  position: fixed;
+  border-radius: 50%;
+  cursor: pointer;
+  bottom: 120px;
+  right: 15px;
+  height: 50px;
+  width: 50px;
+  background-color: dodgerblue;
+  font-size: 30px;
+  font-size: 1.4rem;
+}
+
+.btn-shadow{
+  border: solid black 1px;
+  -webkit-box-shadow: 0px 4px 5px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 4px 5px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 4px 5px 1px rgba(0,0,0,0.75);
+}
+
+.feed-btn:hover, .dropup-btn:hover{
+  background-color: darkblue;
+  color: white;
+}
+
+.feed-btn:active, .dropup-btn:active{
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+}
+.modal-backdrop.feed-shadow{
+  z-index: 100;
+}
+.modal-backdrop.extraNav-shadow{
+  z-index: 99;
+}
+.feed-container{
+  position: fixed;
+  z-index: 101;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%,-10%);
+  height: 300px;
+  min-width: 300px;
+}
+.feed-container.openingFeed{
+  animation: openingFeed 600ms 1 forwards;
+  -webkit-animation: openingFeed 600ms 1 forwards;
+}
+
+.extraNav-container{
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  bottom: 20%;
+  transform: translate(-50%,-20%);
+  width: auto;
+  height: auto;
+}
+.extraNav-container.opening{
+  animation: opening 600ms 1 forwards;
+  -webkit-animation: opening 600ms 1 forwards;
+}
+
+@keyframes opening{
+  0%{
+    transform: translate(-30px,220px);
+    opacity: 0;
+  }
+  90%{
+    transform: translate(-30px,-120px);
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+-webkit-@keyframes opening{
+          0%{
+            transform: translate(-35px,150px);
+            opacity: 0;
+          }
+          90%{
+            transform: translate(-35px,120px);
+          }
+          100%{
+            display: block;
+            opacity: 1;
+          }
+        }
+
+@keyframes openingFeed{
+  0%{
+    transform: translate(60%,90%);
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
+-webkit-@keyframes openingFeed {
+          0% {
+            transform: translate(60%, 90%);
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+@media screen and (min-width: 576px){
+  .feed-btn{
+    height: 70px;
+    width: 70px;
+  }
+  .logOut-btn{
+    height: 70px;
+    width: 70px;
+    bottom: 140px;
+    font-size: 1.8rem;
+  }
+  .feed-container{
+    width: 450px;
+  }
+  .dropup-btn{
+    height: 70px;
+    width: 70px;
+  }
+}
+
+
+@media screen and (min-width: 760px){
+
+}
+
+
+

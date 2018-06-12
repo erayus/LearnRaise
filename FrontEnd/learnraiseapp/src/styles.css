@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+@import url('https://fonts.googleapis.com/css?family=VT323');
+html{
+  height: 100%;
+}
+body{
+  overflow-x: hidden;
+  padding: 0  !important;   /*prevent default behavior of bootstrap modal*/
+  height: 100%;
+}
+
+
+.app-root{
+  height: 100%;
+}

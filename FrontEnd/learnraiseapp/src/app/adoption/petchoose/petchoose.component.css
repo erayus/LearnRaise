@@ -1,0 +1,20 @@
+.petname-input{
+  width: 100%;
+  border: 1px solid darkblue;
+  border-radius: 15px;
+  margin: 10px 0;
+  outline: none;
+  padding: 5px;
+  color: darkblue;
+}
+.petname-input:focus{
+  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
+  -moz-box-shadow: 0px 0px 5px 1px darkblue;
+  box-shadow: 0px 0px 5px 1px darkblue;
+}
+.pet-pic{
+  border-radius: 100%;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}

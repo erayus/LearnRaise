@@ -1,0 +1,19 @@
+.adoption-wrapper{
+  width: 100vw;
+  height: 100vh;
+}
+.adoption-content{
+  margin: 70px auto 100px;
+  width: 275px;
+}
+
+@media screen and (min-width: 576px){
+  h6{
+    font-size: 1.4rem;
+  }
+  .adoption-content{
+    margin: 70px auto 100px;
+    width: 500px;
+  }
+
+}

@@ -1,0 +1,145 @@
+.quizz-pages-container{
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+.quizz-box{
+  min-width: 275px;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid darkblue;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 11px 3px -7px grey;
+  -moz-box-shadow: 0px 11px 3px -7px grey;
+  box-shadow: 0px 11px 3px -7px grey;
+  color: darkblue;
+  position: relative;
+  height: auto;
+  margin: 150px auto 150px ;
+}
+
+.quizz-btn{
+  border: 1px solid darkblue;
+  background-color: white;
+  color: darkblue;
+}
+.quizz-btn:hover{
+  transition: background-color 0.5s ease;
+  background-color: darkblue;
+  color: white;
+}
+
+
+.page-1{
+  text-align: center;
+}
+
+
+.page-2{
+  position: relative;
+  height: 145px;
+}
+.nickname-input{
+  width: 100%;
+  border: 1px solid darkblue;
+  border-radius: 15px;
+  margin: 10px 0;
+  outline: none;
+  padding: 5px;
+  color: darkblue;
+}
+.nickname-input:focus{
+  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
+  -moz-box-shadow: 0px 0px 5px 1px darkblue;
+  box-shadow: 0px 0px 5px 1px darkblue;
+}
+
+.proceed-btn{
+  position: absolute;
+  bottom: 4px;
+  right:4px;
+}
+.preceed-btn{
+  position: absolute;
+  bottom: 3px;
+  left:3px;
+}
+
+/*page 3*/
+.page-3{
+  height: auto;
+  position: relative;
+}
+.avatar-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 48px;
+}
+.avatar{
+  width:70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+.avatar:hover{
+  border: 1px solid darkblue;
+  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
+  -moz-box-shadow: 0px 0px 5px 1px darkblue;
+  box-shadow: 0px 0px 5px 1px darkblue;
+}
+.selected{
+  border: 1px solid darkblue;
+  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
+  -moz-box-shadow: 0px 0px 5px 1px darkblue;
+  box-shadow: 0px 0px 5px 1px darkblue;
+}
+
+/*page 4*/
+.page-4{
+  position: relative;
+}
+
+.pet-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 35px;
+}
+.pet{
+  border-radius: 15px;
+  margin: 10px auto;
+  padding: 5px;
+  cursor: pointer;
+}
+.pet:hover{
+  border: 1px solid darkblue;
+  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
+  -moz-box-shadow: 0px 0px 5px 1px darkblue;
+  box-shadow: 0px 0px 5px 1px darkblue;
+}
+
+.pet-pic{
+  margin: auto;
+  width: 150px;
+  height: 150px;
+}
+
+.modal-body{
+  min-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.modal-backdrop{
+  z-index: -1;
+}
+
+
+.page-number{
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}

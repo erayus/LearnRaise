@@ -1,0 +1,26 @@
+<div class="bars-wrapper row d-flex justify-content-center pt-2">
+  <div class="bars-container">
+    <div class="health-symbol text-center">
+      <i class="heart fa fa-heart" aria-hidden="true"></i>
+    </div>
+    <div class="hungerTime-section text-center">
+      <span style="color: transparent"><strong>Health </strong></span>
+      <div class=" bar-container hungerBar" >
+        <div class="bar-item hunger-item" ></div>
+      </div>
+      <strong class="bar-text"> About {{estimation}}h left </strong>
+    </div>
+
+    <div class="exp-symbol">
+      <h1 class="exp text-center" *ngIf="petObj"> {{petObj.level}}</h1>
+    </div>
+    <div class="exp-section text-center">
+      <span style="color: transparent"><strong>Experience</strong></span>
+      <div class=" bar-container expBar">
+        <div class="bar-item exp-item" ></div>
+      </div>
+      <strong class="bar-text" *ngIf="petObj">{{this.petObj.experience[0]}}/{{this.petObj.experience[1]}}exp</strong>
+    </div>
+    </div>
+
+</div>

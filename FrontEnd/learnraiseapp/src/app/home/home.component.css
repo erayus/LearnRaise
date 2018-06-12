@@ -1,0 +1,9 @@
+.home-wrapper{
+  overflow-x: hidden;
+
+}
+.top-navbar{
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+}

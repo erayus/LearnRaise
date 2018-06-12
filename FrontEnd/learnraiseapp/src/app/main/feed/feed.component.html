@@ -1,0 +1,127 @@
+<!--Mannual Cook Form-->
+<div class="feed-box">
+  <div class="manualCookType" *ngIf="state === 'manual' ">
+    <div class="header p-2">
+      <h4>What is my food for today?</h4>
+    </div>
+    <div class="feed-content">
+      <form (ngSubmit)= " onFeed(f) " #f="ngForm">
+        <div id="word-data">
+          <div class="form-group">
+            <label for="word"><strong>Food name*:</strong></label>
+            <input class="word-input form-control"
+                   id="word"
+                   name="foodName"
+                   placeholder="example"
+                   ngModel
+                   autofocus
+                   spellcheck="true"
+                   dir="auto"
+                   required>
+          </div>
+
+          <div class="form-group">
+            <label  for="wordType"><strong>Food type:</strong></label>
+            <select class="custom-select form-control wordType-input" id="wordType" name="foodType" [ngModel]="defaultFoodType">
+              <option value="none">None</option>
+              <option value="noun">Noun</option>
+              <option value="verb">Verb</option>
+              <!--<option value="phrasal verb">Verb</option>-->
+              <option value="adjective">Adjective</option>
+              <option value="adverb">Adverb</option>
+              <option value="pronoun">Pronoun</option>
+              <option value="preposition">Preposition</option>
+              <option value="conjunction">Conjunction</option>
+              <option value="determiner">Determiner</option>
+              <option value="exclamation">Exclamation</option>
+              <option value="sentence">Sentence</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label  for="wordDes"><strong>Food description:</strong> </label>
+            <textarea
+              class="autoExpand form-control"
+              id="wordDes"
+              rows="1" data-min-rows='1'
+              name="foodDes"
+              ngModel
+              spellcheck
+              placeholder="This is description of food 'example'"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label  for="wordExample"><strong>Food example:</strong> </label>
+            <textarea
+              class="autoExpand form-control"
+              id="wordExample"
+              rows="1" data-min-rows='1'
+              name="foodExample"
+              spellcheck="true"
+              ngModel
+              placeholder="This is example of food 'example'"></textarea>
+          </div>
+        </div>
+        <button class="btn  btn-block feed-btn" [disabled]="!f.valid">Feed</button>
+      </form>
+      <button class="btn-block btn-primary mt-1" (click)="toggleCookType()">Auto Cook</button>
+    </div>
+  </div>
+
+
+  <!--AutoCook Form-->
+  <div class="autoCookType" *ngIf="state === 'auto' ">
+    <div class="header p-2">
+      <h4>Which food are you looking for?</h4>
+    </div>
+    <div class="feed-content">
+      <form (ngSubmit)= " onLookUp(f) " #f="ngForm">
+        <div id="wordLU-data">
+          <div class="form-group">
+            <label for="wordLU"><strong>Food name*:</strong></label>
+            <input class="word-input form-control"
+                   id="wordLU"
+                   name="foodNameLU"
+                   placeholder="example"
+                   ngModel
+                   autofocus
+                   spellcheck="true"
+                   dir="auto"
+                   required>
+          </div>
+          <!--<div class="form-group">-->
+            <!--<label for="wordLUResult"><strong>Result:</strong></label>-->
+            <!---->
+          <!--</div>-->
+        <button class="btn  btn-block feed-btn" [disabled]="!f.valid">Search</button>
+        </div>
+      </form>
+      <button class="btn-block btn-primary mt-1 " (click)="toggleCookType()">Manual Cook</button>
+    </div>
+  </div>
+
+  <div class="result-container" *ngIf="state === 'result' ">
+      <div class="header p-2">
+        <h4>Here are some things I found:</h4>
+      </div>
+    <div class="result-wrapper">
+      <div id="wordLUResult">
+        <h3 class="px-4"  style="color: darkblue"><strong>{{foodResultName | uppercase}}</strong></h3>
+        <div class="px-3 py-2 my-3 wordLUResultItem"
+             *ngFor="let resultItem of resultArray; let i = index"
+             (click)="selectFoodToStomach(i)">
+          <div><strong>Type: </strong> {{resultItem.type}}</div>
+          <strong>Definition:</strong>
+          <div>{{resultItem.description}}</div>
+          <strong>Example:</strong>
+          <div>{{resultItem.example}}</div>
+        </div>
+        <div *ngIf="resultArray.length === 0">
+         <strong>Searching....</strong>
+        </div>
+      </div>
+      <button class="btn  btn-block feed-btn mt-1 " [disabled]="foodsToStomach.length === 0" (click)="addSelectedFoodsToStomach()" >To Stomach</button>
+      <button class="btn-block btn-primary " style="padding:5px; margin: 10px 0" (click)="toggleCookType()">Back</button>
+    </div>
+  </div>
+</div>

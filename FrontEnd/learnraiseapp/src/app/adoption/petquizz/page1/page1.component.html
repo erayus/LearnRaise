@@ -1,0 +1,59 @@
+<div class="pages-wrapper">
+  <div class="page-1-wrapper">
+    <img class="pet-img pet-1" src="../../../../assets/pet/Nios.png">
+    <img class="pet-img pet-2" src="../../../../assets/pet/Eyos.png">
+    <img class="pet-img pet-3" src="../../../../assets/pet/Nera.png">
+
+    <div class="page-1-overlay animated fadeIn">
+      <div class="page-1-content">
+        <h5 class=" lines line-1"> In another universe, exists  </h5>
+        <h5 class="lines line-2">creatures called AliCrea. </h5>
+        <h5 class=" lines line-3">They lived peacefully</h5>
+        <h5 class=" lines line-4">together until that day came.</h5>
+      </div>
+      <button class="btn quizz-btn" (click)="continueToPage2()" > Continue</button>
+    </div>
+  </div>
+
+  <div class="page-2-wrapper">
+    <div class="page-2-overlay">
+      <div class="page-2-content">
+        <h5 class=" lines page2-line-1"> Their planet was invaded </h5>
+        <h5 class="lines page2-line-2">and destroyed by an identified </h5>
+        <h5 class=" lines page2-line-3">creature called themselves </h5>
+        <h5 class=" lines page2-line-4"> the Conquerors.</h5>
+      </div>
+      <button class="btn quizz-btn" (click)="continueToPage3()"> Continue</button>
+    </div>
+  </div>`
+  <div class="page-3-wrapper">
+    <div class="page-3-overlay">
+      <div class="page-3-content">
+        <h5 class=" lines page3-line-1">AliCreas used a portal to </h5>
+        <h5 class="lines page3-line-2">escape. They ended up falling  </h5>
+        <h5 class=" lines page3-line-3">into the Earth.</h5>
+      </div>
+      <button class="btn quizz-btn" (click)="continueToPage4()"> Continue</button>
+    </div>
+  </div>
+
+  <div class="page-4-wrapper">
+    <div class="page-4-overlay">
+      <div class="page-4-content">
+        <h5 class=" lines page4-line-1">In Earth, a group of inventors </h5>
+        <h5 class="lines page4-line-2">ran into AliCreas. Knowing  </h5>
+        <h5 class=" lines page4-line-3"> the story, they invented a </h5>
+        <h5 class=" lines page4-line-4"> digital world for AliCreas  </h5>
+        <h5 class=" lines page4-line-5">to live and hide from the </h5>
+        <h5 class=" lines page4-line-6">  Conquerors. They promised to  </h5>
+        <h5 class=" lines page4-line-7">  help them grow, regain </h5>
+        <h5 class=" lines page4-line-8">   their strength and reclaim </h5>
+        <h5 class=" lines page4-line-9">  what belong to them.</h5>
+      </div>
+      <button class="btn quizz-btn" [routerLink]="['../page2']" > To Registration</button>
+    </div>
+  </div>
+</div>
+
+
+

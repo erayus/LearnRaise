@@ -1,0 +1,72 @@
+/*Rank Board*/
+.rank-board{
+  max-width: 450px;
+  width: 300px;
+  margin: auto;
+  height: 95%;
+}
+.rank-board .header{
+  color: darkblue;
+  text-shadow: 0px 1px 5px #FFFFFF;
+  border-bottom: 3px solid darkblue;
+  text-align: center;
+  padding: 5px;
+  font-family: "Arial Black";
+  font-weight: bold;
+  box-shadow: 0 7px 5px -5px rgba(255, 255, 255, 0.7);
+}
+
+.rank-list{
+  overflow-y: auto;
+  height: 100%;
+  min-height: 300px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.rank-item{
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: white;
+  margin: 8px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 10px 5px -6px rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0px 10px 5px -6px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 10px 5px -6px rgba(255, 255, 255, 0.7);
+  border: 1px solid darkblue;
+}
+.rank-item:last-child{
+  margin-bottom: 20px;
+}
+.rank-item-picture{
+  width: 25%;
+  padding: 5px;
+  background-color: darkblue;
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+  display: flex;
+  justify-content: center;
+}
+.rank-item:nth-child(1) .rank-item-picture{
+  background-color: yellow;
+}
+.rank-item:nth-child(1){
+   -webkit-box-shadow: 0px 0px 8px 2px rgba(255, 255, 0, 0.9);
+   -moz-box-shadow: 0px 0px 8px 2px rgba(255, 255, 0, 0.9);
+   box-shadow: 0px 0px 8px 2px rgba(255, 255, 0, 0.9);
+ }
+.rank-item-info{
+  width: 75%;
+  padding: 5px;
+}
+.avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+@media screen and (min-width: 520px){
+  .rank-board{
+    width: 450px ;
+  }
+}

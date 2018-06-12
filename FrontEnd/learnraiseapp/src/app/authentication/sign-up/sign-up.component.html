@@ -1,0 +1,47 @@
+<div class="signup-form">
+  <h3 class="text-center" style=" color: black ; font-family: Orbitron , sans-serif; font-weight: bolder"> Sign Up  </h3>
+  <h3 class="text-center" style=" color: black ; font-family: Orbitron , sans-serif; font-weight: bolder"> To Learn and Grow With Your Fantasy Pet Now! </h3>
+  <div class="form-container">
+    <form  autocomplete="off" (ngSubmit)="onSignUp(f)" #f="ngForm" >
+      <div id="user-data">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email"
+                 id="email"
+                 name="email"
+                 placeholder="example@example.com"
+                 class="form-control"
+                 [ngClass]="{'ng-invalid': errorMessage.search('Password') == -1 ? true: false}"
+                 ngModel
+                 required
+                 email
+                 #userEmail="ngModel">
+          <span class="form-text error-message" *ngIf="errorMessage !== 'none'  && f.submitted === true && errorMessage.search('Password') == -1 && f.dirty">{{errorMessage}}  </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+                 id="password"
+                 name="password"
+                 placeholder="At least 6 characters"
+                 class="form-control"
+                 [ngClass]="{'ng-invalid': errorMessage.search('Password') !== -1 ? true: false}"
+                 ngModel
+                 required
+                 #userPassword="ngModel">
+          <span class="form-text error-message" *ngIf="errorMessage !== 'none'   && f.submitted === true && errorMessage.search('Password') !== -1 ">{{errorMessage}}  </span>
+        </div>
+      </div>
+      <div class="col-sm-12">
+      </div>
+      <button class="btn btn-success btn-block" style="cursor: pointer" [disabled]="f.invalid" >Sign Up</button>
+      <h6 class="text-center my-3 " style="color: white"> Or </h6>
+      <!--<hr>-->
+      <!--<button class="btn btn-block loginBtn loginBtn&#45;&#45;google" (click)="onLogInGoogle()">Login with Google </button>-->
+    </form>
+    <div class="col-sm-12 mt-2 text-center">
+      <a (click)="changeToLogIn()" style="text-decoration: underline; cursor: pointer; color: black">Already got a buddy? Connect now! </a>
+    </div>
+  </div>
+</div>
+

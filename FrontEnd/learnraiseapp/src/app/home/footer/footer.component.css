@@ -1,0 +1,23 @@
+.shortcut-link {
+  font-size: 1rem;
+}
+.footer-wrapper{
+  background-color: black;
+  height: 150px;
+  width: 100vw;
+  color: white;
+  padding: 10px;
+}
+.content{
+  width: 320px;
+  text-align: center;
+  margin: auto;
+  align-items: center;
+}
+
+h5{
+  font-family: Orbitron;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+

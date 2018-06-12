@@ -1,0 +1,8 @@
+.food-des-wrapper{
+  margin-top: 10px;
+  color: white;
+  background-color:  rgba(0, 0, 0, 0.4);
+  text-shadow: 0px 0px 4px #FFFFFF;
+  height: 95%;
+  padding: 10px;
+}

@@ -1,0 +1,324 @@
+.pages-wrapper{
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+.pet-img{
+  width: 100px;
+  height: 100px;
+}
+.pet-1{
+  position: absolute;
+  top: 50%;
+  left:20%;
+}
+.pet-2{
+  position: absolute;
+  top: 20%;
+  left:10%;
+}
+.pet-3{
+  position: absolute;
+  top: 30%;
+  left:55%;
+}
+
+.page-1-wrapper{
+  height: 100%;
+  width: 100%;
+  background: url('../../../../assets/background/adoption-1.jpg') left  no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+.page-1-overlay{
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%,5%);
+  border-radius: 15px;
+  padding: 10px;
+  width: 320px;
+}
+.page-1-content{
+  font-family: VT323;
+  height: 120px;
+}
+.lines{
+  font-size: 1.7rem;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  /*border-right: .15em solid orange; !* The typwriter cursor *!*/
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing:0 ; /* Adjust as needed */
+  float: left;
+  word-spacing: -6px;
+}
+.line-1{
+  width: 0%;
+  animation:
+    typing 2s steps(30, end);
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+
+.line-2{
+width: 0%;
+  animation:
+    typing 2s steps(30, end);
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+}
+.line-3{
+  width: 0%;
+  animation:
+    typing 2s steps(30, end);
+  animation-delay: 5.5s;
+  animation-fill-mode: forwards;
+}
+.line-4{
+  width: 0%;
+  animation:
+    typing 2s steps(30, end);
+  animation-delay: 7.5s;
+  animation-fill-mode: forwards;
+}
+
+
+.quizz-btn{
+  background-color: white;
+  color: black;
+  float: right;
+  cursor: pointer;
+}
+.page-2-wrapper{
+  height: 100%;
+  width: 100%;
+  background: url('../../../../assets/background/adoption-2.jpg') center no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+
+}
+
+.page-2-overlay{
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  z-index: 4;
+  transform: translate(-50%,5%);
+  border-radius: 15px;
+  padding: 10px;
+  width: 320px;
+  display: none;
+}
+.page-2-content{
+  font-family: VT323;
+  height: 120px;
+}
+.page2-line-1{
+  width: 0%;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode:  forwards;
+  animation-timing-function: steps(30,end);
+}
+
+.page2-line-2{
+  width: 0%;
+  animation-delay: 3s;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-fill-mode: forwards;
+}
+.page2-line-3{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+}
+
+.page2-line-4{
+  width: 0%;
+  animation-duration: 3s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 7s;
+  animation-fill-mode: forwards;
+}
+
+.page-3-wrapper{
+  height: 100%;
+  width: 100%;
+  background: url('../../../../assets/background/adoption-3.jpg') right no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+}
+.page-3-overlay{
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%,5%);
+  border-radius: 15px;
+  padding: 10px;
+  width: 320px;
+  display: none;
+}
+.page-3-content{
+  font-family: VT323;
+  height: 100px;
+}
+.page3-line-1{
+  width: 0%;
+  animation-delay: 1s;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-fill-mode: forwards;
+}
+
+.page3-line-2{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+
+}
+.page3-line-3{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+}
+
+.page-4-wrapper{
+  height: 100%;
+  width: 100%;
+  background: url('../../../../assets/background/adoption-4.jpg') center no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.page-4-overlay{
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%,5%);
+  border-radius: 15px;
+  padding: 10px;
+  width: 320px;
+  display: none;
+}
+.page-4-content{
+  font-family: VT323;
+  height: 270px;
+}
+.page4-line-1{
+  width: 0%;
+  animation-delay: 1s;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-fill-mode: forwards;
+}
+
+.page4-line-2{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+
+}
+.page4-line-3{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+}
+.page4-line-4{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 7s;
+  animation-fill-mode: forwards;
+}
+.page4-line-5{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 9s;
+  animation-fill-mode: forwards;
+}
+
+.page4-line-6{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 11s;
+  animation-fill-mode: forwards;
+}
+
+.page4-line-7{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 13s;
+  animation-fill-mode: forwards;
+}
+.page4-line-8{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 15s;
+  animation-fill-mode: forwards;
+}
+
+.page4-line-9{
+  width: 0%;
+  animation-duration: 2s;
+  animation-timing-function: steps(30,end);
+  animation-delay: 17s;
+  animation-fill-mode: forwards;
+}
+
+
+
+
+
+
+
+
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0
+  }
+  to {
+    width: 100% }
+}
+
+

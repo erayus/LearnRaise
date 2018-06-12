@@ -1,0 +1,62 @@
+.edit-box{
+  background-color: snow;
+  position: relative;
+  -webkit-box-shadow: 0px 13px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 13px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 13px 5px 0px rgba(0,0,0,0.75);
+  height: auto;
+  border-radius: 12px;
+}
+.header{
+  text-align: center;
+  color: snow;
+  background-color: dodgerblue;
+  border-top-left-radius: 12px ;
+  border-top-right-radius:  12px ;
+}
+
+.edit-content{
+  padding: 24px;
+}
+#word-data{
+  height: 270px;
+  overflow-y: auto;
+}
+
+#wordDes, #wordExample {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  resize: none;
+}
+#word, #wordExample,#wordDes, label{
+  color: dodgerblue;
+}
+#word:focus,#wordDes:focus,#wordExample:focus,#wordType:focus{
+  -webkit-box-shadow: 0px 0px 5px 1px dodgerblue;
+  -moz-box-shadow: 0px 0px 5px 1px dodgerblue;
+  box-shadow: 0px 0px 5px 1px dodgerblue;
+}
+input::placeholder, textarea::placeholder {
+  color: dodgerblue;
+  opacity: 0.5;
+}
+option, select{
+  color: dodgerblue;
+}
+.edit-btn{
+  background-color: dodgerblue;
+  color: snow;
+}
+
+@media screen and (min-width:576px) {
+  .header h4{
+    font-size: 2rem;
+    padding: 8px;
+  }
+  #word-data{
+    height: auto;
+  }
+}
+
+

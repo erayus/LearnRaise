@@ -1,0 +1,162 @@
+
+.bars-wrapper{
+}
+.bars-container{
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  width: 100%;
+}
+.bar-text{
+  font-size: 0.7rem;
+  color: white;
+}
+
+.hungerTime-section{
+  width: 30%;
+  margin-right: 20px;
+}
+
+.health-symbol{
+  width: 70px;
+  height: 70px;
+  margin-top: auto ;
+  margin-bottom: auto ;
+  margin-left: 20px;
+  margin-right: -10px;
+  border-radius: 100%;
+  background: linear-gradient(darkblue, blue);
+  color:  orangered;
+  z-index: 2;
+}
+
+.heart{
+  font-size: 2.5rem;
+  padding-top: 18px;
+}
+
+.exp-section{
+  width: 30%;
+  margin: 0 20px;
+}
+.exp-symbol{
+  width: 70px;
+  height: 70px;
+  margin-top: auto ;
+  margin-bottom: auto ;
+  margin-left: 10px;
+  margin-right: -30px;
+  border-radius: 100%;
+  color: greenyellow;
+  background: linear-gradient(darkblue, blue);
+  z-index: 2;
+}
+.exp{
+  font-size: 2.4rem;
+  padding-top: 12px;
+}
+
+.bar-container{
+  border: 5px solid darkblue;
+  width:100%;
+  height: 44px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 1.5px;
+}
+.bar-item{
+  margin: 0;
+  color: white;
+  height: 100%;
+}
+.hungerBar .bar-item{
+  background: linear-gradient(red, orange)
+}
+.expBar .bar-item{
+  background: linear-gradient(green, greenyellow)
+}
+@media screen and (min-width: 576px){
+  .bars-container{
+    width: 80%;
+  }
+  .health-symbol{
+    margin-right: -10px;
+  }
+  .exp-symbol{
+  }
+  .bar-text{
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .bars-container {
+    width: 85%;
+  }
+
+  .health-symbol{
+    width: 90px;
+    height: 80px;
+    margin-right: -60px;
+  }
+  .heart{
+    font-size: 2.7rem;
+    padding-top: 25px;
+  }
+  .exp-symbol{
+    width: 90px;
+    height: 80px;
+    margin-right: -60px;
+  }
+  .exp{
+    font-size: 2.7rem;
+    padding-top: 15px;
+  }
+  .hungerTime-section {
+    margin: 0 50px;
+    width: 40%;
+  }
+
+  .exp-section {
+    width: 40%;
+    margin: 0 50px;
+  }
+}
+  @media screen and (min-width: 1000px) {
+
+    .bars-container {
+      width: 85%;
+    }
+
+    .hungerTime-section{
+      width: 45%;
+    }
+    .hungerBar{
+      height: 50px;
+    }
+    .health-symbol{
+      width: 100px;
+      height: 90px;
+      margin-right: -80px;
+    }
+    .exp-section{
+      width: 45%;
+    }
+    .expBar{
+      height: 50px;
+    }
+    .exp-symbol{
+      width: 100px;
+      height: 90px;
+      margin-right: -80px;
+    }
+    .exp{
+      font-size: 2.5rem;
+      padding-top: 18px;
+    }
+    .hungerTime-section {
+      margin: 0 70px;
+    }
+    .exp-section {
+      margin: 0 70px;
+    }
+  }

@@ -1,0 +1,87 @@
+<nav class="navbar  navbar-toggleable-sm navbar-inverse animated fadeInDown">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand pl-5" href="/">LearnRaise</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-md-auto">
+      <li class="nav-item active px-md-4">
+        <a class="nav-link" href="#">Home </a>
+      </li>
+      <li class="nav-item pr-4">
+        <a class="nav-link"   style="cursor: pointer" (click)="onToSignIn()">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!--<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">-->
+  <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content" *ngIf="isSigningIn">-->
+      <!--<div class="modal-header">-->
+        <!--<h4 class="modal-title" >Sign In</h4>-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+          <!--<span aria-hidden="true">&times;</span>-->
+        <!--</button>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+        <!--<div class="form-container">-->
+          <!--<form (ngSubmit)="onSignIn(f)" #f="ngForm">-->
+            <!--<div id="userLogIn-data">-->
+              <!--&lt;!&ndash;<button class="btn btn-primary" type="button" (click)="loginGoogle()" >Log In With Google</button>&ndash;&gt;-->
+              <!--<div class="form-group">-->
+                <!--<label for="emailLogIn">Email</label>-->
+                <!--<input type="email"-->
+                       <!--id="emailLogIn"-->
+                       <!--name="email"-->
+                       <!--class="form-control"-->
+                       <!--[ngClass]="{'ng-invalid': errorMessage.search('password') == -1 ? true: false}"-->
+                       <!--ngModel=""-->
+                       <!--required-->
+                       <!--email-->
+                       <!--#userEmail="ngModel">-->
+                <!--<span class="form-text error-message" *ngIf="errorMessage !== 'none'  && f.submitted === true && errorMessage.search('password') == -1 && f.dirty">{{errorMessage}}  </span>-->
+              <!--</div>-->
+              <!--<div class="form-group">-->
+                <!--<label for="passwordLogIn">Password</label>-->
+                <!--<input type="password"-->
+                       <!--id="passwordLogIn"-->
+                       <!--name="password"-->
+                       <!--class="form-control"-->
+                       <!--[ngClass]="{'ng-invalid': errorMessage.search('password') !== -1 ? true: false}"-->
+                       <!--ngModel-->
+                       <!--required-->
+                       <!--#userPassword="ngModel">-->
+                <!--<span class="form-text error-message" *ngIf="errorMessage !== 'none'   && f.submitted === true && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<button class="btn btn-success btn-block"  type="submit" [disabled] = "!f.dirty">Submit</button>-->
+            <!--<div class="col-sm-12 mt-2 text-center">-->
+              <!--<a (click)="changeToSignUp()" style="cursor: pointer; color: blue; text-decoration: underline ">Have not got a pet yet? Adopt here!</a>-->
+            <!--</div>-->
+          <!--</form>-->
+        <!--</div>-->
+      <!--</div>-->
+  <!--</div>-->
+
+
+    <!--<div class="modal-content" *ngIf="!isSigningIn">-->
+      <!--<div class="modal-header">-->
+        <!--<h4 class="modal-title" >Sign Up</h4>-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+          <!--<span aria-hidden="true">&times;</span>-->
+        <!--</button>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+
+      <!--</div>-->
+    <!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+
+
+
+
+
+
