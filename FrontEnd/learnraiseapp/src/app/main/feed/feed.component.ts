@@ -19,13 +19,12 @@ export class FeedComponent implements OnInit, AfterViewChecked {
   resultArray = [];
   foodsToStomach = [];
   foodResultName: string;
-  constructor(private petServ: PetService,
+  constructor(
               private mainServ: MainService,
               private stomachServ: StomachService,
               private router: Router,
               private dictionaryServ: DictionaryService,
-              private route: ActivatedRoute,
-              private serverServ: ServerService) { }
+             ) { }
 
   ngOnInit() {
     this.defaultFoodType = 'none';

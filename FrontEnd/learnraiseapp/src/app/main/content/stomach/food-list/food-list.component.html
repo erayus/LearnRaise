@@ -1,5 +1,6 @@
 <div class="food-list-wrapper">
   <div  class="row justify-content-end mx-3">
+    <!--Search bar-->
     <div id="search" class=" my-2 ">
       <label for="search-input">
         <i  class="fa fa-search" aria-hidden="true">
@@ -14,8 +15,9 @@
     </div>
 
   </div>
-
+  <!--Food list-->
   <div class="row food-list" *ngIf="foods">
+    <!--Food item-->
     <app-food-item class="food-item col-xs-6 col-sm-4 col-md-12 col-lg-12"
                    *ngFor="let foodEl of foods| foodFilter: filterFood.toLowerCase(): 'name' ; let i = index "
                    [food]="foodEl"

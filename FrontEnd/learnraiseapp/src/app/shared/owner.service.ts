@@ -25,13 +25,6 @@ export class OwnerService {
   initOwner(owner: Owner) {
     this.owner = owner;
   }
-  beUpToDate(id: string) {
-    this.serverServ.getOwner().subscribe(
-      (upToDateOwner) => {
-        this.owner = upToDateOwner;
-      }
-    )
-  }
 
   retrieveOwner() {
     return this.owner;
@@ -44,6 +37,7 @@ export class OwnerService {
     this.owner.avatar = newAvatar;
     console.log(this.owner.avatar);
   }
+
   gainScoreWhenFeeding(){
     this.owner.score += 1;
     this.saveOwnerToDatabase();

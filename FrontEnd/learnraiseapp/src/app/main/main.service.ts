@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 import {ServerService} from "../shared/server.service";
 import {PetService} from "../shared/pet.service";
 import {OwnerService} from "../shared/owner.service";
+import {StomachService} from "./content/stomach/stomach.service";
 
 @Injectable()
 export class MainService {
@@ -16,6 +17,7 @@ export class MainService {
   constructor(private serverServ: ServerService,
               private ownerService: OwnerService,
               private petService: PetService,
+              private stomachServ: StomachService
               ) {
   }
 
@@ -52,6 +54,13 @@ export class MainService {
         },
         (error) => console.log(error)
       );
+  }
+
+  /**
+   * Load foods from in stomach service
+   */
+  loadFoodsInStomach(){
+    this.stomachServ.loadFoodsFromDatabase();
   }
 
   resetInitiation() {

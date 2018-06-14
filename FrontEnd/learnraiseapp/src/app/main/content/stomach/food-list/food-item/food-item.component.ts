@@ -14,16 +14,16 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   isCooked = true;
   checkIfIsCookedSub: Subscription;
   constructor(private stomachServ: StomachService) { }
+
+  //If there is any change on any food item, ngOnInit will be called on all food item
   ngOnInit() {
     this.checkIfIsCooked();
-   this.checkIfIsCookedSub =  this.stomachServ.foodsChangedEvent.subscribe(
-      () => this.checkIfIsCooked()
-    )
   }
 
-  ngOnDestroy() {
-    this.checkIfIsCookedSub.unsubscribe();
-  }
+  /**
+   * Triggered every time there is any change in any food item
+   * To check if the food is cooked or not (word has enough info to be blue or red)
+   */
   checkIfIsCooked() {
     if ( this.food.type === 'none' || !this.food.description ) {
       this.isCooked = false;
@@ -31,9 +31,11 @@ export class FoodItemComponent implements OnInit, OnDestroy {
       this.isCooked = true;
     }
   }
+
   onSelect() {
     this.stomachServ.foodSelectedEvent.emit(this.food);
   }
+
   edit() {
     this.stomachServ.foodEditEvent.next( this.foodIndex ); // Pass to stomach.ts
   }
@@ -42,5 +44,9 @@ export class FoodItemComponent implements OnInit, OnDestroy {
     if (confirm('Are you sure you want to delete this food?')) {
       this.stomachServ.deleteFoodWithNameAndType(this.food.name, this.food.type);
     }
+  }
+
+  ngOnDestroy() {
+  //   this.checkIfIsCookedSub.unsubscribe();
   }
 }

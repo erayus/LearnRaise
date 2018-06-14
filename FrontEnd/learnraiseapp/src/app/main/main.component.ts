@@ -1,19 +1,14 @@
-import {AfterContentChecked, AfterViewChecked, Component, OnDestroy, OnInit, HostListener} from '@angular/core';
-import {Pet} from "../shared/pet.model";
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import {PetService} from "../shared/pet.service";
 import {MainService} from "./main.service";
-import {ActivatedRoute, Params} from "@angular/router";
 import {ServerService} from "../shared/server.service";
 import {Subscription} from "rxjs/Subscription";
 import {Food} from "../shared/food.model";
 import {StomachService} from "./content/stomach/stomach.service";
 import {GameService} from "../shared/game.service";
-import {OwnerService} from "../shared/owner.service";
 import {CanComponentDeactivate} from "./can-deactivate-guard.service";
 import {Observable} from "rxjs/Observable";
-import * as firebase from 'firebase';
 import {AuthService} from "../authentication/auth-service";
-import {LocalStorageManager} from "../shared/localStorageManager.service";
 declare var $: any;
 @Component({
   selector: 'app-main',
@@ -24,7 +19,6 @@ declare var $: any;
 
 export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   isFeeding = false;
-  ownerId: string;
   closeModalBoxSub: Subscription;
   notificationSub: Subscription;
   foodAddedSub: Subscription;
@@ -67,67 +61,65 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   // };
 
   ngOnInit() {
+    //Wait for the ownerKey to be ready first
+    this.serverServ.onOwnerKeyReady.subscribe(
+      ()=> {
+        // Initiate owner
+        this.mainServ.initOwner();
 
-        this.ownerId = this.serverServ.getUserId();
+        // Initiate pet
+        this.mainServ.initPet();
+        this.petServ.startGettingHungry();
 
-        const body = document.getElementsByTagName("BODY")[0];
-        if (body.classList.contains('modal-open')) {
-          body.classList.remove('modal-open');
-          const shadowEl = document.getElementsByClassName('modal-backdrop');
-          shadowEl[0].remove();
-        }
-        // Used to give notifications from any component within main
-        this.notificationSub = this.mainServ.onNotify
-          .subscribe(
-            (message: string) => confirm(message)
-          );
+        // Load food from the server to stomach
+        this.mainServ.loadFoodsInStomach();
+      }
+    );
 
-        this.serverServ.onOwnerKeyReady.subscribe(
-          ()=> {
-            // Initiate owner
-            this.mainServ.initOwner();
+    const body = document.getElementsByTagName("BODY")[0];
+    if (body.classList.contains('modal-open')) {
+      body.classList.remove('modal-open');
+      const shadowEl = document.getElementsByClassName('modal-backdrop');
+      shadowEl[0].remove();
+    }
+    // Used to give notifications from any component within main
+    this.notificationSub = this.mainServ.onNotify
+      .subscribe(
+        (message: string) => confirm(message)
+      );
 
-            // Initiate pet
-            this.mainServ.initPet();
-            this.petServ.startGettingHungry();
+    this.closeModalBoxSub = this.mainServ.onCloseFeedBox.subscribe(
+      () => {
+        this.closeModalBox()
+      }
+    );
 
-            // Load food from the server to stomach
-            this.stomachServ.loadFoodFromServer(this.ownerId);
-          }
-        );
+    // To be able to add food at any component within main
+    this.foodAddedSub = this.mainServ.onFeedPet.subscribe(
+      (food: Food) => {
+        this.stomachServ.addFood(food);
+        this.gameServ.onFoodAdded();
+      }
+    );
 
-        this.closeModalBoxSub = this.mainServ.onCloseFeedBox.subscribe(
-          () => {
-            this.closeModalBox()
-          }
-        );
-
-        // to be able to add food at any component within main
-        this.foodAddedSub = this.mainServ.onFeedPet.subscribe(
-          (food: Food) => {
-            this.stomachServ.addFood(food);
-            this.gameServ.onFoodAdded();
-          }
-        );
-
-        /**
-         *   Save Pet when the user minimize the window on mobile phohne
-         */
-        this.vis(() => {
-          if (!this.vis(() => {
-            })) {
-            this.petServ.saveLeaveTimeAndHungerTime();
-          } else {
-            // check if token has been expired and update hunger time
-            this.serverServ.getTokenReady();
-            this.petServ.checkHealthAndRetrievePet();
-          }
-        })
+    /**
+     *   Save Pet when the user minimize the window on mobile phone
+     */
+    this.vis(() => {
+      if (!this.vis(() => {
+        })) {
+        this.petServ.saveLeaveTimeAndHungerTime();
+      } else {
+        // check if token has been expired and update hunger time
+        this.serverServ.getTokenReady();
+        this.petServ.checkHealthAndRetrievePet();
+      }
+    })
   }
 
   // $(document).on('keydown', 'ctrl+enter', () => {
 
-// });
+  // });
   onFeed() {
     this.isFeeding = true;
   }

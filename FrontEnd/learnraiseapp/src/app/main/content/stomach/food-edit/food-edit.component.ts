@@ -18,9 +18,7 @@ export class FoodEditComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.editingFoodItem = this.stomachServ.getFoodByIndex(this.editingFoodIndex);
-    console.log(this.editingFoodIndex);
     setTimeout( () => {
-      console.log(this.editingFoodItem);
       this.editForm.setValue({
         foodName: this.editingFoodItem.name,
         foodType: this.editingFoodItem.type,
@@ -54,12 +52,12 @@ export class FoodEditComponent implements OnInit, AfterViewChecked {
       form.value.foodDes,
       form.value.foodExample
     );
-    // if (!this.stomachServ.checkSameFoods(newFood) && ) {
-    //   alert('This food has already been exist!')
-    // }else {
+    if (!this.stomachServ.checkSameFoods(newFood) ) {
+      alert('This food has already been exist!')
+    }else {
       this.stomachServ.updateFood(this.editingFoodIndex, newFood);
       this.closeEditBox();
-    // }
+    }
   }
 
 }

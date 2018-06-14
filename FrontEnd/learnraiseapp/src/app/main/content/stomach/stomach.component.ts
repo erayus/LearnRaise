@@ -39,14 +39,20 @@ export class StomachComponent implements OnInit, OnDestroy{
         this.router.navigate(['../petinfo'], {relativeTo: this.route});
       };
 
-    // When a food is selected
+    // When a food is selected, display its description
     this.stomachServ.foodSelectedEvent.subscribe(
       (food: Food) => {
-        this.selectedFood = food;
-        this.displayDes = true;
-        this.isSelecting = true;
+        this.selectAndDisplayFoodDes(food);
       }
     );
+
+    // When a food is added, select and display its description
+    this.stomachServ.foodAddedEvent.subscribe(
+      (food: Food) => {
+        this.selectAndDisplayFoodDes(food)
+      }
+    );
+
     // When a food is being edited
     this.foodEditSub = this.stomachServ.foodEditEvent.subscribe(
       (foodIndex: number) => {
@@ -56,13 +62,25 @@ export class StomachComponent implements OnInit, OnDestroy{
       }
     );
     // if there is any change in the food array, close the description window
-    this.stomachServ.foodsChangedEvent.subscribe(
-      () => this.displayDes = false
+    this.stomachServ.foodChangedEvent.subscribe(
+      (food: Food) => {
+        this.selectAndDisplayFoodDes(food)
+      }
     );
+
     this.closingEditModal = this.stomachServ.closeEditingModalBoxEvent.subscribe(
-      () => {this.closeEditingModalBox(); this.displayDes = false}
+      () => {
+        this.closeEditingModalBox();
+      }
     );
   }
+
+  selectAndDisplayFoodDes(selectedFood: Food){
+    this.selectedFood = selectedFood;
+    this.displayDes = true;
+    this.isSelecting = true;
+  }
+
   ngOnDestroy() {
     // this.stomachServ.saveFoodsToDatabase();
     this.foodEditSub.unsubscribe();
