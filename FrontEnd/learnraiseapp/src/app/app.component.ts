@@ -14,5 +14,6 @@ export class AppComponent implements OnInit{
     //   authDomain: "learnraise.firebaseapp.com",
     //   databaseURL: "https://learnraise.firebaseio.com"
     // });
+    console.log("Final version hell yes");
   };
 }

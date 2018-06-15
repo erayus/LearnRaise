@@ -5,8 +5,8 @@
   "name": "LearnRaise",
   "short_name": "LearnRaise",
   "description": "Let's Make Learning Never Feel Like Learning Again",
-
   "scope": "/",
+
   "start_url": "/",
   "theme_color":"#ffffff",
   "background_color": "#ffffff",
