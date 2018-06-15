@@ -61,8 +61,9 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   // };
 
   ngOnInit() {
+    this.serverServ.setUpOwnerKeyAndToken();
     //Wait for the ownerKey to be ready first
-    this.serverServ.onOwnerKeyReady.subscribe(
+    this.serverServ.onOwnerKeyAndTokenReady.subscribe(
       ()=> {
         // Initiate owner
         this.mainServ.initOwner();
@@ -73,6 +74,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
 
         // Load food from the server to stomach
         this.mainServ.loadFoodsInStomach();
+
       }
     );
 

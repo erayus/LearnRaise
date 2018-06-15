@@ -33,8 +33,8 @@ export class AdoptionComponent implements OnInit {
               private serverServ: ServerService) {
   }
   refresh = () => {
-    this.serverServ.getTokenReady(); //IMPORTANT: must be called first
-    this.serverServ.onOwnerKeyReady.subscribe(
+    this.serverServ.setUpOwnerKeyAndToken();//IMPORTANT: must be called first
+    this.serverServ.onOwnerKeyAndTokenReady.subscribe(
       () => {
         this.serverServ.getOwner()
           .subscribe(

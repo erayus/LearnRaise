@@ -26,6 +26,8 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {LocalStorageManager} from "./shared/localStorageManager.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ServiceWorkerModule} from "@angular/service-worker";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import {HttpClientModule} from "@angular/common/http";
     AuthenticationModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
 
   providers: [AuthService,

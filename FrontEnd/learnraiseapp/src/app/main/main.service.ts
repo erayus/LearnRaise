@@ -50,6 +50,7 @@ export class MainService {
         (pet) => {
           this.petService.initPet(pet);
           // console.log('Pet initiated');
+          console.log("Noooo");
           this.onPetInited.next(this.petService.checkHealthAndRetrievePet()); // pass to petinfo to update bars
         },
         (error) => console.log(error)

@@ -28,16 +28,14 @@ export class ServerService {
   private userId: string;
   private ownerKey: string;
   onSavedImportantData = new Subject();
-  onOwnerKeyReady = new Subject();
+  onOwnerKeyAndTokenReady = new Subject();
   constructor(private httpClient: HttpClient,
               private lsManager: LocalStorageManager,
               private db: AngularFireDatabase,
               private afAuth: AngularFireAuth
               ) {
-    //Set up user id and token
-    this.setUpOwnerKey();
-    this.getTokenReady();
-
+    //Set up user id and token whenever there is a refresh
+    // this.setUpOwnerKeyAndToken();
   }
   /**
    * Retrieve Token from local storage and store it a variable so that it can be used later to make request to the server
@@ -63,12 +61,13 @@ export class ServerService {
   }
 
   /**
-   * Called to get the ownerKey before manipulating the data (add, update, delete)
+   * Called to get the ownerKey and Token before manipulating the data (add, update, delete)
    * @param {string} userId
    */
-  setUpOwnerKey() {
+  setUpOwnerKeyAndToken() {
     // If there is user info in the local storage
     if (this.lsManager.getUserInfo()) {
+      this.getTokenReady();
       //Get user id from the Local Storage
       const user = this.lsManager.getUserInfo();
       this.userId = user.uid;
@@ -81,7 +80,7 @@ export class ServerService {
             for (let owner of owners) {
               if (owner.oId === this.userId) {
                 this.ownerKey = owner.key;
-                this.onOwnerKeyReady.next();
+                this.onOwnerKeyAndTokenReady.next();
                 break;
               }
             }

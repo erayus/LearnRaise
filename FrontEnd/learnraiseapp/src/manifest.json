@@ -1,13 +1,21 @@
 {
-  "short_name": "LearnRaise",
-  "name": "LearnRaise",
-  "start_url": "/",
+  "dir": "ltr",
+  "lang": "en",
 
+  "name": "LearnRaise",
+  "short_name": "LearnRaise",
+  "description": "Let's Make Learning Never Feel Like Learning Again",
+
+  "scope": "/",
+  "start_url": "/",
   "theme_color":"#ffffff",
   "background_color": "#ffffff",
 
   "display": "standalone",
   "orientation": "portrait",
+
+  "related_applications": [],
+  "prefer_related_applications": false,
 
   "icons":[
     {

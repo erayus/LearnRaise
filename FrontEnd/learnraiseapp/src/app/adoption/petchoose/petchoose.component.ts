@@ -31,7 +31,7 @@ export class PetchooseComponent implements OnInit {
      case 'communityAccess':
        this.petServ.setName(this.petName);
        this.petServ.updatePet();
-       this.petServ.destroyPet();
+       // this.petServ.destroyPet();
        this.ownerServ.finishReg();
        this.ownerServ.saveOwnerToDatabase() ;
        this.currentStage = 'communityAccess';
@@ -42,7 +42,7 @@ export class PetchooseComponent implements OnInit {
    }
   }
   navigateToMain() {
-    // this.router.navigate(['/main', 'petinfo']);
-    window.location.href = "/main/petinfo"
+    this.router.navigate(['/main', 'petinfo']);
+    // window.location.href = "/main/petinfo"
   }
 }

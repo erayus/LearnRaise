@@ -32,6 +32,8 @@ export class ToolBarComponent implements OnInit, AfterViewChecked, OnDestroy {
         (pet: Pet) => {
           resolve(pet)
         })
+    } else { //if this is after registration and there is pet object already
+      resolve(this.petService.retrivePet());
     }
   });
 

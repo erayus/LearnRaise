@@ -28,8 +28,7 @@ export class AuthService {
       .then(
         (response) => {
           // Set up token  Server Service (IMPORTANCE: should be put here before creating owner and pet)
-          this.serverServ.getTokenReady();
-          this.serverServ.setUpOwnerKey();
+          this.serverServ.setUpOwnerKeyAndToken();
           const user = response;
           // Initiate owner in OwnerService and create Owner table in the database
           const ownerData = this.ownerServ.createOwnerWithIdAndEmail(user.uid, user.email);
@@ -51,11 +50,9 @@ export class AuthService {
               this.loggedIn = true;
               // Navigate to petquizz
               this.router.navigate(['/adoption', 'petquizz', 'page1'])
-
             },
           (error)=>{ console.log(error)}
           );
-
 
         }
     ).catch(
@@ -69,10 +66,9 @@ export class AuthService {
           // Give access to next routes
           this.loggedIn = true;
           //Set up TokenAndUserId
-          // this.setUpToken();
           // Navigate to main component
-          // this.router.navigate(['/main']);
-          window.location.href = "/main";
+
+          this.router.navigate(['/main']);
         }
       )
       .catch(
