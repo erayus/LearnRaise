@@ -39,6 +39,7 @@ export class AdoptionComponent implements OnInit {
         this.serverServ.getOwner()
           .subscribe(
             (owner: Owner) => {
+              console.log("Owner: ", owner);
               this.ownerServ.initOwner(owner);
             },
             (error)=> {console.log(error)}
@@ -46,6 +47,7 @@ export class AdoptionComponent implements OnInit {
         this.serverServ.getPet()
           .subscribe(
             (pet: Pet) => {
+              console.log("Pet: ", pet);
               this.petServ.initPet(pet);
             },
           ),

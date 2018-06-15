@@ -63,4 +63,7 @@ export class OwnerService {
   finishReg() {
     this.owner.isRegComplete = true;
   }
+  destroyOwner(){
+    this.owner = null;
+  }
 }

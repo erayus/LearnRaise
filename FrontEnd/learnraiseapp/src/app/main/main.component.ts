@@ -125,8 +125,8 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   }
 
   onLogOut(){
-    if (confirm('Are you sure you want to disconnect with your pet?')){
-      this.authServ.logOut();
+    if (confirm('Are you sure you want to disconnect with your pet?')) {
+          this.authServ.logOut();
     }
   }
   closeModalBox() {
@@ -143,7 +143,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   }
 
   ngOnDestroy() {
-    this.petServ.saveLeaveTimeAndHungerTime();
+    // this.petServ.saveLeaveTimeAndHungerTime();
     this.mainServ.resetInitiation();
     this.foodAddedSub.unsubscribe();
     this.petServ.destroyPet();

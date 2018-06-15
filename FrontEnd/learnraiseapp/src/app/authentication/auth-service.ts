@@ -8,6 +8,7 @@ import {Food} from "../shared/food.model";
 import {OwnerService} from "../shared/owner.service";
 import {AngularFireAuth} from "angularfire2/auth"
 import {LocalStorageManager} from "../shared/localStorageManager.service";
+import {Owner} from "../shared/owner.model";
 
 @Injectable()
 export class AuthService {
@@ -36,13 +37,11 @@ export class AuthService {
           //Add owner first and then use owner's key to add pet and stomach
           this.serverServ.addOwner(ownerData).subscribe(
             (response) =>{
-              const responseObj = response.json();
-              ownerKey = responseObj.name;
-
+              ownerKey = response.name;
               // Initiate petObj in PetService and create Pet table
               const petData = this.petServ.createPetWithId(user.uid);
               // Add pet to the database using ownerKey
-              this.serverServ.addPet( ownerKey, petData);
+              this.serverServ.addPet( ownerKey, petData).subscribe();
               // Add example food to stomach in the database using ownerKey
               const exampleFood = new Food('example', 'noun', 'This is an example', 'This is an example of an example');
               this.serverServ.addFood(ownerKey,exampleFood).subscribe(
@@ -89,11 +88,11 @@ export class AuthService {
   // }
   logOut() {
     this.petServ.saveLeaveTimeAndHungerTime();
-    // this.petServ.destroyPet();
+    this.petServ.destroyPet();
+    this.ownerServ.destroyOwner();
     window.location.href = '/';
     this.afAuth.auth.signOut();
     this.loggedIn = false;
-    this.serverServ.deleteToken();
   }
   // getToken() {
   //   firebase.auth().currentUser.getIdToken()

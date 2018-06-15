@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import 'rxjs/Rx';
 import {Food} from "./food.model";
 import {Pet} from "./pet.model";
@@ -12,6 +11,7 @@ import {map} from "rxjs/operators";
 import {AuthService} from "../authentication/auth-service";
 import {Subject} from "rxjs/Subject";
 import {AngularFireAuth} from "angularfire2/auth";
+import {HttpClient} from "@angular/common/http";
 
 
 /**
@@ -27,8 +27,9 @@ export class ServerService {
   private token: string;
   private userId: string;
   private ownerKey: string;
+  onSavedImportantData = new Subject();
   onOwnerKeyReady = new Subject();
-  constructor(private http: Http,
+  constructor(private httpClient: HttpClient,
               private lsManager: LocalStorageManager,
               private db: AngularFireDatabase,
               private afAuth: AngularFireAuth
@@ -101,19 +102,13 @@ export class ServerService {
 
   // OWNERS TABLE
   addOwner(owner: Owner) {
-    return this.http.post(`${firebaseConfig.databaseURL}/owners.json?auth=${this.token}`, owner)
+    return this.httpClient.post<any>(`${firebaseConfig.databaseURL}/owners.json?auth=${this.token}`, owner)
   }
   updateOwner(owner: Owner) {
-    return this.http.put(`${firebaseConfig.databaseURL}/owners/${this.ownerKey}.json?auth=${this.token}`, owner);
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/owners/${this.ownerKey}.json?auth=${this.token}`, owner);
   }
   getOwner() {
-    return this.http.get(`${firebaseConfig.databaseURL}/owners/${this.ownerKey}.json?auth=${this.token}`)
-      .map(
-        (response: Response) => {
-          const data = response.json();
-          return data;
-        }
-      )
+    return this.httpClient.get<Owner>(`${firebaseConfig.databaseURL}/owners/${this.ownerKey}.json?auth=${this.token}`)
   }
 
   getAllOwners() {
@@ -123,14 +118,10 @@ export class ServerService {
 
   // PETS TABLE
   addPet(userKey: string, pet: Pet) {
-    return this.http.put(`${firebaseConfig.databaseURL}/pets/${userKey}.json?auth=${this.token}`, pet).subscribe(
-      (response) =>{
-        const responseObj = response.json();
-        }
-      )
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/pets/${userKey}.json?auth=${this.token}`, pet)
   }
   updatePet( pet: Pet) {
-    return this.http.put(`${firebaseConfig.databaseURL}/pets/${this.ownerKey}.json?auth=${this.token}`, pet).subscribe();
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/pets/${this.ownerKey}.json?auth=${this.token}`, pet).subscribe();
   }
   saveLeaveTimeAndHungerTime(oId, leaveTime: number, currentHungerTime: number[]) {
     const xhr = new XMLHttpRequest();
@@ -139,26 +130,22 @@ export class ServerService {
     xhr.send(leaveTimeData);
     const currentHungerTimeData = JSON.stringify(currentHungerTime);
     xhr.open("PUT",`${firebaseConfig.databaseURL}/pets/${this.ownerKey}/hungerTime.json?auth=${this.token}`, false);
-    xhr.send(currentHungerTimeData)
+    xhr.send(currentHungerTimeData);
+
+    this.deleteToken();
   }
 
   getPet() {
-    return this.http.get(`${firebaseConfig.databaseURL}/pets/${this.ownerKey}.json?auth=${this.token}`)
-      .map(
-        (response: Response) => {
-          const data = response.json();
-          return data;
-        }
-      )
+    return this.httpClient.get<Pet>(`${firebaseConfig.databaseURL}/pets/${this.ownerKey}.json?auth=${this.token}`)
   }
 
 
   // STOMACHS TABLE
   saveFoods(ownerKey, newFoods: Food[]) {
-    return this.http.put(`${firebaseConfig.databaseURL}/stomachs/${ownerKey}.json?auth=${this.token}`, newFoods).subscribe();
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/stomachs/${ownerKey}.json?auth=${this.token}`, newFoods).subscribe();
   }
   updateFood(foodKey : string, newFood : Food){
-    return this.http.put(`${firebaseConfig.databaseURL}/stomachs/${this.ownerKey}/${foodKey}.json?auth=${this.token}`, newFood);
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/stomachs/${this.ownerKey}/${foodKey}.json?auth=${this.token}`, newFood);
   }
 
   /**
@@ -168,7 +155,7 @@ export class ServerService {
    * @return {Observable<Response>}
    */
   addFood(ownerKey, newFood: Food){
-    return this.http.post(`${firebaseConfig.databaseURL}/stomachs/${ownerKey}.json?auth=${this.token}`, newFood)
+    return this.httpClient.post(`${firebaseConfig.databaseURL}/stomachs/${ownerKey}.json?auth=${this.token}`, newFood)
   }
   getFoods() {
      return this.db.list(`stomachs/${this.ownerKey}`).valueChanges();

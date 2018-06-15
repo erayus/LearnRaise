@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
-import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "./authentication/auth-service";
 import {AuthGuard} from "./authentication/auth-guard.service";
@@ -26,6 +25,7 @@ import {firebaseConfig} from "../environments/firebase.config";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {LocalStorageManager} from "./shared/localStorageManager.service";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import {LocalStorageManager} from "./shared/localStorageManager.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule,
     HomeModule,
     AuthenticationModule,

@@ -77,8 +77,14 @@ export class StomachComponent implements OnInit, OnDestroy{
 
   selectAndDisplayFoodDes(selectedFood: Food){
     this.selectedFood = selectedFood;
-    this.displayDes = true;
-    this.isSelecting = true;
+    //If the food is not undefined select and display its description
+    if(this.selectedFood != undefined){
+      this.isSelecting = true;
+      this.displayDes = true;
+    } else {
+      this.isSelecting = false;
+      this.displayDes = false;
+    }
   }
 
   ngOnDestroy() {
