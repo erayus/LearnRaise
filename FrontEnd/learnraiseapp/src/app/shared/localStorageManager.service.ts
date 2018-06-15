@@ -1,4 +1,3 @@
-import {Subject} from "rxjs/Subject";
 
 /**
  * This is used to store and get information in the local storage
