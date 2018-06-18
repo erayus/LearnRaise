@@ -90,14 +90,6 @@ export class AuthService {
     this.afAuth.auth.signOut();
     this.loggedIn = false;
   }
-  // getToken() {
-  //   firebase.auth().currentUser.getIdToken()
-  //     .then(
-  //       (token: string) => this.token = token
-  //     );
-  //   console.log(this.token);
-  //   return this.token;
-  // }
   isAuthenticated() {
     return this.loggedIn;
   }
