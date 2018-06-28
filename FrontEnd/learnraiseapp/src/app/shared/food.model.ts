@@ -5,3 +5,4 @@ export class Food {
     public description: string,
     public example: string) {}
 }
+

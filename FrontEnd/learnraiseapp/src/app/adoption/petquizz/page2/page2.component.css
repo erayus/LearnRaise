@@ -100,32 +100,36 @@
 .page-4{
   position: relative;
 }
-
-.pet-container{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.carousel-item{
   flex-direction: column;
-  padding-bottom: 35px;
 }
-.pet{
-  border-radius: 15px;
-  margin: 10px auto;
-  padding: 5px;
-  cursor: pointer;
+.carousel-indicators {
+  bottom: -40px;
+  height: 8px;
 }
-.pet:hover{
-  border: 1px solid darkblue;
-  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
-  -moz-box-shadow: 0px 0px 5px 1px darkblue;
-  box-shadow: 0px 0px 5px 1px darkblue;
+.carousel-indicators li{
+  background-color: orange;
+}
+.carousel-indicators li.active{
+  background-color: orangered;
 }
 
-.pet-pic{
-  margin: auto;
-  width: 150px;
-  height: 150px;
+.carousel-control-prev-icon i{
+  color: orange;
 }
+.carousel-control-next-icon i{
+  color: orange;
+}
+.view-story-btn{
+  background-color: orange;
+  border: orange;
+}
+.select-pet-btn{
+  background-color: #ff6b00;
+  border: #ff6b00;
+}
+
+
 
 .modal-body{
   min-width: 300px;
@@ -142,4 +146,17 @@
   bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+
+
+
+
+
+@media screen and (min-width: 768px) {
+  .pet-img{
+    width: 250px!important;
+    height: 250px !important;
+  }
+
 }

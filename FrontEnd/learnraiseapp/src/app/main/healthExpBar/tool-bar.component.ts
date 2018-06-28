@@ -3,7 +3,7 @@ import {AuthService} from "../../authentication/auth-service";
 import {PetService} from "../../shared/pet.service";
 import {MainService} from "../main.service";
 import {StomachService} from "../content/stomach/stomach.service";
-import {Pet} from "../../shared/pet.model";
+import {Pet} from "../../shared/pets/pet.model";
 import {Subscription} from "rxjs";
 
 declare var $: any;

@@ -20,7 +20,6 @@ export class HomepageContentComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    const position = $('.second-section-header').offset();
     $(document).ready(() => {
       $(window).scroll(() => {
         const secondSecPos =  $('.second-section-header').offset().top - 350;

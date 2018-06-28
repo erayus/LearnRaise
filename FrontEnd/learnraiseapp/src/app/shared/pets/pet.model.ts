@@ -1,5 +1,3 @@
-import {Food} from "./food.model";
-
 export class Pet {
   constructor(
     public userId: string,

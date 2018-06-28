@@ -5,14 +5,14 @@
   "name": "LearnRaise",
   "short_name": "LearnRaise",
   "description": "Let's Make Learning Never Feel Like Learning Again",
-  "scope": "/",
+  "scope": ".",
 
-  "start_url": "/",
-  "theme_color":"#ffffff",
+  "start_url": "/main/petinfo",
+  "theme_color":" #75A8F9",
   "background_color": "#ffffff",
 
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
 
   "related_applications": [],
   "prefer_related_applications": false,

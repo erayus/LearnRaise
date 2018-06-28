@@ -9,7 +9,22 @@ body{
   padding: 0  !important;   /*prevent default behavior of bootstrap modal*/
   height: 100%;
 }
+.primary-text{
+  color:  #ff6b00;
+  font-family: Orbitron, "Helvetica Neue";
+  font-weight: bold;
+}
+.primary-color{
+  color:  #ff6b00;
+}
 
+.secondary-text{
+  color: orange;
+  font-family: Orbitron, cursive;
+}
+.secondary-color{
+  color: orange;
+}
 
 .app-root{
   height: 100%;

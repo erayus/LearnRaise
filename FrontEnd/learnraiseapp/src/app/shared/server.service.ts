@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import {Food} from "./food.model";
-import {Pet} from "./pet.model";
+import {Pet} from "./pets/pet.model";
 import {Owner} from "./owner.model";
 import {firebaseConfig} from "../../environments/firebase.config"
 import {AngularFireDatabase} from "angularfire2/database";
