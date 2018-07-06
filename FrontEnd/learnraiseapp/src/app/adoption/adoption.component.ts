@@ -5,7 +5,7 @@ import {PetService} from "../shared/pet.service";
 import {OwnerService} from "../shared/owner.service";
 import {ServerService} from "../shared/server.service";
 import {Owner} from "../shared/owner.model";
-import {Pet} from "../shared/pets/pet.model";
+import {Pet} from "../shared/pet.model";
 
 @Component({
   selector: 'app-adoption',

@@ -7,25 +7,25 @@
   min-width: 275px;
   max-width: 500px;
   padding: 10px;
-  border: 1px solid darkblue;
+  border: 1px solid #ff6b00;
   border-radius: 12px;
   -webkit-box-shadow: 0px 11px 3px -7px grey;
   -moz-box-shadow: 0px 11px 3px -7px grey;
   box-shadow: 0px 11px 3px -7px grey;
-  color: darkblue;
+  color: black;
   position: relative;
   height: auto;
   margin: 150px auto 150px ;
 }
 
 .quizz-btn{
-  border: 1px solid darkblue;
+  border: 1px solid #ff6b00;
   background-color: white;
-  color: darkblue;
+  color: #ff6b00;
 }
 .quizz-btn:hover{
   transition: background-color 0.5s ease;
-  background-color: darkblue;
+  background-color: #ff6b00;
   color: white;
 }
 
@@ -41,17 +41,17 @@
 }
 .nickname-input{
   width: 100%;
-  border: 1px solid darkblue;
+  border: 1px solid #ff6b00;
   border-radius: 15px;
   margin: 10px 0;
   outline: none;
   padding: 5px;
-  color: darkblue;
+  color: #ff6b00;
 }
 .nickname-input:focus{
-  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
-  -moz-box-shadow: 0px 0px 5px 1px darkblue;
-  box-shadow: 0px 0px 5px 1px darkblue;
+  -webkit-box-shadow: 0px 0px 5px 1px #ff6b00;
+  -moz-box-shadow: 0px 0px 5px 1px #ff6b00;
+  box-shadow: 0px 0px 5px 1px #ff6b00;
 }
 
 .proceed-btn{
@@ -84,16 +84,16 @@
   cursor: pointer;
 }
 .avatar:hover{
-  border: 1px solid darkblue;
-  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
-  -moz-box-shadow: 0px 0px 5px 1px darkblue;
-  box-shadow: 0px 0px 5px 1px darkblue;
+  border: 1px solid #ff6b00;
+  -webkit-box-shadow: 0px 0px 5px 1px #ff6b00;
+  -moz-box-shadow: 0px 0px 5px 1px #ff6b00;
+  box-shadow: 0px 0px 5px 1px #ff6b00;
 }
 .selected{
-  border: 1px solid darkblue;
-  -webkit-box-shadow: 0px 0px 5px 1px darkblue;
-  -moz-box-shadow: 0px 0px 5px 1px darkblue;
-  box-shadow: 0px 0px 5px 1px darkblue;
+  border: 1px solid #ff6b00;
+  -webkit-box-shadow: 0px 0px 5px 1px #ff6b00;
+  -moz-box-shadow: 0px 0px 5px 1px #ff6b00;
+  box-shadow: 0px 0px 5px 1px #ff6b00;
 }
 
 /*page 4*/
@@ -123,10 +123,12 @@
 .view-story-btn{
   background-color: orange;
   border: orange;
+  cursor: pointer;
 }
 .select-pet-btn{
   background-color: #ff6b00;
   border: #ff6b00;
+  cursor: pointer;
 }
 
 

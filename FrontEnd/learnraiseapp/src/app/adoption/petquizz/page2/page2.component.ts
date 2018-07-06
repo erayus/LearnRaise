@@ -106,8 +106,11 @@ export class Page2Component implements OnInit {
           this.ownerPet.pictureURL = ["../../../assets/pet/Nios.png", '', '', ''];
           this.onProceed("done");
           break;
+        } else{
+          break;
         }
       case 1:
+        if (confirm("Are you sure you want to adopt Nera?")) {
         this.ownerPet.name = "Nera";
         this.ownerPet.species = "Nera";
         this.ownerPet.element = 'Diverse';
@@ -118,8 +121,13 @@ export class Page2Component implements OnInit {
         this.ownerPet.weight = 50;
         this.ownerPet.height = 78;
         this.ownerPet.pictureURL = ['../../../assets/pet/Nera.png','','',''];
+        this.onProceed("done");
         break;
+        } else{
+          break;
+        }
       case 2:
+        if (confirm("Are you sure you want to adopt Eyos?")) {
         this.ownerPet.name = 'Eyos';
         this.ownerPet.species = 'Eyos';
         this.ownerPet.element = 'Fire';
@@ -130,7 +138,11 @@ export class Page2Component implements OnInit {
         this.ownerPet.weight = 56;
         this.ownerPet.height = 80;
         this.ownerPet.pictureURL = ['../../../assets/pet/Eyos.png', '', '', ''];
+        this.onProceed("done");
         break;
+        } else{
+          break;
+        }
     }
   }
 }

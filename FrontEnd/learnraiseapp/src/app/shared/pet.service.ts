@@ -1,6 +1,6 @@
 
 import {Subject} from "rxjs/Subject";
-import {Pet} from "./pets/pet.model";
+import {Pet} from "./pet.model";
 import {Food} from "./food.model";
 import {Injectable, OnInit} from "@angular/core";
 import {ServerService} from "./server.service";

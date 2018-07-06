@@ -2,8 +2,20 @@
   color: black;
 }
 .form-container label{
-  color: black;
+  color: #ff6b00;
 }
 .error-message{
   color: red;
 }
+button{
+  background-color: #ff6b00;
+  border: 1px solid #ff6b00;
+}
+
+button:hover{
+  background-color: white;
+  color: #ff6b00;
+  border: 1px solid #ff6b00;
+}
+
+

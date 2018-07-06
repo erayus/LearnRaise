@@ -2,3 +2,13 @@
 .error-message{
   color: red;
 }
+button{
+  background-color: #ff6b00 !important;
+  border: 1px solid #ff6b00 !important;
+}
+
+button:hover{
+  background-color: white !important;
+  color: #ff6b00 !important;
+  border: 1px solid #ff6b00 !important;
+}
