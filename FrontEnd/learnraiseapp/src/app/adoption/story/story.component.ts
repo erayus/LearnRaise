@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 declare var $: any;
 @Component({
   selector: 'app-page1',
-  templateUrl: './page1.component.html',
-  styleUrls: ['./page1.component.css']
+  templateUrl: './story.component.html',
+  styleUrls: ['./story.component.css']
 })
-export class Page1Component implements OnInit {
+export class StoryComponent implements OnInit {
 
   constructor(){}
   ngOnInit() {}
@@ -17,10 +17,10 @@ export class Page1Component implements OnInit {
         $('.page-1-wrapper').css('display', 'none');
         $('.page-2-overlay').css('display', 'block');
         $('.page-2-overlay').addClass('animated fadeIn');
-        $('.page2-line-1').css('animation-name', 'typing');
-        $('.page2-line-2').css('animation-name', 'typing');
-        $('.page2-line-3').css('animation-name', 'typing');
-        $('.page2-line-4').css('animation-name', 'typing');
+        $('.registration-line-1').css('animation-name', 'typing');
+        $('.registration-line-2').css('animation-name', 'typing');
+        $('.registration-line-3').css('animation-name', 'typing');
+        $('.registration-line-4').css('animation-name', 'typing');
       });
   }
   continueToPage3() {

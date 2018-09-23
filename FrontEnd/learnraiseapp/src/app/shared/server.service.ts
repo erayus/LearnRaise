@@ -5,10 +5,7 @@ import {Pet} from "./pet.model";
 import {Owner} from "./owner.model";
 import {firebaseConfig} from "../../environments/firebase.config"
 import {AngularFireDatabase} from "angularfire2/database";
-import {Router} from "@angular/router";
 import {LocalStorageManager} from "./localStorageManager.service";
-import {map} from "rxjs/operators";
-import {AuthService} from "../authentication/auth-service";
 import {Subject} from "rxjs/Subject";
 import {AngularFireAuth} from "angularfire2/auth";
 import {HttpClient} from "@angular/common/http";
@@ -27,7 +24,6 @@ export class ServerService {
   private token: string;
   private userId: string;
   private ownerKey: string;
-  onSavedImportantData = new Subject();
   onOwnerKeyAndTokenReady = new Subject();
   constructor(private httpClient: HttpClient,
               private lsManager: LocalStorageManager,
@@ -43,17 +39,16 @@ export class ServerService {
   getTokenReady () {
     //@source https://stackoverflow.com/questions/39035594/firebase-retrieve-the-user-data-stored-in-local-storage-as-firebaseauthuser
     const currentTime = Date.now();
-    if (this.lsManager.getUserInfo()) {
-      const user = this.lsManager.getUserInfo();
-      // check if the token has been expired
-      if (currentTime > user.stsTokenManager.expirationTime) { // if expired
-        window.location.href = '/authentication/login';
-        return false // for canDeativative component
-      } else {
-        this.token = user.stsTokenManager.accessToken;
-        return true // for canDeactivative component
-      }
+    const user = this.lsManager.getUserInfo();
+    // check if the token has been expired
+    if (currentTime > user.stsTokenManager.expirationTime) { // if expired
+      window.location.href = '/authentication/login';
+      return false // for canDeativative component
+    } else {
+      this.token = user.stsTokenManager.accessToken;
+      return true // for canDeactivative component
     }
+
   }
 
   deleteToken() {
@@ -86,6 +81,8 @@ export class ServerService {
             }
           }
         );
+    } else {
+      window.location.href = "./index.html";
     }
   }
   getUserId() {

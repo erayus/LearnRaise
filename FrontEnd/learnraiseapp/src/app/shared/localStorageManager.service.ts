@@ -15,7 +15,7 @@ export class LocalStorageManager{
       return user;
     } else {
       console.log("Error: Cannot find user Id in the local storage");
-      return false;
+      return false
     }
   }
 }

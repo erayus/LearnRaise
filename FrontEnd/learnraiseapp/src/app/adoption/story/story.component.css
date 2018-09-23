@@ -26,7 +26,7 @@
 .page-1-wrapper{
   height: 100%;
   width: 100%;
-  background: url('../../../../assets/background/adoption-1.jpg') left  no-repeat;
+  background: url('../../../assets/background/adoption-1.jpg') left  no-repeat;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -90,16 +90,10 @@ width: 0%;
 }
 
 
-.quizz-btn{
-  background-color: white;
-  color: black;
-  float: right;
-  cursor: pointer;
-}
 .page-2-wrapper{
   height: 100%;
   width: 100%;
-  background: url('../../../../assets/background/adoption-2.jpg') center no-repeat;
+  background: url('../../../assets/background/adoption-2.jpg') center no-repeat;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -159,7 +153,7 @@ width: 0%;
 .page-3-wrapper{
   height: 100%;
   width: 100%;
-  background: url('../../../../assets/background/adoption-3.jpg') right no-repeat;
+  background: url('../../../assets/background/adoption-3.jpg') right no-repeat;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -211,7 +205,7 @@ width: 0%;
 .page-4-wrapper{
   height: 100%;
   width: 100%;
-  background: url('../../../../assets/background/adoption-4.jpg') center no-repeat;
+  background: url('../../../assets/background/adoption-4.jpg') center no-repeat;
   background-size: cover;
   position: absolute;
   top: 0;

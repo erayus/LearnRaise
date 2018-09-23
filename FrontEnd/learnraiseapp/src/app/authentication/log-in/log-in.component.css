@@ -7,12 +7,13 @@
 .error-message{
   color: red;
 }
-button{
+.login-btn{
   background-color: #ff6b00;
   border: 1px solid #ff6b00;
+  color: white;
 }
 
-button:hover{
+.login-btn:hover {
   background-color: white;
   color: #ff6b00;
   border: 1px solid #ff6b00;

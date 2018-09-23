@@ -1,20 +1,16 @@
 import {NgModule} from "@angular/core";
 import {AdoptionComponent} from "./adoption.component";
-import {PetchooseComponent} from "./petchoose/petchoose.component";
-import {PetquizzComponent} from "./petquizz/petquizz.component";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {AdoptionRoutingModule} from "./adoption-routing.module";
-import { Page1Component } from './petquizz/page1/page1.component';
-import { Page2Component } from './petquizz/page2/page2.component';
+import { RegistrationComponent} from './registration/registration.component';
+import {StoryComponent} from "./story/story.component";
 
 @NgModule ({
   declarations: [
     AdoptionComponent,
-    PetchooseComponent,
-    PetquizzComponent,
-    Page1Component,
-    Page2Component,
+    RegistrationComponent,
+    StoryComponent
   ],
   imports: [
     CommonModule,

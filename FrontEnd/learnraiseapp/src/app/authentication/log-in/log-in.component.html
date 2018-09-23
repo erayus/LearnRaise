@@ -29,7 +29,8 @@
         <span class="form-text error-message" *ngIf="errorMessage !== 'none'   && fIn.submitted === true && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>
       </div>
     </div>
-    <button class="btn btn-success btn-block"   [disabled] = "!fIn.dirty">Log In</button>
+    <button class="login-btn btn btn-block"   [disabled] = "!fIn.dirty">Log In</button>
+
   </form>
   <div class="col-sm-12 mt-2 text-center">
     <a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't got a buddy yet? Sign Up to find one! </a>

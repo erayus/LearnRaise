@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {PetService} from "../../../shared/pet.service";
-import {OwnerService} from "../../../shared/owner.service";
+import {PetService} from "../../shared/pet.service";
+import {OwnerService} from "../../shared/owner.service";
+import {Pet} from "../../shared/pet.model";
+import {Owner} from "../../shared/owner.model";
 declare var $: any;
 
 @Component({
   selector: 'app-page2',
-  templateUrl: './page2.component.html',
-  styleUrls: ['./page2.component.css']
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class Page2Component implements OnInit {
+export class RegistrationComponent implements OnInit {
 
-  page = 'page1';
+  page = 'welcome';
   ownerNickname: string;
   ownerAvatar: string;
   ownerPet = {name:'', species:'', element:'', story: '',weight: 0, height: 0, pictureURL:[]};
+
+  pet: Pet;
+  petName: string;
+  owner: Owner;
   constructor( private router: Router,
                private route: ActivatedRoute,
                private petServ: PetService,
@@ -24,20 +30,20 @@ export class Page2Component implements OnInit {
 
   onProceed(page: string){
     switch (page) {
-      case 'page2':
-        this.page = 'page2';
+      case 'userName':
+        this.page = 'userName';
         break;
-      case 'page3':
+      case 'avatar':
         if (this.ownerNickname !== undefined && this.ownerNickname.length > 0) {
           this.ownerServ.setName(this.ownerNickname);
-          this.page = 'page3';
+          this.page = 'avatar';
         }
         break;
-      case 'page4':
+      case 'petSelection':
         this.ownerServ.setAvatar(this.ownerAvatar);
-        this.page = 'page4';
+        this.page = 'petSelection';
         break;
-      case 'done':
+      case 'petName':
         this.petServ.installPet(this.ownerPet.name,
           this.ownerPet.species,
           this.ownerPet.element,
@@ -45,20 +51,53 @@ export class Page2Component implements OnInit {
           this.ownerPet.weight,
           this.ownerPet.height,
           this.ownerPet.pictureURL);
-        this.router.navigate(['../../petchoose'], {relativeTo: this.route});
+          this.page = 'petName';
+        setTimeout(() => {
+          this.pet = this.petServ.retrivePet();
+          this.owner = this.ownerServ.retrieveOwner();
+          this.petName = this.pet.name;
+        } , 2000);
+        // this.router.navigate(['../petchoose'], {relativeTo: this.route});
+        break;
+      case 'communityAccess':
+        this.petServ.setName(this.petName);
+        this.petServ.updatePet();
+        // this.petServ.destroyPet();
+        this.ownerServ.finishReg();
+        this.ownerServ.saveOwnerToDatabase();
+        this.page = 'communityAccess';
+        break;
+      case 'infoAnnouncement':
+        this.page = 'infoAnnouncement';
+        break;
+      case 'done':
+        // this.router.navigate(['/main', 'petinfo']);
+        window.location.href = '/main/petinfo';
         break;
     }
   }
   onPreceed(page: string){
     switch (page) {
-      case 'page1':
-        this.page = 'page1';
+      case 'story':
+        this.page = 'story';
         break;
-      case 'page2':
-        this.page = 'page2';
+      case 'welcome':
+        this.page = 'welcome';
         break;
-      case 'page3':
-        this.page = 'page3';
+      case 'userName':
+        this.page = 'userName';
+        break;
+      case 'avatar':
+        this.page = 'avatar';
+        break;
+      case 'petSelection':
+        this.page = 'petSelection';
+        break;
+      case 'petName':
+        this.page = 'petName';
+        break;
+      case 'communityAccess':
+        this.page = "communityAccess";
         break;
     }
   }
@@ -104,7 +143,7 @@ export class Page2Component implements OnInit {
           this.ownerPet.weight = 40;
           this.ownerPet.height = 60;
           this.ownerPet.pictureURL = ["../../../assets/pet/Nios.png", '', '', ''];
-          this.onProceed("done");
+          this.onProceed("petName");
           break;
         } else{
           break;
@@ -121,7 +160,7 @@ export class Page2Component implements OnInit {
         this.ownerPet.weight = 50;
         this.ownerPet.height = 78;
         this.ownerPet.pictureURL = ['../../../assets/pet/Nera.png','','',''];
-        this.onProceed("done");
+        this.onProceed("petName");
         break;
         } else{
           break;
@@ -138,7 +177,7 @@ export class Page2Component implements OnInit {
         this.ownerPet.weight = 56;
         this.ownerPet.height = 80;
         this.ownerPet.pictureURL = ['../../../assets/pet/Eyos.png', '', '', ''];
-        this.onProceed("done");
+        this.onProceed("petName");
         break;
         } else{
           break;

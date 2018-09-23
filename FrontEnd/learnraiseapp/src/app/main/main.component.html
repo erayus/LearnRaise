@@ -1,5 +1,4 @@
-<div class="container-fluid main"
-     style="background: #ffffff url('../../assets/background/night.jpg') no-repeat center">
+<div class="container-fluid main" style="background: #ffffff url('../../assets/background/night.jpg') no-repeat center">
 
   <!--Status Bars-->
   <div class="bars-containner">
@@ -27,9 +26,13 @@
     <app-nav-bar></app-nav-bar>
   </div>
 
+
+
   <!--Feed button-->
-  <button class="btn btn-primary feed-btn btn-shadow" (click)="onFeed()"><span class="feed-text">+</span></button>
-  <button class="btn btn-primary logOut-btn btn-shadow" (click)="onLogOut()"><i class="fa fa-sign-out"></i></button>
+  <button class="btn feed-btn btn-shadow primary-btn" (click)="onFeed()"><span class="feed-text">+</span></button>
+
+  <!--Log out Btn-->
+  <button class="btn logOut-btn btn-shadow secondary-btn" (click)="onLogOut()"><i class="fas fa-sign-out-alt"></i></button>
 
 
   <div class="feed-container openingFeed" *ngIf="isFeeding" >

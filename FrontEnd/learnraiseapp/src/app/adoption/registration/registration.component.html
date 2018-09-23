@@ -1,24 +1,26 @@
 <div class="quizz-pages-container">
-  <div class="quizz-box" *ngIf="page != 'page4'">
+  <div class="quizz-box" *ngIf=" page == 'welcome' || page == 'userName' || page == 'avatar'">
 
-    <div class="page-1" *ngIf="page==='page1'">
+    <div class="page-1" *ngIf=" page==='welcome'">
       <h1 class="primary-text">Welcome!</h1>
-      <h6 class="mb-5 ">Hi there, now you know the secret which means that you are about to embrace
+      <p class="mb-5">
+        Hi there, now you know the secret which means that you are about to embrace
         into a journey with one of AliCreas who's waiting to see their destined master.
         It's going to an adventurous journey. Are you ready?
-      </h6>
-      <button class="btn proceed-btn quizz-btn " (click)="onProceed('page2')"> Next</button>
+      </p>
+      <button class="btn proceed-btn primary-btn" (click)="onProceed('userName')"> Next</button>
     </div>
 
-    <div class="page-2" *ngIf="page==='page2'">
+
+    <div class="page-2" *ngIf="page=== 'userName'">
       <h5 class="primary-text">How would you like to call yourself?</h5>
       <input class="nickname-input" name="nickname" [(ngModel)]="ownerNickname"/>
       <span class="page-number"> Page 2/4</span>
-      <button class="btn preceed-btn quizz-btn" (click)="onPreceed('page1')" > Back</button>
-      <button class="btn proceed-btn quizz-btn "(click)="onProceed('page3')" [disabled]="!ownerNickname || ownerNickname.length ===0"> Next</button>
+      <button class="btn preceed-btn secondary-btn" (click)="onPreceed('welcome')" > Back</button>
+      <button class="btn proceed-btn primary-btn" (click)="onProceed('avatar')" [disabled]="!ownerNickname || ownerNickname.length ===0"> Next</button>
     </div>
 
-    <div class="page-3" *ngIf="page==='page3'">
+    <div class="page-3" *ngIf="page=== 'avatar' " >
       <h5 class="primary-text">Choose your favorite avatar</h5>
       <div class="avatar-container">
       <img class="avatar" src="../../../assets/avatar/batman.jpg" (click)="chooseAvatar(0)" />
@@ -30,19 +32,20 @@
       <img class="avatar" src="../../../assets/avatar/images.png" (click)="chooseAvatar(4)"/>
       </div>
       <span class="page-number"> Page 3/4</span>
-      <button class="btn preceed-btn quizz-btn" (click)="onPreceed('page2')" > Back</button>
-      <button class="btn proceed-btn quizz-btn "(click)="onProceed('page4')" [disabled]="!ownerAvatar"> Next</button>
+      <button class="btn preceed-btn secondary-btn" (click)="onPreceed('userName')" > Back</button>
+      <button class="btn proceed-btn primary-btn" (click)="onProceed('petSelection')" [disabled]="!ownerAvatar"> Next</button>
     </div>
 
   </div>
 
   <!--Page 4 - Pet Selection-->
-  <div class="page-4 mt-4"  *ngIf="page==='page4'">
-    <button style="z-index: 1000" class="btn preceed-btn quizz-btn ml-4" (click)="onPreceed('page3')" > Back</button>
+  <div class="page-4 mt-4"  *ngIf="page==='petSelection' ">
+    <button style="z-index: 1000" class="btn preceed-btn secondary-btn ml-4" (click)="onPreceed('avatar')" > Back</button>
     <div class="pet-selection-heading container mb-4">
       <h2 class="primary-text">Adoption</h2>
-      <h6 class="w-75 mx-auto">Alright! Currently there are 3 AliCreas who are waiting for you. Click on 'View Story' to
-      understand more about the AliCrea. Tap on it and click 'Connect' to choose. Make your decision with care!</h6>
+      <p class="w-75 mx-auto">
+        Alright! Currently there are 3 AliCreas who are waiting for you. Click on 'View Story' to
+      understand more about the AliCrea. Tap on it and click 'Connect' to choose. Make your decision with care!</p>
     </div>
 
     <!--SLIDES-->
@@ -59,10 +62,10 @@
           <div class="pet-description mb-3">
             <h5 class="primary-text">Nios</h5>
             <p>The Nerdy Alien</p>
-            <button type="button" class="btn btn-primary view-story-btn mr-2" data-toggle="modal" data-target="#pet0">
+            <button type="button" class="btn view-story-btn mr-2" data-toggle="modal" data-target="#pet0">
             View Story
             </button>
-            <button type="button" class="btn btn-primary select-pet-btn " (click)="choosePet(0)" >
+            <button type="button" class="btn primary-btn" (click)="choosePet(0)" >
               Adopt
             </button>
           </div>
@@ -73,10 +76,10 @@
             <div class="pet-description mb-3">
               <h5 class="primary-text">Nera</h5>
               <p>The Fluffy Warrior</p>
-              <button type="button" class="btn btn-primary view-story-btn mr-2" data-toggle="modal" data-target="#pet1">
+              <button type="button" class="btn view-story-btn mr-2" data-toggle="modal" data-target="#pet1">
                 View Story
               </button>
-              <button type="button" class="btn btn-primary select-pet-btn " (click)="choosePet(1)" >
+              <button type="button" class="btn primary-btn " (click)="choosePet(1)" >
                 Adopt
               </button>
             </div>
@@ -89,10 +92,10 @@
           <div class="pet-description mb-3">
             <h5 class="primary-text">Eyos</h5>
             <p>The Adventurer</p>
-            <button type="button" class="btn btn-primary view-story-btn mr-2" data-toggle="modal" data-target="#pet2">
+            <button type="button" class="btn view-story-btn mr-2" data-toggle="modal" data-target="#pet2">
               View Story
             </button>
-            <button type="button" class="btn btn-primary select-pet-btn " (click)="choosePet(2)" >
+            <button type="button" class="btn primary-btn " (click)="choosePet(2)" >
               Adopt
             </button>
           </div>
@@ -140,7 +143,7 @@
             <p>Plus-One = Players gain an extra life in quiz games</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+            <button type="button" class="btn secondary-btn " data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -174,7 +177,7 @@
             question they received in the quiz.</p>
           </div>
         <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn secondary-btn" data-dismiss="modal">Close</button>
         </div>
         </div>
       </div>
@@ -207,67 +210,55 @@
           <p>Time Addition = Players gain additional time to do their quizzes</p>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn secondary-btn" data-dismiss="modal">Close</button>
         </div>
         </div>
       </div>
     </div>
-
-
-
   </div>
 
-  <!--<div class="page-4" *ngIf="page==='page4'">-->
-    <!--<h6 class="text-center">Alright! Currently there are 3 AliCreas who are waiting for you. Click on 'View Story' to-->
-      <!--understand more about the AliCrea. Tap on it and click 'Connect' to choose. Make your decision with care!</h6>-->
-    <!--<div class="pet-container">-->
+  <!--Page Pet Selection - Pet set up pet name-->
+  <div class="page-5 mt-5"  *ngIf="page==='petName'">
+    <div class="petchoose-wrapper text-center mt-5" *ngIf = "pet; else searchingTempl">
+
+        <div class="pet-pic" >
+          <img class="img-fluid " style="width: 100%" src="{{pet.curPic}}" />
+        </div>
+        <div class="row">
+          <a class="mx-auto">
+            <h6 class=" text-center" style="font-family: VT323; font-size: 1.3rem">
+              Here he is!  His name is {{pet.name}}. If you want to change it. Type it below and  Click 'Set' to continue!
+              Otherwise, press 'Continue'!
+            </h6>
+            <input class="petname-input" name="petname" [(ngModel)]="petName"/>
+            <button class="btn primary-btn" (click)="onProceed('communityAccess')"   [disabled]="!petName">Set</button>
+            <button class="mt-5 btn mx-auto btn-block primary-btn w-25" (click)="onProceed('communityAccess')">Continue</button>
+
+          </a>
+        </div>
 
 
+      <ng-template #searchingTempl> Searching for him...</ng-template>
+    </div>
+  </div>
 
+  <div class="page-6 mt-5"  *ngIf="page==='communityAccess'">
+    <h1 style="font-family: Orbitron"> Join The Pack!!!</h1>
+    <p class="info-text" style="font-family: VT323; font-size: 1.5rem; width: 300px; margin: auto">
+      {{owner.nickName}}, you now are one of us.
+      Click <a href="https://www.facebook.com/groups/158649758099381/?ref=bookmarks" target="_blank">here</a> to join us!!
+    </p>
+    <button class="btn-block btn primary-btn mt-3" style="width: 300px; margin: auto"  (click)="onProceed('infoAnnouncement')" >Continue</button>
+  </div>
 
+  <div class="mt-5" *ngIf="page==='infoAnnouncement'">
+    <h1 style="font-family: Orbitron" class="primary-text"> Adoption Completed</h1>
+    <p class="info-text" style="font-family: VT323; font-size: 1.5rem; width: 300px; margin: auto">{{pet.name}} now officially
+      become your pet. His destiny as well as AliCrea's destiny are now in your hands.
+      Raise him and train him to get ready for the battle with the Conquerors.
+    </p>
+    <button class="btn-block btn primary-btn mt-3" style="width: 300px; margin: auto" (click)="onProceed('done')" >Let's start</button>
+  </div>
 
-      <!--<div class="pet" (click)="choosePet(1)">-->
-        <!--<img class="pet-pic" src="../../../assets/pet/Nera.png" />-->
-
-
-
-
-
-      <!--<div class="pet" (click)="choosePet(2)">-->
-        <!--<img class="pet-pic" src="../../../assets/pet/Eyos.png" />-->
-        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pet2">-->
-          <!--View Story-->
-        <!--</button>-->
-        <!--&lt;!&ndash; Modal &ndash;&gt;-->
-        <!--<div class="modal fade" id="pet2" tabindex="-1" role="dialog" aria-labelledby="pet2Label" aria-hidden="true">-->
-          <!--<div class="modal-dialog" role="document">-->
-            <!--<div class="modal-content">-->
-              <!--<div class="modal-header">-->
-                <!--<h5 class="modal-title" id="pet2Label">Eyos - The Adventurers</h5>-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                  <!--<span aria-hidden="true">&times;</span>-->
-                <!--</button>-->
-              <!--</div>-->
-              <!--<div class="modal-body" style="text-align: justify">-->
-                <!--<strong>Background– </strong>-->
-                <!--Eyos are species that wandered around many different places of their universe. Originally from the East End of their Universe, Eyos eventually migrated to the South End. Many Places in the South End are undiscovered or have never been visited by other species. This attracts the species of Eyos as they as a species enjoy learning and adventuring.-->
-                <!--<strong> Personality- </strong>-->
-                <!--Eyos are enthusiastic creatives who love to explore and learn. These personality traits led them to gaining the reputation as one of the smartest species in their universe. Often labelled as crazy by other creatures due to their drive to learn something new at all cost. They will not hesitate to pin point someone’s mistake and are fully aware that their species are an intelligent species.-->
-                <!--<strong>Short Summary- </strong>-->
-                <!--<strong>In-game ability – </strong>-->
-                <!--Time Addition = Players gain additional time to do their quizzes-->
-              <!--</div>-->
-              <!--<div class="modal-footer">-->
-                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<span class="page-number"> The End</span>-->
-    <!--<button class="btn preceed-btn quizz-btn" (click)="onPreceed('page3')" > Back</button>-->
-    <!--<button class="btn proceed-btn quizz-btn "(click)="onProceed('done')" [disabled]="ownerPet.name === ''"> Connect </button>-->
-  <!--</div>-->
 
 </div>
