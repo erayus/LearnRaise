@@ -2,17 +2,22 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "LearnRaise",
+      "name": "AppShell",
       "installMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
-          "/index.html"
+          "/index.html",
+          "/"
         ],
         "versionedFiles": [
-          "/*.bundle.css",
-          "/*.bundle.js",
-          "/*.chunk.js"
+          "/*.css",
+          "/*.js",
+          "/*.js"
+        ],
+        "urls":[
+          "/",
+          "https://use.fontawesome.com/releases/v5.1.0/css/all.css"
         ]
       }
     },

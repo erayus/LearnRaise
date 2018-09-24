@@ -83,7 +83,7 @@ export class PetService {
         if (confirm('Your alien pet left you, you now will be sent back to the home page!')) {
           window.location.href = '/authentication/login';
         }
-      } else if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives > 1) { // if pet dies and still have lives
+      } else if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives > 1 && this.petObj.curPic != '') { // if pet dies and still have lives
         this.petObj.noOfLives -= 1;
         this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
         alert(`Your pet was gone and recovered, number of lives left: ${this.petObj.noOfLives}`);

@@ -49,7 +49,7 @@ export class AuthService {
               // Give access to the next routes
               this.loggedIn = true;
               // Navigate to petquizz
-              this.router.navigate(['/adoption', 'petquizz', 'page1'])
+              this.router.navigate(['/adoption', 'story'])
             },
           (error)=>{ console.log(error)}
           );
@@ -78,7 +78,7 @@ export class AuthService {
   // loginGoogle(provider) {
   //   this.afAuth.auth.signInWithPopup(provider).then(
   //     (userInfo) => {
-  //       this.router.navigate(['/adoption', 'petquizz', 'page1']);
+  //       this.router.navigate(['/adoption', 'story']);
   //       console.log(userInfo);
   //     });
   // }

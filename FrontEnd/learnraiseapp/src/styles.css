@@ -10,6 +10,49 @@ body{
   height: 100%;
   position: relative;
 }
+.primary-text{
+  color:  #ff6b00;
+  font-family: Orbitron, "Helvetica Neue";
+  font-weight: bold;
+}
+.primary-color{
+  color:  #ff6b00;
+}
+
+.secondary-text{
+  color: orange;
+  font-family: Orbitron, cursive;
+}
+.secondary-color{
+  color: orange;
+}
+
+/*Buttons*/
+.primary-btn{
+  border: 1px solid #ff6b00;
+  background-color: #ff6b00;
+  color: white;
+  cursor: pointer;
+}
+.primary-btn:hover{
+  transition: background-color 0.5s ease;
+  background-color: black;
+  color: #ff6b00;
+  border-color: #ff6b00;
+}
+
+.secondary-btn{
+  border: 1px solid #ff6b00;
+  background-color: white;
+  color: #ff6b00;
+  cursor: pointer;
+}
+.secondary-btn:hover{
+  transition: background-color 0.5s ease;
+  background-color: #ff6b00;
+  color: white;
+}
+
 
 
 

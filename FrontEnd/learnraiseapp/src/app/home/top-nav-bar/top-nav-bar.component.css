@@ -1,5 +1,8 @@
 .navbar{
-  background-color: rgba(0,0,0,0.5);
+  background-color:black;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
 }
 .nav-item{
   font-size: 1.2rem;
@@ -68,9 +71,6 @@ input.ng-invalid.ng-touched{
 }
 
 @media screen and (min-width:768px ){
-  .navbar{
-    background-color: rgba(0,0,0,0);
-  }
 }
 
 

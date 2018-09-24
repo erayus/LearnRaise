@@ -34,7 +34,7 @@ export class MainService {
             this.ownerService.initOwner(owner);
             this.onOwnerInited.next(this.ownerService.retrieveOwner());//pass to petinfo and main component
           } else {
-            window.location.href = `/adoption/petquizz/page1`;
+            window.location.href = `/adoption/story`;
           }
         },
         (error) => console.log(error)

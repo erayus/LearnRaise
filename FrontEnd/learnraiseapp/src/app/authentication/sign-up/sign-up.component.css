@@ -2,3 +2,17 @@
 .error-message{
   color: red;
 }
+
+
+.signUpBtn{
+  background-color: #ff6b00;
+  border: 1px solid #ff6b00;
+  color: white;
+}
+
+.signUpBtn:hover{
+  background-color: white;
+  color: #ff6b00;
+  border: 1px solid #ff6b00;
+}
+

@@ -1,71 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {PetService} from "../../../shared/pet.service";
-import {OwnerService} from "../../../shared/owner.service";
+import {PetService} from "../../shared/pet.service";
+import {OwnerService} from "../../shared/owner.service";
+import {Pet} from "../../shared/pet.model";
+import {Owner} from "../../shared/owner.model";
 declare var $: any;
 
 @Component({
   selector: 'app-page2',
-  templateUrl: './page2.component.html',
-  styleUrls: ['./page2.component.css']
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class Page2Component implements OnInit {
+export class RegistrationComponent implements OnInit {
 
-  page = 'page1';
+  page = 'welcome';
   ownerNickname: string;
   ownerAvatar: string;
   ownerPet = {name:'', species:'', element:'', story: '',weight: 0, height: 0, pictureURL:[]};
+
+  pet: Pet;
+  petName: string;
+  owner: Owner;
   constructor( private router: Router,
                private route: ActivatedRoute,
                private petServ: PetService,
                private ownerServ: OwnerService) { }
   ngOnInit() {
   }
-  chooseDark() {
-    this.petServ.installPet('Adios',
-      'Wolf',
-      'Ice',
-      'Adios is an icy wolf who is an instinctive warrior. He is a born-leader, never afraid to be the last one to eat and first one to lead.' +
-      ' He is also fearless to be the lonely wolf to face the challenges.',
-      10,
-      50,
-      ['https://orig00.deviantart.net/85d2/f/2015/145/8/3/wolflinkf_by_daieny-d8urgky.png','' +
-      'https://orig00.deviantart.net/2682/f/2011/066/4/6/chibi___wolf_by_dolphy-d3b4pdz.png','','']
-    );
-    this.router.navigate(['adoption', 'petchoose', this.route.snapshot.params['id']]);
-  }
-  chooseFire() {
-    this.petServ.installPet(
-      'Adus',
-      'Dragon',
-      'Metal',
-      'Born to be the king of the sky. ',
-      15,
-      75,
-      ['https://s-media-cache-ak0.pinimg.com/originals/96/e3/15/96e31533291321ab069944827241e399.jpg',
-        '','','']
-    );
-    this.router.navigate(['adoption', 'petchoose', this.route.snapshot.params['id']]);
-  }
+
   onProceed(page: string){
     switch (page) {
-      case 'page2':
-        this.page = 'page2';
+      case 'userName':
+        this.page = 'userName';
         break;
-      case 'page3':
+      case 'avatar':
         if (this.ownerNickname !== undefined && this.ownerNickname.length > 0) {
           this.ownerServ.setName(this.ownerNickname);
-          this.page = 'page3';
-        } else {
-          $('.nickname-input').css('border','1px solid red');
-          alert('Other MonGurus would like to know your name! ')
+          this.page = 'avatar';
         }
         break;
-      case 'page4':
+      case 'petSelection':
         this.ownerServ.setAvatar(this.ownerAvatar);
-        this.page = 'page4';
+        this.page = 'petSelection';
         break;
-      case 'done':
+      case 'petName':
         this.petServ.installPet(this.ownerPet.name,
           this.ownerPet.species,
           this.ownerPet.element,
@@ -73,20 +51,53 @@ export class Page2Component implements OnInit {
           this.ownerPet.weight,
           this.ownerPet.height,
           this.ownerPet.pictureURL);
-        this.router.navigate(['../../petchoose'], {relativeTo: this.route});
+          this.page = 'petName';
+        setTimeout(() => {
+          this.pet = this.petServ.retrivePet();
+          this.owner = this.ownerServ.retrieveOwner();
+          this.petName = this.pet.name;
+        } , 2000);
+        // this.router.navigate(['../petchoose'], {relativeTo: this.route});
+        break;
+      case 'communityAccess':
+        this.petServ.setName(this.petName);
+        this.petServ.updatePet();
+        // this.petServ.destroyPet();
+        this.ownerServ.finishReg();
+        this.ownerServ.saveOwnerToDatabase();
+        this.page = 'communityAccess';
+        break;
+      case 'infoAnnouncement':
+        this.page = 'infoAnnouncement';
+        break;
+      case 'done':
+        // this.router.navigate(['/main', 'petinfo']);
+        window.location.href = '/main/petinfo';
         break;
     }
   }
   onPreceed(page: string){
     switch (page) {
-      case 'page1':
-        this.page = 'page1';
+      case 'story':
+        this.page = 'story';
         break;
-      case 'page2':
-        this.page = 'page2';
+      case 'welcome':
+        this.page = 'welcome';
         break;
-      case 'page3':
-        this.page = 'page3';
+      case 'userName':
+        this.page = 'userName';
+        break;
+      case 'avatar':
+        this.page = 'avatar';
+        break;
+      case 'petSelection':
+        this.page = 'petSelection';
+        break;
+      case 'petName':
+        this.page = 'petName';
+        break;
+      case 'communityAccess':
+        this.page = "communityAccess";
         break;
     }
   }
@@ -119,23 +130,26 @@ export class Page2Component implements OnInit {
 
 
   choosePet(id: number) {
-    const selectedPetEl = $('.pet-container').children()[id];
-    $('.pet-container ').children().removeClass('selected');
-    selectedPetEl.classList.toggle('selected');
 
     switch (id) {
       case 0:
-        this.ownerPet.name = "Nios";
-        this.ownerPet.species = "Nios";
-        this.ownerPet.element = 'Water';
-        this.ownerPet.story = 'Before the Invasion, Nios were always viewed by other creatures in their universe as royalty. ' +
-          'They give off such strong aura that whenever they are in presence of other creatures, ' +
-          'they are showered with respect and hospitality. ';
-        this.ownerPet.weight = 40;
-        this.ownerPet.height = 60;
-        this.ownerPet.pictureURL = [ "../../../assets/pet/Nios.png", '', '', ''];
-        break;
+        if (confirm("Are you sure you want to adopt Nios?")) {
+          this.ownerPet.name = "Nios";
+          this.ownerPet.species = "Nios";
+          this.ownerPet.element = 'Water';
+          this.ownerPet.story = 'Before the Invasion, Nios were always viewed by other creatures in their universe as royalty. ' +
+            'They give off such strong aura that whenever they are in presence of other creatures, ' +
+            'they are showered with respect and hospitality. ';
+          this.ownerPet.weight = 40;
+          this.ownerPet.height = 60;
+          this.ownerPet.pictureURL = ["../../../assets/pet/Nios.png", '', '', ''];
+          this.onProceed("petName");
+          break;
+        } else{
+          break;
+        }
       case 1:
+        if (confirm("Are you sure you want to adopt Nera?")) {
         this.ownerPet.name = "Nera";
         this.ownerPet.species = "Nera";
         this.ownerPet.element = 'Diverse';
@@ -146,8 +160,13 @@ export class Page2Component implements OnInit {
         this.ownerPet.weight = 50;
         this.ownerPet.height = 78;
         this.ownerPet.pictureURL = ['../../../assets/pet/Nera.png','','',''];
+        this.onProceed("petName");
         break;
+        } else{
+          break;
+        }
       case 2:
+        if (confirm("Are you sure you want to adopt Eyos?")) {
         this.ownerPet.name = 'Eyos';
         this.ownerPet.species = 'Eyos';
         this.ownerPet.element = 'Fire';
@@ -158,7 +177,11 @@ export class Page2Component implements OnInit {
         this.ownerPet.weight = 56;
         this.ownerPet.height = 80;
         this.ownerPet.pictureURL = ['../../../assets/pet/Eyos.png', '', '', ''];
+        this.onProceed("petName");
         break;
+        } else{
+          break;
+        }
     }
   }
 }

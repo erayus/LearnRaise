@@ -1,10 +1,10 @@
 <div class="form-container">
   <form (ngSubmit)="onSignIn()" #fIn="ngForm">
-    <h3 class="text-center" style=" color: black ;font-weight: bolder; font-family: Orbitron , 'sans-serif'"> Sign In  </h3>
-    <h3 class="text-center" style=" color: black ;font-weight: bolder; font-family: Orbitron , 'sans-serif'">To Connect With Your Pet </h3>
+    <h1 class="text-center primary-text"> Sign In  </h1>
+    <h3 class="text-center primary-text" >To Connect With Your Pet </h3>
     <div id="userSignUp-data">
       <div class="form-group">
-        <label for="emailSignUp">Email</label>
+        <label for="emailSignUp" >Email</label>
         <input type="email"
                id="emailSignUp"
                name="email"
@@ -29,10 +29,11 @@
         <span class="form-text error-message" *ngIf="errorMessage !== 'none'   && fIn.submitted === true && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>
       </div>
     </div>
-    <button class="btn btn-success btn-block"   [disabled] = "!fIn.dirty">Log In</button>
+    <button class="login-btn btn btn-block"   [disabled] = "!fIn.dirty">Log In</button>
+
   </form>
   <div class="col-sm-12 mt-2 text-center">
-    <a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: black">Haven't got a buddy yet? Sign Up to find one! </a>
+    <a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't got a buddy yet? Sign Up to find one! </a>
   </div>
 </div>
 

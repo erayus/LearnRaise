@@ -5,7 +5,6 @@ import {AuthenticationComponent} from "../authentication/authentication.componen
 const homeRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'authentication', component: AuthenticationComponent},
-
 ];
 
 @NgModule({
