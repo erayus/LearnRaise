@@ -17,10 +17,10 @@ export class StoryComponent implements OnInit {
         $('.page-1-wrapper').css('display', 'none');
         $('.page-2-overlay').css('display', 'block');
         $('.page-2-overlay').addClass('animated fadeIn');
-        $('.registration-line-1').css('animation-name', 'typing');
-        $('.registration-line-2').css('animation-name', 'typing');
-        $('.registration-line-3').css('animation-name', 'typing');
-        $('.registration-line-4').css('animation-name', 'typing');
+        $('.page2-line-1').css('animation-name', 'typing');
+        $('.page2-line-2').css('animation-name', 'typing');
+        $('.page2-line-3').css('animation-name', 'typing');
+        $('.page2-line-4').css('animation-name', 'typing');
       });
   }
   continueToPage3() {
@@ -53,5 +53,4 @@ export class StoryComponent implements OnInit {
         $('.page4-line-9').css('animation-name', 'typing');
       });
   }
-
 }
