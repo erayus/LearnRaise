@@ -1,6 +1,8 @@
 # LearnRaise 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+Make learning never feel like learning again
+
 
 ## Development server
 

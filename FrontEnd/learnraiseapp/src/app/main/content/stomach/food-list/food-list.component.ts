@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import {StomachService} from "../stomach.service";
+declare let $: any;
 
 @Component({
   selector: 'app-food-list',
@@ -23,9 +24,16 @@ export class FoodListComponent implements OnInit  {
   ngOnInit() {
     //Subscribe to any changes in the database and update the view
     this.stomachServ.getFoodsObserver().subscribe(
-      (foodsFromDatabase) => this.foods = foodsFromDatabase.reverse()
-    )
+      (foodsFromDatabase) => {
+        this.foods = foodsFromDatabase.reverse();
+        $('.food-list').sortable();
+      }
+
+    );
+
   }
+
+
 
 
 
