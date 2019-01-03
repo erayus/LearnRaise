@@ -45,7 +45,8 @@ import {environment} from "../environments/environment";
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : [console.log('wRONGG')]  ],
+    // environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : [console.log('wRONGG')]
+  ],
 
   providers: [AuthService,
     AuthGuard,
