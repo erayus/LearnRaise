@@ -55,7 +55,7 @@ export class PetInfoComponent implements OnInit, AfterViewChecked, OnDestroy{
     });
 
     // When there is change in the database
-    this.changesInDatabaseSub = this.petService.onGettingUpdatedPet.subscribe(
+    this.changesInDatabaseSub = this.petService.onPetChanged.subscribe(
       (upToDatePet) => {
         this.petObj = upToDatePet;
       }

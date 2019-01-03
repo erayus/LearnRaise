@@ -28,22 +28,20 @@ export class AuthService {
       .then(
         (response) => {
           // Set up token  Server Service (IMPORTANCE: should be put here before creating owner and pet)
-          this.serverServ.setUpOwnerKeyAndToken();
+          this.serverServ.setUpOwnerIdAndToken();
           const user = response;
           // Initiate owner in OwnerService and create Owner table in the database
           const ownerData = this.ownerServ.createOwnerWithIdAndEmail(user.uid, user.email);
-          let ownerKey = null;
           //Add owner first and then use owner's key to add pet and stomach
-          this.serverServ.addOwner(ownerData).subscribe(
+          this.serverServ.addOwner(user.uid, ownerData).subscribe(
             (response) =>{
-              ownerKey = response.name;
               // Initiate petObj in PetService and create Pet table
               const petData = this.petServ.createPetWithId(user.uid);
-              // Add pet to the database using ownerKey
-              this.serverServ.addPet( ownerKey, petData).subscribe();
-              // Add example food to stomach in the database using ownerKey
+              // Add pet to the database using user Id
+              this.serverServ.addPet( user.uid, petData).subscribe();
+              // Add example food to stomach in the database using user Id
               const exampleFood = new Food('example', 'noun', 'This is an example', 'This is an example of an example');
-              this.serverServ.addFood(ownerKey,exampleFood).subscribe(
+              this.serverServ.addFood(user.uid,exampleFood).subscribe(
                 console.log
               );
               // Give access to the next routes

@@ -46,6 +46,8 @@ export class FeedComponent implements OnInit, AfterViewChecked {
         this.rows = minRows + rows;
       });
   }
+
+  //Manual feed: When the user feed the pet using manual feature
   onFeed(form: NgForm) {
     const foodName = form.value.foodName;
     const foodType = form.value.foodType;
@@ -59,6 +61,50 @@ export class FeedComponent implements OnInit, AfterViewChecked {
       this.router.navigate(['main','stomach'])
     }
   }
+
+  //Auto feed: When the user feed the pet using dictionary feature
+  addSelectedFoodsToStomach(){
+    let checkSameTypeFood = () => {
+      for (let i = 0; i < this.foodsToStomach.length-1; i++){
+        for (let j = i+1; j < this.foodsToStomach.length; j ++){
+          if (this.foodsToStomach[i].type === this.foodsToStomach[j].type){
+            return false;
+          }
+        }
+      }
+      return true;
+    };
+    let addFood = () => {
+      let sameFoodDetected = false;
+      //Iterate through the selected foods and check if
+      this.foodsToStomach.forEach((food) => {
+        if (!this.stomachServ.checkSameFoods(new Food(this.foodResultName, food.type, food.description, food.example))){ // same food detected
+          sameFoodDetected = true;
+          return
+        }
+      });
+      if (sameFoodDetected){
+        alert("There are foods that I have eaten")
+      } else{
+        this.foodsToStomach.forEach( (food) => {
+          this.closeFeedBox();
+          this.mainServ.onFeedPet.next(new Food(this.foodResultName, food.type, food.description, food.example));
+          this.router.navigate(['main', 'stomach'])
+        });
+      }
+    };
+
+    if (this.foodsToStomach.length > 1 ){
+      if (checkSameTypeFood()){
+        addFood();
+      }else {
+        alert("Ooops I can't eat food that have the same types");
+      }
+    } else{
+      addFood();
+    }
+  }
+
   toggleCookType() {
     if (this.state === 'manual') {
       this.state = 'auto'
@@ -105,6 +151,7 @@ export class FeedComponent implements OnInit, AfterViewChecked {
     }
     this.foodsToStomach = [];
   }
+
   selectFoodToStomach(index){
     //UI interaction
     let selectedFoodDiv = $('#wordLUResult').children()[index+1]; // plus 1 bcause index 0 of #wordLUResult is the header
@@ -112,58 +159,22 @@ export class FeedComponent implements OnInit, AfterViewChecked {
     let selectedFood = this.resultArray[index];
     let isAdded = false;
     let foodAddedIndex: number;
+    //Check if this food has already been added to the stomach
     this.foodsToStomach.forEach((food, index) => {
-      if (selectedFood.description === food.description){
+      if (selectedFood.description === food.description){ //Use the description to check to be the most precise
         isAdded = true;
         foodAddedIndex = index;
       }
     });
+
     if (!isAdded){
       this.foodsToStomach.push(selectedFood);
     }else{
       this.foodsToStomach.splice(foodAddedIndex,1);
     }
   }
-  addSelectedFoodsToStomach(){
-    let checkSameTypeFood = () => {
-      for (let i = 0; i < this.foodsToStomach.length-1; i++){
-        for (let j = i+1; j < this.foodsToStomach.length; j ++){
-          if (this.foodsToStomach[i].type === this.foodsToStomach[j].type){
-            return false;
-          }
-        }
-      }
-      return true;
-    };
-    let addFood = () => {
-      let sameFoodDetected = false;
-      this.foodsToStomach.forEach((food) => {
-        if (!this.stomachServ.checkSameFoods(new Food(this.foodResultName, food.type, food.description, food.example))){ // same food detected
-          sameFoodDetected = true;
-          return
-        }
-      });
-      if (sameFoodDetected){
-        alert("There are foods that I have eaten")
-      } else{
-        this.foodsToStomach.forEach( (food) => {
-          this.closeFeedBox();
-          this.mainServ.onFeedPet.next(new Food(this.foodResultName, food.type, food.description, food.example));
-          this.router.navigate(['main', 'stomach'])
-        });
-      }
-    };
 
-    if (this.foodsToStomach.length > 1 ){
-      if (checkSameTypeFood()){
-        addFood();
-      }else {
-        alert("Ooops I can't eat food that have the same types");
-      }
-    } else{
-      addFood();
-    }
-  }
+
   closeFeedBox() {
     this.mainServ.onCloseFeedBox.next();
   }

@@ -18,7 +18,7 @@ export class GameService {
     if (currentExp < totalExp) { // if still not enough food to level up
       this.petServ.gainExpAndPower();
       this.ownerServ.gainScoreWhenFeeding();
-    } else {
+    } else { //Level Up mechanism
       const currentLevel = this.petServ.getCurrentLevel();
       switch (currentLevel) {
         case 1:

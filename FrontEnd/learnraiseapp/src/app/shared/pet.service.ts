@@ -13,7 +13,8 @@ export class PetService {
   private petObj: Pet;
   private hungerInterval;
   private initedHungerInterval = false;
-  onGettingUpdatedPet = new Subject<Pet>();
+  //This event is triggered whenever there is any change
+  onPetChanged = new Subject<Pet>();
   constructor(private serverServ: ServerService) {}
 
 
@@ -73,21 +74,25 @@ export class PetService {
    *
    */
   checkHealthAndRetrievePet() {
+    console.log('Pet obj', this.petObj);
     if (this.petObj != null) {
       const lastHungerTime = this.petObj.hungerTime[0];
       const amountOfOfflineTime = Date.now() - this.petObj.leaveTime;
       this.petObj.hungerTime[0] = lastHungerTime - amountOfOfflineTime;
-      if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives === 1) { // if pet dies and runs out of lives
+      // if pet dies and runs out of lives
+      if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives === 1) {
         this.petObj.curPic = '';
         this.updatePet();
         if (confirm('Your alien pet left you, you now will be sent back to the home page!')) {
           window.location.href = '/authentication/login';
         }
-      } else if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives > 1 && this.petObj.curPic != '') { // if pet dies and still have lives
+        // if pet dies and still have lives
+      } else if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives > 1 && this.petObj.curPic != '') {
         this.petObj.noOfLives -= 1;
         this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
         alert(`Your pet was gone and recovered, number of lives left: ${this.petObj.noOfLives}`);
         this.startGettingHungry();
+        this.updatePet();
         return this.petObj;
       } else {
         this.updatePet();
@@ -117,7 +122,7 @@ export class PetService {
     this.petObj.hungerTime[1] = newHungerTime;
     this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
     this.petObj.power += 5;
-    this.onLevelUp.next(); // Pass to tool bar
+    //update pet in the database
     this.updatePet();
   }
   evolve(stage: string) {
@@ -143,12 +148,14 @@ export class PetService {
     }
     this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
     this.petObj.hungerTime[1] += 10800000;
+    //update pet in the database
     this.updatePet();
   }
 
   getHungerTimeArray() {
     return this.petObj.hungerTime;
   }
+
   moreHungerTime() {
     let newHungerTime;
     const currentLevel = this.getCurrentLevel();
@@ -161,6 +168,8 @@ export class PetService {
     }else {
       this.petObj.hungerTime[0] = newHungerTime;
     }
+    //Notify other components that there is something changed in pet Obj (tool bar components)
+    this.onPetChanged.next(this.petObj)
   }
 
   startGettingHungry() {
@@ -168,13 +177,15 @@ export class PetService {
     if (this.initedHungerInterval === false) {
       this.initedHungerInterval = true;
       this.hungerInterval = setInterval(() => {
+        //If the pet is still alive
         if (this.petObj.hungerTime[0] > 0 ) {
           this.petObj.hungerTime[0] -= 60000;
+          //Notify other components that there is something changed in pet Obj (tool bar components)
+          this.onPetChanged.next(this.petObj);
         } else {
           clearInterval(this.hungerInterval);
           this.initedHungerInterval = false;
           this.checkHealthAndRetrievePet();
-          // console.log(this.initedHungerInterval);
         }
       }, 60000);
     }
@@ -192,6 +203,7 @@ export class PetService {
 
   updatePet() {
     this.petObj.leaveTime = Date.now();
+    this.onPetChanged.next(this.petObj);
     this.serverServ.updatePet(this.petObj);
   }
 }

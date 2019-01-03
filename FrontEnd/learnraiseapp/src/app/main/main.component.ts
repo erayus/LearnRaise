@@ -61,10 +61,11 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   // };
 
   ngOnInit() {
-    this.serverServ.setUpOwnerKeyAndToken();
+    this.serverServ.setUpOwnerIdAndToken();
     //Wait for the ownerKey to be ready first
-    this.serverServ.onOwnerKeyAndTokenReady.subscribe(
+    this.serverServ.onOwnerIdAndTokenReady.subscribe(
       ()=> {
+        console.log('ready');
         // Initiate owner
         this.mainServ.initOwner();
 
@@ -108,11 +109,12 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
      *   Save Pet when the user minimize the window on mobile phone
      */
     this.vis(() => {
+      // if the user goes away from the screen
       if (!this.vis(() => {
         })) {
         this.petServ.saveLeaveTimeAndHungerTime();
       } else {
-        // check if token has been expired and update hunger time
+        // when the user come back to the screen, check if token has been expired and update hunger time
         this.serverServ.getTokenReady();
         this.petServ.checkHealthAndRetrievePet();
       }

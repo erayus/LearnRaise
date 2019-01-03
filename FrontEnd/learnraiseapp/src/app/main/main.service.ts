@@ -49,11 +49,14 @@ export class MainService {
       .subscribe(
         (pet) => {
           this.petService.initPet(pet);
-          // console.log('Pet initiated');
-          console.log("Noooo");
+          console.log('Pet object: ', pet);
+          console.log('Pet hunger time: ', pet.hungerTime[0]/60000);
           this.onPetInited.next(this.petService.checkHealthAndRetrievePet()); // pass to petinfo to update bars
         },
-        (error) => console.log(error)
+        (error) => {
+          alert('No pet in the database');
+          console.log(error)
+        }
       );
   }
 

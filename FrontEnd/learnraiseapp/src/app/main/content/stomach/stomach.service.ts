@@ -27,9 +27,9 @@ export class StomachService {
    *   To get foods from the database and store in foodsInStomach
    */
   loadFoodsFromDatabase() {
-         const ownerKey = this.serverServ.getOwnerKey();
-         this.stomachRef$ = this.db.list(`stomachs/${ownerKey}`);
+         const userId = this.serverServ.getUserId();
 
+         this.stomachRef$ = this.db.list(`stomachs/${userId}`);
          //Store foods from the database to a variable
          this.stomachRef$.valueChanges().subscribe(
            (foods) => this.foodsInStomach = foods.reverse()
@@ -85,7 +85,6 @@ export class StomachService {
   }
 
   updateFood(index: number, newFood: Food) {
-
     //Notify stomach component to close description box
     this.foodChangedEvent.next(newFood);
     //Update food in the database

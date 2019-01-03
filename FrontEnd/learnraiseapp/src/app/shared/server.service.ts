@@ -23,15 +23,12 @@ import {HttpClient} from "@angular/common/http";
 export class ServerService {
   private token: string;
   private userId: string;
-  private ownerKey: string;
-  onOwnerKeyAndTokenReady = new Subject();
+  onOwnerIdAndTokenReady = new Subject();
   constructor(private httpClient: HttpClient,
               private lsManager: LocalStorageManager,
               private db: AngularFireDatabase,
               private afAuth: AngularFireAuth
               ) {
-    //Set up user id and token whenever there is a refresh
-    // this.setUpOwnerKeyAndToken();
   }
   /**
    * Retrieve Token from local storage and store it a variable so that it can be used later to make request to the server
@@ -59,28 +56,18 @@ export class ServerService {
    * Called to get the ownerKey and Token before manipulating the data (add, update, delete)
    * @param {string} userId
    */
-  setUpOwnerKeyAndToken() {
+  setUpOwnerIdAndToken() {
     // If there is user info in the local storage
     if (this.lsManager.getUserInfo()) {
-      this.getTokenReady();
-      //Get user id from the Local Storage
-      const user = this.lsManager.getUserInfo();
-      this.userId = user.uid;
-      // User user id to set ownerKey
-      this.db.list('owners').snapshotChanges().map(changes =>
-          changes.map(c => ({key: c.payload.key, ...c.payload.val()})
-          )
-        ).subscribe(
-          (owners) => {
-            for (let owner of owners) {
-              if (owner.oId === this.userId) {
-                this.ownerKey = owner.key;
-                this.onOwnerKeyAndTokenReady.next();
-                break;
-              }
-            }
-          }
-        );
+      if (this.getTokenReady()){
+        //Get user id from the Local Storage
+        const user = this.lsManager.getUserInfo();
+        this.userId = user.uid;
+        // Wait for the other components a little bit to subscribe to the event before notify them (services are run before components)
+        setTimeout(()=>{
+          this.onOwnerIdAndTokenReady.next();
+        }, 0.5);
+      }
     } else {
       window.location.href = "./index.html";
     }
@@ -89,73 +76,59 @@ export class ServerService {
     const returnId = this.userId;
     return returnId;
   }
-  getOwnerKey(){
-    const copyKey = this.ownerKey;
-    if (this.ownerKey){
-      return copyKey;
-    }
-  }
 
   // OWNERS TABLE
-  addOwner(owner: Owner) {
-    return this.httpClient.post<any>(`${firebaseConfig.databaseURL}/owners.json?auth=${this.token}`, owner)
+  addOwner(userId, owner: Owner) {
+    return this.httpClient.post<any>(`${firebaseConfig.databaseURL}/owners/${userId}.json?auth=${this.token}`, owner)
   }
   updateOwner(owner: Owner) {
-    return this.httpClient.put(`${firebaseConfig.databaseURL}/owners/${this.ownerKey}.json?auth=${this.token}`, owner);
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/owners/${this.userId}.json?auth=${this.token}`, owner);
   }
   getOwner() {
-    return this.httpClient.get<Owner>(`${firebaseConfig.databaseURL}/owners/${this.ownerKey}.json?auth=${this.token}`)
+    return this.httpClient.get<Owner>(`${firebaseConfig.databaseURL}/owners/${this.userId}.json?auth=${this.token}`)
   }
-
   getAllOwners() {
     return  this.db.list("owners").valueChanges();
   }
 
 
   // PETS TABLE
-  addPet(userKey: string, pet: Pet) {
-    return this.httpClient.put(`${firebaseConfig.databaseURL}/pets/${userKey}.json?auth=${this.token}`, pet)
+  getPet() {
+    return this.httpClient.get<Pet>(`${firebaseConfig.databaseURL}/pets/${this.userId}.json?auth=${this.token}`)
+  }
+  addPet(userId: string, pet: Pet) {
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/pets/${userId}.json?auth=${this.token}`, pet)
   }
   updatePet( pet: Pet) {
-    return this.httpClient.put(`${firebaseConfig.databaseURL}/pets/${this.ownerKey}.json?auth=${this.token}`, pet).subscribe();
+    return this.httpClient.put(`${firebaseConfig.databaseURL}/pets/${this.userId}.json?auth=${this.token}`, pet).subscribe();
   }
   saveLeaveTimeAndHungerTime(oId, leaveTime: number, currentHungerTime: number[]) {
     const xhr = new XMLHttpRequest();
     const leaveTimeData = JSON.stringify(leaveTime);
-    xhr.open("PUT",`${firebaseConfig.databaseURL}/pets/${this.ownerKey}/leaveTime.json?auth=${this.token}`, false);
+    xhr.open("PUT",`${firebaseConfig.databaseURL}/pets/${this.userId}/leaveTime.json?auth=${this.token}`, false);
     xhr.send(leaveTimeData);
     const currentHungerTimeData = JSON.stringify(currentHungerTime);
-    xhr.open("PUT",`${firebaseConfig.databaseURL}/pets/${this.ownerKey}/hungerTime.json?auth=${this.token}`, false);
+    xhr.open("PUT",`${firebaseConfig.databaseURL}/pets/${this.userId}/hungerTime.json?auth=${this.token}`, false);
     xhr.send(currentHungerTimeData);
 
     this.deleteToken();
   }
 
-  getPet() {
-    return this.httpClient.get<Pet>(`${firebaseConfig.databaseURL}/pets/${this.ownerKey}.json?auth=${this.token}`)
-  }
 
 
   // STOMACHS TABLE
-  saveFoods(ownerKey, newFoods: Food[]) {
-    return this.httpClient.put(`${firebaseConfig.databaseURL}/stomachs/${ownerKey}.json?auth=${this.token}`, newFoods).subscribe();
-  }
-  updateFood(foodKey : string, newFood : Food){
-    return this.httpClient.put(`${firebaseConfig.databaseURL}/stomachs/${this.ownerKey}/${foodKey}.json?auth=${this.token}`, newFood);
-  }
-
   /**
    * Used to add food when authenticating
    * @param ownerKey
    * @param {Food} newFood
    * @return {Observable<Response>}
    */
-  addFood(ownerKey, newFood: Food){
-    return this.httpClient.post(`${firebaseConfig.databaseURL}/stomachs/${ownerKey}.json?auth=${this.token}`, newFood)
+  addFood(userId, newFood: Food){
+    return this.httpClient.post(`${firebaseConfig.databaseURL}/stomachs/${userId}.json?auth=${this.token}`, newFood)
   }
-  getFoods() {
-     return this.db.list(`stomachs/${this.ownerKey}`).valueChanges();
-  }
+  // getFoods() {
+  //    return this.db.list(`stomachs/${this.ownerKey}`).valueChanges();
+  // }
 
 
 }
