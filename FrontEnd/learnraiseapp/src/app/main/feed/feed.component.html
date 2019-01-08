@@ -105,22 +105,24 @@
         <h4>Here are some things I found:</h4>
       </div>
     <div class="result-wrapper">
-      <div id="wordLUResult">
-        <h3 class="px-4"  style="color: darkblue"><strong>{{foodResultName | uppercase}}</strong></h3>
-        <div class="px-3 py-2 my-3 wordLUResultItem"
-             *ngFor="let resultItem of resultArray; let i = index"
-             (click)="selectFoodToStomach(i)">
-          <div><strong>Type: </strong> {{resultItem.type}}</div>
-          <strong>Definition:</strong>
-          <div>{{resultItem.description}}</div>
-          <strong>Example:</strong>
-          <div>{{resultItem.example}}</div>
+      <div id="wordLUResult" *ngIf="food">
+        <h3 class="px-4"  style="color: darkblue"  ><strong>{{this.food['word']| titlecase}} {{this.food['phonetic']}}</strong></h3>
+        <div class="px-3 py-2 my-3 wordLUResultItem" *ngIf="typesArray.length > 0">
+
+          <div class="wordPart" *ngFor="let foodType of typesArray ">
+            <h6><strong>{{foodType}}</strong></h6>
+            <ul class="wordDefinition mb-3" *ngFor="let foodDef of meaningObj[foodType]" >
+              <strong >Definition: </strong>{{foodDef.definition}}<br/>
+              <strong>Example: </strong>{{foodDef.example}}
+            </ul>
+          </div>
         </div>
-        <div *ngIf="resultArray.length === 0">
-         <strong>Searching....</strong>
-        </div>
+
       </div>
-      <button class="btn  btn-block feed-btn mt-1 " [disabled]="foodsToStomach.length === 0" (click)="addSelectedFoodsToStomach()" >To Stomach</button>
+      <div *ngIf="!food">
+        <strong>Searching....</strong>
+      </div>
+      <button class="btn  btn-block feed-btn mt-1 " [disabled]="!food" (click)="addSelectedFoodsToStomach()" >To Stomach</button>
       <button class="btn-block btn-primary " style="padding:5px; margin: 10px 0" (click)="toggleCookType()">Back</button>
     </div>
   </div>

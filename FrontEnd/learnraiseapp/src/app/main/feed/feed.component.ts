@@ -16,9 +16,11 @@ declare var $: any;
 export class FeedComponent implements OnInit, AfterViewChecked {
   defaultFoodType: string;
   state = 'auto';
-  resultArray = [];
+  typesArray = [];
+  meaningObj: any;
   foodsToStomach = [];
-  foodResultName: string;
+  food: any;
+
   constructor(
               private mainServ: MainService,
               private stomachServ: StomachService,
@@ -49,60 +51,28 @@ export class FeedComponent implements OnInit, AfterViewChecked {
 
   //Manual feed: When the user feed the pet using manual feature
   onFeed(form: NgForm) {
-    const foodName = form.value.foodName;
-    const foodType = form.value.foodType;
-    const foodDes = form.value.foodDes;
-    const foodExample = form.value.foodExample;
-    if (!this.stomachServ.checkSameFoods( new Food(foodName, foodType, foodDes, foodExample))) {
-      alert('This food has already been added!')
-    } else {
-      this.closeFeedBox();
-      this.mainServ.onFeedPet.next(new Food(foodName, foodType, foodDes, foodExample));
-      this.router.navigate(['main','stomach'])
-    }
+    // const foodName = form.value.foodName;
+    // const foodType = form.value.foodType;
+    // const foodDes = form.value.foodDes;
+    // const foodExample = form.value.foodExample;
+    // if (!this.stomachServ.isFoodEaten( new Food(food, this.food.meaning, this.food.phonetic))) {
+    //   alert('This food has already been added!')
+    // } else {
+    //   this.closeFeedBox();
+    //   this.mainServ.onFeedPet.next(new Food(foodName, foodType, foodDes, foodExample));
+    //   this.router.navigate(['main','stomach'])
+    // }
   }
 
   //Auto feed: When the user feed the pet using dictionary feature
   addSelectedFoodsToStomach(){
-    let checkSameTypeFood = () => {
-      for (let i = 0; i < this.foodsToStomach.length-1; i++){
-        for (let j = i+1; j < this.foodsToStomach.length; j ++){
-          if (this.foodsToStomach[i].type === this.foodsToStomach[j].type){
-            return false;
-          }
-        }
-      }
-      return true;
-    };
     let addFood = () => {
-      let sameFoodDetected = false;
-      //Iterate through the selected foods and check if
-      this.foodsToStomach.forEach((food) => {
-        if (!this.stomachServ.checkSameFoods(new Food(this.foodResultName, food.type, food.description, food.example))){ // same food detected
-          sameFoodDetected = true;
-          return
-        }
-      });
-      if (sameFoodDetected){
-        alert("There are foods that I have eaten")
-      } else{
-        this.foodsToStomach.forEach( (food) => {
-          this.closeFeedBox();
-          this.mainServ.onFeedPet.next(new Food(this.foodResultName, food.type, food.description, food.example));
-          this.router.navigate(['main', 'stomach'])
-        });
-      }
+        this.mainServ.onFeedPet.next(this.food);
+        this.closeFeedBox();
+        // this.mainServ.onFeedPet.next(new Food(this.foodResultName, food.type, food.description, food.example));
+        this.router.navigate(['main', 'stomach'])
     };
-
-    if (this.foodsToStomach.length > 1 ){
-      if (checkSameTypeFood()){
-        addFood();
-      }else {
-        alert("Ooops I can't eat food that have the same types");
-      }
-    } else{
-      addFood();
-    }
+    addFood();
   }
 
   toggleCookType() {
@@ -113,50 +83,39 @@ export class FeedComponent implements OnInit, AfterViewChecked {
     } else {
       this.state = 'auto'
     }
-    this.resultArray = [];
+    this.typesArray = [];
   }
 
   onLookUp(form: NgForm) {
     const foodNameLU = form.value.foodNameLU;
     if (foodNameLU.split('').indexOf(' ') !== -1){
       alert("Food's name cannot contain space")
-    }else {
+    } else if (this.stomachServ.isFoodEaten(foodNameLU.toLowerCase())){
+      alert('I have eaten this food')
+    } else {
       this.state = 'result';
       this.dictionaryServ.lookUpFood(foodNameLU.toLowerCase()).subscribe(
-        (response: any[]) => {
-          if (response.length == 0) {
-            alert('Oops I cannot find this word for you :(');
-          } else {
-            this.foodResultName = foodNameLU;
-            for (const object of response) {
-              if (object['senses'] !== null
-                && object['senses'][0].hasOwnProperty('definition')
-                && object.hasOwnProperty('part_of_speech')
-                && object['headword'].toLowerCase() === foodNameLU.toLowerCase()) {
-                const resultObj = {};
-                resultObj['type'] = object["part_of_speech"];
-                resultObj['description'] = object["senses"][0]["definition"];
-                resultObj['example'] = 'no example found!';
-                if (object["senses"][0].hasOwnProperty('examples')) {
-                  resultObj['example'] = object['senses'][0]['examples'][0]['text'];
-                } else if (object["senses"][0].hasOwnProperty('gramatical_examples')) {
-                  resultObj['example'] = object['senses'][0]['gramatical_examples'][0]['examples'][0]['text'];
-                }
-                this.resultArray.push(resultObj);
-              }
-            }
-          }
-        }
-      );
+          (response: any) => {
+            // switch to result box
+            this.state = 'result';
+
+            this.food = response;
+            this.meaningObj = this.food.meaning;
+            this.typesArray = Object.keys(this.meaningObj);
+
+          },
+        (error) => alert("Oops I can't find this word for you. Please check the word again")
+      )
     }
     this.foodsToStomach = [];
   }
+
 
   selectFoodToStomach(index){
     //UI interaction
     let selectedFoodDiv = $('#wordLUResult').children()[index+1]; // plus 1 bcause index 0 of #wordLUResult is the header
     selectedFoodDiv.classList.toggle('selected');
-    let selectedFood = this.resultArray[index];
+    let selectedFood = this.typesArray[index];
     let isAdded = false;
     let foodAddedIndex: number;
     //Check if this food has already been added to the stomach

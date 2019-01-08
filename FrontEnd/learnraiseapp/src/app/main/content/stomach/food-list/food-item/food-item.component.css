@@ -1,14 +1,15 @@
 .food-item{
   display: flex;
   flex-wrap: nowrap;
-  border-radius: 15px;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   padding: 0;
 }
 
+
 .food-item.cooked{
-  background-color: dodgerblue;
+  background-color: #4285F4
 }
 .food-item.cooked:hover{
   background-color: darkblue;
@@ -41,14 +42,14 @@
   font-size: 1.1rem;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
-  padding: 10px 0;
-  margin-right: 5px;
+  text-align: right;
+  padding: 10px 10px;
+  display: none;
 }
 .delete-icon{
   padding: 4px;
-
 }
+
 .edit-icon{
   padding: 4px;
 }

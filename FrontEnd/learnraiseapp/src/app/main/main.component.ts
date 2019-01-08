@@ -9,6 +9,8 @@ import {GameService} from "../shared/game.service";
 import {CanComponentDeactivate} from "./can-deactivate-guard.service";
 import {Observable} from "rxjs/Observable";
 import {AuthService} from "../authentication/auth-service";
+import {DictionaryService} from "../shared/dictionary.service";
+import {r} from "@angular/core/src/render3";
 declare var $: any;
 @Component({
   selector: 'app-main',
@@ -53,6 +55,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
               private gameServ: GameService,
               private serverServ: ServerService,
               private authServ: AuthService,
+              private dicServ: DictionaryService
               ) {
   }
   // @HostListener('window:beforeunload', ['$event'])
@@ -75,8 +78,8 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
 
         // Load food from the server to stomach
         this.mainServ.loadFoodsInStomach();
-
       }
+
     );
 
     const body = document.getElementsByTagName("BODY")[0];
@@ -99,7 +102,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
 
     // To be able to add food at any component within main
     this.foodAddedSub = this.mainServ.onFeedPet.subscribe(
-      (food: Food) => {
+      (food) => {
         this.stomachServ.addFood(food);
         this.gameServ.onFoodAdded();
       }

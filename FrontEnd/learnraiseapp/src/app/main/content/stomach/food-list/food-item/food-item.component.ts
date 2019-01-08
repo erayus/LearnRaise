@@ -12,12 +12,24 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   @Input() food;
   @Input() foodIndex;
   isCooked = true;
+  typesArray: string[];
   checkIfIsCookedSub: Subscription;
   constructor(private stomachServ: StomachService) { }
 
   //If there is any change on any food item, ngOnInit will be called on all food item
   ngOnInit() {
-    this.checkIfIsCooked();
+    // this.checkIfIsCooked();
+
+    this.typesArray = Object.keys(this.food.meaning);
+
+    //show icons when mouse enter
+    $('.food-item').mouseenter(function() {
+      $(this).children('.icons').show("slow");
+    }).mouseleave(function() {
+      $(this).children('.icons').hide("slow");
+    });
+
+
   }
 
   /**

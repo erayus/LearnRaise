@@ -1,10 +1,14 @@
 <div class="food-des-wrapper">
-  <h4 class="">{{food.name}} ({{food.type}})</h4>
-  <hr>
-  <h5 class="card-title">Description:</h5>
-  <p>  {{food.description}}</p>
-  <h5 class="card-title"> Example:</h5>
-  <p>  {{food.example}}</p>
+  <h4 class=""   ><strong>{{this.food['word']| titlecase}} {{this.food['phonetic']}}</strong></h4> <i class="fas fa-volume-up"></i>
+  <div class=" py-2 my-3 wordLUResultItem" *ngIf="typesArray.length > 0">
+    <div class="wordPart" *ngFor="let foodType of typesArray">
+      <h6><strong>{{foodType}}</strong></h6>
+      <ul class="wordDefinition mb-3" *ngFor="let foodDef of meaningObj[foodType]" >
+        <strong >Definition: </strong>{{foodDef.definition}}<br/>
+        <strong>Example: </strong>{{foodDef.example}}
+      </ul>
+    </div>
+  </div>
 
 </div>
 

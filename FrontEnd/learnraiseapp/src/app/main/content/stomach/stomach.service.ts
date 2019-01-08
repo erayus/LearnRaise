@@ -64,20 +64,24 @@ export class StomachService {
    * @param {Food} newFood
    * @return {boolean}
    */
-  checkSameFoods(newFood: Food) {
-    for (const food of this.foodsInStomach){
-      if ( newFood.name.toLowerCase() === food.name.toLowerCase() && newFood.type === food.type) {
-        return false
+  isFoodEaten(newFoodName: string) {
+    console.log('Checking food', this.foodsInStomach);
+    var flag = false;
+    if (this.foodsInStomach.length > 0){
+      for (const food of this.foodsInStomach){
+        if ( newFoodName === food.word.toLowerCase() ) {
+          flag = true;
+        }
       }
     }
-    return true;
+    return flag
   }
 
   getFoodByIndex(index: number) {
     return this.foodsInStomach[index];
   }
 
-  addFood(food: Food) {
+  addFood(food) {
     //Notify stomach component to display its description
     this.foodAddedEvent.next(food);
     //Add food to the database

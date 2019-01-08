@@ -11,7 +11,7 @@ export class MainService {
   onCloseFeedBox = new Subject();
   onPetInited = new Subject();
   onOwnerInited = new Subject();
-  onFeedPet = new Subject<Food>();
+  onFeedPet = new Subject<any>();
   onNotify = new Subject<string>();
   isInited = false;
   constructor(private serverServ: ServerService,

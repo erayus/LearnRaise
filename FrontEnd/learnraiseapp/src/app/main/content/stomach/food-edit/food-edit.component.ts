@@ -13,18 +13,18 @@ declare var $: any;
 export class FoodEditComponent implements OnInit, AfterViewChecked {
   @Input() editingFoodIndex;
   @ViewChild('f') editForm: NgForm;
-  editingFoodItem: Food;
+  // editingFoodItem: any;
   constructor( private stomachServ: StomachService) { }
 
   ngOnInit() {
-    this.editingFoodItem = this.stomachServ.getFoodByIndex(this.editingFoodIndex);
-    setTimeout( () => {
-      this.editForm.setValue({
-        foodName: this.editingFoodItem.name,
-        foodType: this.editingFoodItem.type,
-        foodDes: this.editingFoodItem.description,
-        foodExample: this.editingFoodItem.example})
-    }, 10 );
+    // this.editingFoodItem = this.stomachServ.getFoodByIndex(this.editingFoodIndex);
+    // setTimeout( () => {
+    //   this.editForm.setValue({
+    //     foodName: this.editingFoodItem.name,
+    //     foodType: this.editingFoodItem.type,
+    //     foodDes: this.editingFoodItem.description,
+    //     foodExample: this.editingFoodItem.example})
+    // }, 10 );
   }
   ngAfterViewChecked() {
     $(document)
@@ -46,18 +46,18 @@ export class FoodEditComponent implements OnInit, AfterViewChecked {
     this.stomachServ.closeEditingModalBoxEvent.next();
   }
   onEdit( form: NgForm) {
-    const newFood = new Food(
-      form.value.foodName,
-      form.value.foodType,
-      form.value.foodDes,
-      form.value.foodExample
-    );
-    if (!this.stomachServ.checkSameFoods(newFood) ) {
-      alert('This food has already been exist!')
-    }else {
-      this.stomachServ.updateFood(this.editingFoodIndex, newFood);
-      this.closeEditBox();
-    }
+  //   const newFood = new Food(
+  //     form.value.foodName,
+  //     form.value.foodType,
+  //     form.value.foodDes,
+  //     form.value.foodExample
+  //   );
+  //   if (!this.stomachServ.isFoodEaten(newFood) ) {
+  //     alert('This food has already been exist!')
+  //   }else {
+  //     this.stomachServ.updateFood(this.editingFoodIndex, newFood);
+  //     this.closeEditBox();
+  //   }
   }
 
 }

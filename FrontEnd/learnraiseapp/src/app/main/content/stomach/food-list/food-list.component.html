@@ -10,7 +10,7 @@
       <input  id = "search-input"
               autocomplete="off"
               spellcheck="true"
-              placeholder="Search food"
+              placeholder="Search"
               [(ngModel)]="filterFood"/>
     </div>
 
@@ -19,7 +19,7 @@
   <div class="row food-list" *ngIf="foods">
     <!--Food item-->
     <app-food-item class="food-item col-xs-6 col-sm-4 col-md-12 col-lg-12 "
-                   *ngFor="let foodEl of foods| foodFilter: filterFood.toLowerCase(): 'name' ; let i = index "
+                   *ngFor="let foodEl of foods| foodFilter: filterFood.toLowerCase(): 'word' ; let i = index "
                    [food]="foodEl"
                    [foodIndex]="i" ></app-food-item>
   </div>

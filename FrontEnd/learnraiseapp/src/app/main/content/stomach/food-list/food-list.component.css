@@ -5,9 +5,8 @@
   margin: 0;
 }
 .food-item{
-  margin: 2px 0;
+  margin: 8px 2px;
   width: 24%;
-  padding: 2px;
 }
 #search{
   position: relative;

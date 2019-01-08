@@ -78,16 +78,17 @@ export class PetService {
     if (this.petObj != null) {
       const lastHungerTime = this.petObj.hungerTime[0];
       const amountOfOfflineTime = Date.now() - this.petObj.leaveTime;
-      this.petObj.hungerTime[0] = lastHungerTime - amountOfOfflineTime;
+      const petCurrentHungerTime = lastHungerTime - amountOfOfflineTime;
+      this.petObj.hungerTime[0] = petCurrentHungerTime;
       // if pet dies and runs out of lives
-      if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives === 1) {
+      if ( petCurrentHungerTime <= 0 && this.petObj.noOfLives === 1) {
         this.petObj.curPic = '';
         this.updatePet();
         if (confirm('Your alien pet left you, you now will be sent back to the home page!')) {
           window.location.href = '/authentication/login';
         }
         // if pet dies and still have lives
-      } else if (this.petObj.hungerTime[0] <= 0 && this.petObj.noOfLives > 1 && this.petObj.curPic != '') {
+      } else if (petCurrentHungerTime <= 0 && this.petObj.noOfLives > 1 ) {
         this.petObj.noOfLives -= 1;
         this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
         alert(`Your pet was gone and recovered, number of lives left: ${this.petObj.noOfLives}`);
@@ -125,6 +126,7 @@ export class PetService {
     //update pet in the database
     this.updatePet();
   }
+
   evolve(stage: string) {
     switch (stage) {
       case 'teenager':

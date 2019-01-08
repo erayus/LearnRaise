@@ -40,10 +40,10 @@ export class AuthService {
               // Add pet to the database using user Id
               this.serverServ.addPet( user.uid, petData).subscribe();
               // Add example food to stomach in the database using user Id
-              const exampleFood = new Food('example', 'noun', 'This is an example', 'This is an example of an example');
-              this.serverServ.addFood(user.uid,exampleFood).subscribe(
-                console.log
-              );
+              // const exampleFood = new Food('example', 'noun', 'This is an example', 'This is an example of an example');
+              // this.serverServ.addFood(user.uid,exampleFood).subscribe(
+              //   console.log
+              // );
               // Give access to the next routes
               this.loggedIn = true;
               // Navigate to petquizz
