@@ -71,8 +71,8 @@
 
   <!--AutoCook Form-->
   <div class="autoCookType" *ngIf="state === 'auto' ">
-    <div class="header p-2">
-      <h4>Which food are you looking for?</h4>
+    <div class="header p-2 success-color">
+      <h4 style="  font-size: 26px">Which food are you looking for?</h4>
     </div>
     <div class="feed-content">
       <form (ngSubmit)= " onLookUp(f) " #f="ngForm">
@@ -93,16 +93,16 @@
             <!--<label for="wordLUResult"><strong>Result:</strong></label>-->
             <!---->
           <!--</div>-->
-        <button class="btn  btn-block feed-btn" [disabled]="!f.valid">Search</button>
+        <button class="btn  btn-block btn-success feed-btn " [disabled]="!f.valid">Search</button>
         </div>
       </form>
-      <button class="btn-block btn-primary mt-1 " (click)="toggleCookType()">Manual Cook</button>
+      <!--<button class="btn-block btn-primary mt-1 " (click)="toggleCookType()">Manual Cook</button>-->
     </div>
   </div>
 
   <div class="result-container" *ngIf="state === 'result' ">
-      <div class="header p-2">
-        <h4>Here are some things I found:</h4>
+      <div class="header p-2 success-color">
+        <h4 style="font-size: 25px">Here are some things I found:</h4>
       </div>
     <div class="result-wrapper">
       <div id="wordLUResult" *ngIf="food">
@@ -119,11 +119,11 @@
         </div>
 
       </div>
-      <div *ngIf="!food">
-        <strong>Searching....</strong>
+      <div class="text-center" *ngIf="!food">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif">
       </div>
-      <button class="btn  btn-block feed-btn mt-1 " [disabled]="!food" (click)="addSelectedFoodsToStomach()" >To Stomach</button>
-      <button class="btn-block btn-primary " style="padding:5px; margin: 10px 0" (click)="toggleCookType()">Back</button>
+      <button class="btn  btn-block btn-success feed-btn mt-1 " [disabled]="!food" (click)="addSelectedFoodsToStomach()" >Add</button>
+      <button class="btn btn-block btn-primary p-2 " style="padding:5px; margin: 10px 0" (click)="toggleCookType()">Back</button>
     </div>
   </div>
 </div>

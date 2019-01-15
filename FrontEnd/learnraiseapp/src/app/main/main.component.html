@@ -29,10 +29,14 @@
 
 
   <!--Feed button-->
-  <button class="btn feed-btn btn-shadow primary-btn" (click)="onFeed()"><span class="feed-text">+</span></button>
+  <button class="btn feed-btn btn-shadow primary-btn" (click)="onFeed()">
+    <i class="fas fa-plus-circle"></i>
+  </button>
 
   <!--Log out Btn-->
-  <button class="btn logOut-btn btn-shadow secondary-btn" (click)="onLogOut()"><i class="fas fa-sign-out-alt"></i></button>
+  <button class="btn logOut-btn btn-shadow secondary-btn" (click)="onLogOut()">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
 
 
   <div class="feed-container openingFeed" *ngIf="isFeeding" >

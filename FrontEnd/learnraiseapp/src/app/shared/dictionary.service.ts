@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 declare var $: any;
 @Injectable()
 export class DictionaryService {
+  wordNikAPI = "6f5c4a3558f34bbb7500c033d5c0ec4cb4447bbf144994657";
   constructor(private http: HttpClient) {
   }
 
@@ -11,23 +12,22 @@ export class DictionaryService {
     return this.http.get<any>(`https://googledictionaryapi.eu-gb.mybluemix.net/?define=${foodName.toLowerCase()}&lang=en`)
       .map(
         (response) => {
-          //Format response into an object
+          // Format response into an object
           const result = response[0];
           return result;
         }
       )
   }
 
-  textOxford() {
-    var result;
-
-    var googleAPI = "https://googledictionaryapi.eu-gb.mybluemix.net/";
-    var app_key = "6f5c4a3558f34bbb7500c033d5c0ec4cb4447bbf144994657";
-    $.ajax({
-      url:"https://api.wordnik.com/v4/word.json/cool/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=" + app_key,
-      dataType: 'json',
-      success: function (response) {
-      }
-    });
+  getWordPronunciation(word) {
+    return this.http.get<any>(`https://api.wordnik.com/v4/word.json/${word.toLowerCase()}/audio?useCanonical=false&limit=1&api_key=${this.wordNikAPI}`)
+      .map(
+        (response) => {
+          // Format response into an object
+          console.log(response);
+          const mp3FileUrl = response[0].fileUrl;
+          return mp3FileUrl;
+        }
+      )
   }
 }

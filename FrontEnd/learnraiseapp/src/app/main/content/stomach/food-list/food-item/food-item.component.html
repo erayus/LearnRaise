@@ -1,6 +1,6 @@
 <div class="col-md-12 food-item text-left" [ngClass]="{'cooked': isCooked, 'uncooked': !isCooked} ">
   <div class="food-name" (mouseenter)="onSelect()" >
-    <div style="width: 100%"><strong>{{food.word | nameShorten | titlecase }} ({{typesArray | typeShorten: typesArray}})</strong></div>
+    <div style="width: 100%"><strong>{{food.word | nameShorten | titlecase }}  ({{typesArray | typeShorten: typesArray}})</strong></div>
   </div>
   <div class="icons">
     <!--<i class="fas fa-edit edit-icon" aria-hidden="true" (click)= "edit()" ></i>-->

@@ -9,7 +9,6 @@ import {CanDeactivateGuard} from "./can-deactivate-guard.service";
 import {CommunityComponent} from "./content/community/community.component";
 
 
-
 const mainRoutes: Routes = [
   {path: '', component: MainComponent, canDeactivate: [CanDeactivateGuard], children: [
     {path: '', redirectTo: 'petinfo', pathMatch: 'full'},

@@ -1,11 +1,11 @@
 <div class="row stomach-container pt-3 ">
   <!--Food list-->
-  <div class=" col-md-2 food-list-container">
+  <div class=" col-md-3 food-list-container">
     <app-food-list></app-food-list>
   </div>
 
   <!--Food description on landscape screens-->
-  <div class=" col-md-10 hidden-sm-down food-des-container">
+  <div class=" col-md-9 hidden-sm-down food-des-container">
     <app-food-des
       [food]="selectedFood "
       *ngIf="selectedFood && displayDes; else infoText"

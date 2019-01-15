@@ -7,7 +7,7 @@ import {Food} from "../shared/food.model";
 import {StomachService} from "./content/stomach/stomach.service";
 import {GameService} from "../shared/game.service";
 import {CanComponentDeactivate} from "./can-deactivate-guard.service";
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 import {AuthService} from "../authentication/auth-service";
 import {DictionaryService} from "../shared/dictionary.service";
 import {r} from "@angular/core/src/render3";
@@ -18,7 +18,6 @@ declare var $: any;
   styleUrls: ['./main.component.css'],
   providers: []
 })
-
 export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   isFeeding = false;
   closeModalBoxSub: Subscription;
@@ -131,7 +130,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
     this.isFeeding = true;
   }
 
-  onLogOut(){
+  onLogOut() {
     if (confirm('Are you sure you want to disconnect with your pet?')) {
           this.authServ.logOut();
     }

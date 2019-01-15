@@ -4,6 +4,8 @@ import {
 } from '@angular/core';
 
 import {StomachService} from "../stomach.service";
+import {ServerService} from '../../../../shared/server.service';
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 declare let $: any;
 
 @Component({
@@ -16,21 +18,23 @@ declare let $: any;
  */
 export class FoodListComponent implements OnInit  {
   foods = [];
-  filterFood = '';
+  filterFood = "";
+  private stomachRef$: AngularFireList<any>;
 
-  constructor(private stomachServ: StomachService) {
+  constructor(private stomachServ: StomachService,
+              private serverServ: ServerService,
+              private db: AngularFireDatabase) {
+
   }
 
   ngOnInit() {
-    //Subscribe to any changes in the database and update the view
-    this.stomachServ.getFoodsObserver().subscribe(
-      (foodsFromDatabase) => {
-        this.foods = foodsFromDatabase.reverse();
-        $('.food-list').sortable();
-      }
+    const userId = this.serverServ.getUserId();
 
+    this.stomachRef$ = this.db.list(`stomachs/${userId}`);
+    // Store foods from the database to a variable
+    this.stomachRef$.valueChanges().subscribe(
+      (foods) => this.foods = foods.reverse()
     );
-
   }
 
 

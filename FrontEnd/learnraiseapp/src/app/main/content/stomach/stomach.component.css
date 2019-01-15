@@ -1,6 +1,5 @@
 .stomach-container{
   height: 100% !important;
-  margin: auto;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;

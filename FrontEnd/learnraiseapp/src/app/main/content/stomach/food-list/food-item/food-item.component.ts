@@ -54,7 +54,7 @@ export class FoodItemComponent implements OnInit, OnDestroy {
 
   delete() {
     if (confirm('Are you sure you want to delete this food?')) {
-      this.stomachServ.deleteFoodWithNameAndType(this.food.name, this.food.type);
+      this.stomachServ.deleteFoodWithIndex(this.foodIndex);
     }
   }
 

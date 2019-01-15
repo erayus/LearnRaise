@@ -6,3 +6,12 @@
   height: 95%;
   padding: 10px;
 }
+.pronounce-btn{
+  cursor: pointer;
+  transition: all ease 500ms;
+
+}
+.pronounce-btn:hover, .pronounce-btn.active{
+  color: dodgerblue;
+}
+

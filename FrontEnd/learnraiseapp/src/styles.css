@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 @import url('https://fonts.googleapis.com/css?family=VT323');
+
 html{
   height: 100%;
 }
@@ -9,6 +10,7 @@ body{
   padding: 0  !important;   /*prevent default behavior of bootstrap modal*/
   height: 100%;
   position: relative;
+  font-family: cursive;
 }
 .primary-text{
   color:  #ff6b00;
@@ -52,8 +54,6 @@ body{
   background-color: #ff6b00;
   color: white;
 }
-
-
 
 
 .app-root{

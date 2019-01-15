@@ -43,8 +43,14 @@
   left: 15px;
   height: 50px;
   width: 50px;
+}
+
+.logOut-btn i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-size: 30px;
-  font-size: 1.4rem;
 }
 .feed-btn{
   position: fixed;
@@ -54,8 +60,13 @@
   right: 15px;
   height: 50px;
   width: 50px;
+}
+.feed-btn i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-size: 30px;
-  font-size: 1.4rem;
 }
 
 .btn-shadow{
