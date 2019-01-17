@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import {Food} from "../../../shared/food.model";
 import {StomachService} from "./stomach.service";
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs";
 import {PetService} from "../../../shared/pet.service";
 import {MainService} from "../../main.service";
 import {ActivatedRoute, Router} from "@angular/router";

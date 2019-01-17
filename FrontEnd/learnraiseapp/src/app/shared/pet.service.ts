@@ -1,10 +1,12 @@
 
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {Pet} from "./pet.model";
 import {Food} from "./food.model";
 import {Injectable, OnInit} from "@angular/core";
 import {ServerService} from "./server.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AngularFireAuth} from "angularfire2/auth"
+
 import {AuthService} from "../authentication/auth-service";
 
 @Injectable()
@@ -15,7 +17,8 @@ export class PetService {
   private initedHungerInterval = false;
   //This event is triggered whenever there is any change
   onPetChanged = new Subject<Pet>();
-  constructor(private serverServ: ServerService) {}
+  constructor(private serverServ: ServerService,
+              private af: AngularFireAuth) {}
 
 
   createPetWithId(userId: string): Pet {
@@ -85,6 +88,7 @@ export class PetService {
         this.petObj.curPic = '';
         this.updatePet();
         if (confirm('Your alien pet left you, you now will be sent back to the home page!')) {
+          this.af.auth.signOut();
           window.location.href = '/authentication/login';
         }
         // if pet dies and still have lives

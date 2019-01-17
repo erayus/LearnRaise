@@ -1,4 +1,4 @@
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {Food} from "../shared/food.model";
 import {Injectable} from "@angular/core";
 import {ServerService} from "../shared/server.service";

@@ -13,7 +13,7 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
   declarations: [
     AuthenticationComponent,
     LogInComponent,
-    SignUpComponent
+    SignUpComponent,
   ],
   imports: [
     CommonModule,

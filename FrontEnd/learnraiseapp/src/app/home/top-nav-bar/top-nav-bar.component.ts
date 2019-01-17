@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../../authentication/auth-service";
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs";
 import * as firebase from 'firebase';
 import {Router} from "@angular/router";
 

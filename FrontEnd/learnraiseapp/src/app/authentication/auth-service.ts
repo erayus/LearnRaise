@@ -1,7 +1,7 @@
 // import * as firebase from 'firebase';
 import {Injectable} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {ServerService} from "../shared/server.service";
 import {PetService} from "../shared/pet.service";
 import {Food} from "../shared/food.model";
@@ -28,8 +28,9 @@ export class AuthService {
       .then(
         (response) => {
           // Set up token  Server Service (IMPORTANCE: should be put here before creating owner and pet)
-          this.serverServ.setUpOwnerIdAndToken();
-          const user = response;
+          const user = response.user;
+          this.serverServ.setUpOwnerIdAndToken(user);
+
           // Initiate owner in OwnerService and create Owner table in the database
           const ownerData = this.ownerServ.createOwnerWithIdAndEmail(user.uid, user.email);
           //Add owner first and then use owner's key to add pet and stomach
@@ -82,9 +83,10 @@ export class AuthService {
   // }
   logOut() {
     this.petServ.saveLeaveTimeAndHungerTime();
+    this.serverServ.deleteToken();
     this.petServ.destroyPet();
     this.ownerServ.destroyOwner();
-    window.location.href = '/';
+    window.location.href = '/authentication/login';
     this.afAuth.auth.signOut();
     this.loggedIn = false;
   }

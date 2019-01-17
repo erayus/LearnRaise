@@ -2,15 +2,16 @@ import { Component, OnDestroy, OnInit} from '@angular/core';
 import {PetService} from "../shared/pet.service";
 import {MainService} from "./main.service";
 import {ServerService} from "../shared/server.service";
-import {Subscription} from "rxjs/Subscription";
+import {Subscription, Observable} from "rxjs";
 import {Food} from "../shared/food.model";
 import {StomachService} from "./content/stomach/stomach.service";
 import {GameService} from "../shared/game.service";
 import {CanComponentDeactivate} from "./can-deactivate-guard.service";
-import {Observable} from 'rxjs/Observable';
 import {AuthService} from "../authentication/auth-service";
 import {DictionaryService} from "../shared/dictionary.service";
-import {r} from "@angular/core/src/render3";
+// import {r} from "@angular/core/src/render3";
+import {AngularFireAuth} from "angularfire2/auth"
+
 declare var $: any;
 @Component({
   selector: 'app-main',
@@ -54,7 +55,8 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
               private gameServ: GameService,
               private serverServ: ServerService,
               private authServ: AuthService,
-              private dicServ: DictionaryService
+              private dicServ: DictionaryService,
+              private af: AngularFireAuth
               ) {
   }
   // @HostListener('window:beforeunload', ['$event'])
@@ -63,11 +65,18 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   // };
 
   ngOnInit() {
-    this.serverServ.setUpOwnerIdAndToken();
-    //Wait for the ownerKey to be ready first
+    this.af.authState.subscribe(user =>{
+      console.log("Auth: ", user);
+      if (user && user.uid) {
+        console.log('user is logged in');
+        this.serverServ.setUpOwnerIdAndToken(user);
+      } else {
+        console.log('user not logged in');
+      }
+    });
+    // //Wait for the ownerKey to be ready first
     this.serverServ.onOwnerIdAndTokenReady.subscribe(
       ()=> {
-        console.log('ready');
         // Initiate owner
         this.mainServ.initOwner();
 
@@ -117,8 +126,14 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
         this.petServ.saveLeaveTimeAndHungerTime();
       } else {
         // when the user come back to the screen, check if token has been expired and update hunger time
-        this.serverServ.getTokenReady();
-        this.petServ.checkHealthAndRetrievePet();
+        //If not expired
+        if (!this.serverServ.isTokenExpired()){
+          this.petServ.checkHealthAndRetrievePet();
+        //If expired, delete token
+        }else{
+          window.location.href = '/authentication/login';
+          this.serverServ.deleteToken()
+        }
       }
     })
   }
@@ -140,10 +155,13 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
     this.isFeeding = false;
     this.extraNavActivated = false;
   }
+
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.serverServ.getTokenReady()) {
+      //If not expired (e.g user press the arrow back button on the browser)
+    if (!this.serverServ.isTokenExpired()) {
       return confirm('Are you sure you want to disconnect with your pet?');
-    } else if (!this.serverServ.getTokenReady()) {
+      //if token is expired
+    } else if (this.serverServ.isTokenExpired()) {
       return confirm('Your pet was playful, please connect again to see him/her');
     }
   }

@@ -6,6 +6,8 @@ import {OwnerService} from "../shared/owner.service";
 import {ServerService} from "../shared/server.service";
 import {Owner} from "../shared/owner.model";
 import {Pet} from "../shared/pet.model";
+import {AngularFireAuth} from "angularfire2/auth"
+
 
 @Component({
   selector: 'app-adoption',
@@ -30,10 +32,20 @@ export class AdoptionComponent implements OnInit {
 
   constructor(private petServ: PetService,
               private ownerServ: OwnerService,
-              private serverServ: ServerService) {
+              private serverServ: ServerService,
+              private af: AngularFireAuth) {
   }
   refresh = () => {
-    this.serverServ.setUpOwnerIdAndToken();//IMPORTANT: must be called first
+    this.af.authState.subscribe(user =>{
+      console.log("Auth: ", user);
+      if (user && user.uid) {
+        console.log('user is logged in');
+        this.serverServ.setUpOwnerIdAndToken(user);
+
+      } else {
+        console.log('user not logged in');
+      }
+    });
     this.serverServ.onOwnerIdAndTokenReady.subscribe(
       () => {
         this.serverServ.getOwner()

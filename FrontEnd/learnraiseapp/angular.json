@@ -3,8 +3,8 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "stumartapp": {
-      "root": "",
+    "learnraiseapp": {
+      "root": "learnraiseapp",
       "projectType": "application",
       "architect": {
         "build": {
@@ -73,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stumartapp:build"
+            "browserTarget": "learnraiseapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stumartapp:build:production"
+              "browserTarget": "learnraiseapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stumartapp:build"
+            "browserTarget": "learnraiseapp:build"
           }
         },
         "test": {
@@ -135,8 +135,8 @@
         }
       }
     },
-    "stumartapp-e2e": {
-      "root": "",
+    "learnraiseapp-e2e": {
+      "root": "learnraiseapp",
       "projectType": "application",
       "cli": {},
       "schematics": {},
@@ -145,7 +145,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "stumartapp:serve"
+            "devServerTarget": "learnraiseapp:serve"
           }
         },
         "lint": {

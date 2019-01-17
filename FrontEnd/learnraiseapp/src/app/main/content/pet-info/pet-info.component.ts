@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, AfterViewChecked, HostListener} from '@ang
 import {Pet} from "../../../shared/pet.model";
 import {PetService} from "../../../shared/pet.service";
 import {MainService} from "../../main.service";
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs";
 import {StomachService} from "../stomach/stomach.service";
 import {Owner} from "../../../shared/owner.model";
 import {OwnerService} from "../../../shared/owner.service";

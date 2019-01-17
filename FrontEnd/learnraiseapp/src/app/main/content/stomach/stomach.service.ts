@@ -1,9 +1,8 @@
 import {EventEmitter, Injectable, OnInit} from "@angular/core";
 import {Food} from "../../../shared/food.model";
-import {Subject} from "rxjs/Subject";
+import {Subject, Observable} from "rxjs";
 import {ServerService} from "../../../shared/server.service";
 import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
-import {Observable} from "rxjs/Observable";
 import {forEach} from '@angular/router/src/utils/collection';
 
 

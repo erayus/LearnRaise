@@ -6,7 +6,7 @@ import {Owner} from "./owner.model";
 import {firebaseConfig} from "../../environments/firebase.config"
 import {AngularFireDatabase} from "angularfire2/database";
 import {LocalStorageManager} from "./localStorageManager.service";
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 import {AngularFireAuth} from "angularfire2/auth";
 import {HttpClient} from "@angular/common/http";
 
@@ -23,6 +23,7 @@ import {HttpClient} from "@angular/common/http";
 export class ServerService {
   private token: string;
   private userId: string;
+  private tokenExpirationTime: number;
   onOwnerIdAndTokenReady = new Subject();
   constructor(private httpClient: HttpClient,
               private lsManager: LocalStorageManager,
@@ -33,17 +34,15 @@ export class ServerService {
   /**
    * Retrieve Token from local storage and store it a variable so that it can be used later to make request to the server
    */
-  getTokenReady () {
-    //@source https://stackoverflow.com/questions/39035594/firebase-retrieve-the-user-data-stored-in-local-storage-as-firebaseauthuser
+  isTokenExpired () {
     const currentTime = Date.now();
-    const user = this.lsManager.getUserInfo();
     // check if the token has been expired
-    if (currentTime > user.stsTokenManager.expirationTime) { // if expired
-      window.location.href = '/authentication/login';
-      return false // for canDeativative component
+    if (currentTime > this.tokenExpirationTime ) { // if expired
+      // console.log("Token", this.token);
+      // window.location.href = '/authentication/login';
+      return true // for canDeativative component
     } else {
-      this.token = user.stsTokenManager.accessToken;
-      return true // for canDeactivative component
+      return false // for canDeactivative component
     }
 
   }
@@ -56,20 +55,21 @@ export class ServerService {
    * Called to get the ownerKey and Token before manipulating the data (add, update, delete)
    * @param {string} userId
    */
-  setUpOwnerIdAndToken() {
-    // If there is user info in the local storage
-    if (this.lsManager.getUserInfo()) {
-      if (this.getTokenReady()){
-        //Get user id from the Local Storage
-        const user = this.lsManager.getUserInfo();
-        this.userId = user.uid;
-        // Wait for the other components a little bit to subscribe to the event before notify them (services are run before components)
-        setTimeout(()=>{
-          this.onOwnerIdAndTokenReady.next();
-        }, 0.5);
-      }
-    } else {
-      window.location.href = "./index.html";
+  setUpOwnerIdAndToken(user) {
+    this.tokenExpirationTime = user.h.c;
+    //If not expired
+    if (!this.isTokenExpired()){
+      //Get user id from the Local Storage
+      console.log(true);
+      this.userId = user.uid;
+      this.token = user.ra;
+      // Wait for the other components a little bit to subscribe to the event before notify them (services are run before components)
+      setTimeout(()=>{
+        this.onOwnerIdAndTokenReady.next();
+      }, 0.5);
+    //If expired
+    }else {
+      window.location.href = '/authentication/login';
     }
   }
   getUserId() {
@@ -111,7 +111,7 @@ export class ServerService {
     xhr.open("PUT",`${firebaseConfig.databaseURL}/pets/${this.userId}/hungerTime.json?auth=${this.token}`, false);
     xhr.send(currentHungerTimeData);
 
-    this.deleteToken();
+    // this.deleteToken();
   }
 
 

@@ -1,6 +1,6 @@
 import {AfterViewChecked, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {StomachService} from "../stomach.service";
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs";
 import {Food} from "../../../../shared/food.model";
 import {NgForm} from "@angular/forms";
 

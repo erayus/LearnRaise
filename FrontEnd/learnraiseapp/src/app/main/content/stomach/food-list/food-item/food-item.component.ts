@@ -1,6 +1,6 @@
 import {AfterViewChecked, Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {StomachService} from "../../stomach.service";
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs";
 
 declare var $: any;
 @Component({
