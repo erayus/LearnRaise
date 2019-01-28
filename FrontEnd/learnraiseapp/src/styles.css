@@ -1,3 +1,4 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html{
   height: 100%;
@@ -7,7 +8,7 @@ body{
   padding: 0  !important;   /*prevent default behavior of bootstrap modal*/
   height: 100%;
   position: relative;
-  font-family: cursive;
+  font-family: sans-serif;
 }
 .primary-text{
   color:  #ff6b00;

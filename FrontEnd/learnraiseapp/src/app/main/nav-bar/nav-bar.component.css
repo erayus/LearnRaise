@@ -1,20 +1,19 @@
 .navigation-container{
   width: 100vw;
-
 }
 .nav-bar{
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   text-align: center;
-  width: 70%;
+  width: 50%;
   height: 10vh;
 }
 
 .nav-item{
   height: 100%;
-  min-width: 100px;
-  width: 15%;
+  min-width: 75px;
+  width: 12%;
   font-size: 1.5em;
   background-color: dodgerblue;
   cursor: pointer;
@@ -79,12 +78,19 @@
   background-color: darkblue;
 }
 
-
 .nav-text{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+}
+
+@media screen and (min-width: 768px) {
+  .nav-item{
+    min-width: 100px;
+    width: 20%;
+
+  }
 }
 
 

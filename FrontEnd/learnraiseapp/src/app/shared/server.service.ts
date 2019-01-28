@@ -34,12 +34,11 @@ export class ServerService {
   /**
    * Retrieve Token from local storage and store it a variable so that it can be used later to make request to the server
    */
-  isTokenExpired () {
+  isTokenExpired (user) {
+    this.tokenExpirationTime = user.h.c;
     const currentTime = Date.now();
     // check if the token has been expired
     if (currentTime > this.tokenExpirationTime ) { // if expired
-      // console.log("Token", this.token);
-      // window.location.href = '/authentication/login';
       return true // for canDeativative component
     } else {
       return false // for canDeactivative component
@@ -56,21 +55,14 @@ export class ServerService {
    * @param {string} userId
    */
   setUpOwnerIdAndToken(user) {
-    this.tokenExpirationTime = user.h.c;
-    //If not expired
-    if (!this.isTokenExpired()){
-      //Get user id from the Local Storage
-      console.log(true);
-      this.userId = user.uid;
-      this.token = user.ra;
-      // Wait for the other components a little bit to subscribe to the event before notify them (services are run before components)
-      setTimeout(()=>{
-        this.onOwnerIdAndTokenReady.next();
-      }, 0.5);
-    //If expired
-    }else {
-      window.location.href = '/authentication/login';
-    }
+    this.userId = user.uid;
+    this.token = user.ra;
+    // Wait for the other components a little bit to subscribe to the event before notify them (services are run before components)
+    setTimeout(()=>{
+      this.onOwnerIdAndTokenReady.next();
+    }, 0.5);
+
+
   }
   getUserId() {
     const returnId = this.userId;
@@ -79,7 +71,7 @@ export class ServerService {
 
   // OWNERS TABLE
   addOwner(userId, owner: Owner) {
-    return this.httpClient.post<any>(`${firebaseConfig.databaseURL}/owners/${userId}.json?auth=${this.token}`, owner)
+    return this.httpClient.put<any>(`${firebaseConfig.databaseURL}/owners/${userId}.json?auth=${this.token}`, owner)
   }
   updateOwner(owner: Owner) {
     return this.httpClient.put(`${firebaseConfig.databaseURL}/owners/${this.userId}.json?auth=${this.token}`, owner);

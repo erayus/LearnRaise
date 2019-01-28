@@ -18,7 +18,7 @@
   <!--Food list-->
   <div class="row food-list" *ngIf="foods">
     <!--Food item-->
-    <app-food-item class="food-item col-xs-6 col-sm-4 col-md-12 col-lg-12 "
+    <app-food-item class="food-item col-xs-12 col-sm-6 col-md-12 col-lg-12 my-1"
                    *ngFor="let foodEl of foods| foodFilter: filterFood.toLowerCase(): 'word' ; let i = index "
                    [food]="foodEl"
                    [foodIndex]="i" ></app-food-item>

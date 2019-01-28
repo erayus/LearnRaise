@@ -13,6 +13,7 @@ export class StomachService {
   private keys: string[];
   private foodSoundList = [];
 
+  onFoodsLoaded = new Subject<Food[]>();
   foodSelectedEvent = new EventEmitter<Food>();
   foodAddedEvent = new Subject<Food>();
   foodEditEvent = new Subject<number>();
@@ -33,7 +34,10 @@ export class StomachService {
          this.stomachRef$ = this.db.list(`stomachs/${userId}`);
          // Store foods from the database to a variable
          this.stomachRef$.valueChanges().subscribe(
-           (foods) => this.foodsInStomach = foods.reverse()
+           (foods) => {
+             this.foodsInStomach = foods.reverse();
+             this.onFoodsLoaded.next(this.foodsInStomach);
+           }
          );
 
          // Generate a list of keys

@@ -2,21 +2,21 @@
   width: 100vw;
   height: 100vh;
   text-align: center;
+  position: relative;
 }
 .quizz-box{
-  min-width: 275px;
-  max-width: 500px;
+  width: 300px;
   padding: 10px;
   border: 1px solid #ff6b00;
   border-radius: 12px;
   -webkit-box-shadow: 0px 11px 3px -7px grey;
   -moz-box-shadow: 0px 11px 3px -7px grey;
   box-shadow: 0px 11px 3px -7px grey;
-  color: white;
-  background-color: black;
-  position: relative;
+  position: absolute;
   height: auto;
-  margin: 150px auto 150px ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
@@ -24,13 +24,12 @@
   text-align: center;
 }
 
-
 .page-2{
   position: relative;
-  height: 145px;
 }
-.nickname-input{
+.nickname-input, .petname-input{
   width: 100%;
+  text-align: center;
   border: 1px solid #ff6b00;
   border-radius: 15px;
   margin: 10px 0;
@@ -42,17 +41,6 @@
   -webkit-box-shadow: 0px 0px 5px 1px #ff6b00;
   -moz-box-shadow: 0px 0px 5px 1px #ff6b00;
   box-shadow: 0px 0px 5px 1px #ff6b00;
-}
-
-.proceed-btn{
-  position: absolute;
-  bottom: 4px;
-  right:4px;
-}
-.preceed-btn{
-  position: absolute;
-  bottom: 3px;
-  left:3px;
 }
 
 /*page 3*/
@@ -130,13 +118,6 @@
 }
 
 
-.page-number{
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 
 .pet-pic{
   border-radius: 100%;
@@ -152,6 +133,9 @@
 
 
 @media screen and (min-width: 768px) {
+  .quizz-box{
+    width: 500px;
+  }
   .pet-img{
     width: 250px!important;
     height: 250px !important;

@@ -5,6 +5,7 @@ import {ServerService} from "../shared/server.service";
 import {PetService} from "../shared/pet.service";
 import {OwnerService} from "../shared/owner.service";
 import {StomachService} from "./content/stomach/stomach.service";
+import {AuthService} from '../authentication/auth-service';
 
 @Injectable()
 export class MainService {
@@ -17,7 +18,8 @@ export class MainService {
   constructor(private serverServ: ServerService,
               private ownerService: OwnerService,
               private petService: PetService,
-              private stomachServ: StomachService
+              private stomachServ: StomachService,
+              private authServ: AuthService
               ) {
   }
 
@@ -48,13 +50,17 @@ export class MainService {
     this.serverServ.getPet()
       .subscribe(
         (pet) => {
-          this.petService.initPet(pet);
-          console.log('Pet object: ', pet);
-          console.log('Pet hunger time: ', pet.hungerTime[0]/60000);
-          this.onPetInited.next(this.petService.checkHealthAndRetrievePet()); // pass to petinfo to update bars
+          if (pet != null){
+            this.petService.initPet(pet);
+            // console.log('Pet object: ', pet);
+            this.onPetInited.next(this.petService.checkHealthAndRetrievePet()); // pass to petinfo to update bars
+          } else {
+            this.authServ.logOut();
+          }
         },
         (error) => {
           alert('No pet in the database');
+          this.authServ.logOut();
           console.log(error)
         }
       );

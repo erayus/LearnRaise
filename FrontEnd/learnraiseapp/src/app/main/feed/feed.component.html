@@ -100,7 +100,7 @@
     </div>
   </div>
 
-  <div class="result-container" *ngIf="state === 'result' ">
+  <div class="result-container " *ngIf="state === 'result' ">
       <div class="header p-2 success-color">
         <h4 style="font-size: 25px">Here are some things I found:</h4>
       </div>
@@ -112,8 +112,9 @@
           <div class="wordPart" *ngFor="let foodType of typesArray ">
             <h6><strong>{{foodType}}</strong></h6>
             <ul class="wordDefinition mb-3" *ngFor="let foodDef of meaningObj[foodType]" >
-              <strong >Definition: </strong>{{foodDef.definition}}<br/>
-              <strong>Example: </strong>{{foodDef.example}}
+              <strong><u>Definition:</u> </strong> {{foodDef.definition}}<br/>
+              <strong><u>Example:</u> </strong> {{foodDef.example}}<br/>
+              <strong><u>Synonyms:</u></strong> {{foodDef.synonyms | spaceAdder}}
             </ul>
           </div>
         </div>
@@ -122,7 +123,9 @@
       <div class="text-center" *ngIf="!food">
         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif">
       </div>
-      <button class="btn  btn-block btn-success feed-btn mt-1 " [disabled]="!food" (click)="addSelectedFoodsToStomach()" >Add</button>
+      <button class="btn  btn-block btn-success feed-btn mt-1 " [disabled]="!food" (click)="addSelectedFoodsToStomach()" >
+        Feed
+      </button>
       <button class="btn btn-block btn-primary p-2 " style="padding:5px; margin: 10px 0" (click)="toggleCookType()">Back</button>
     </div>
   </div>

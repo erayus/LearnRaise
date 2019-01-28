@@ -35,9 +35,6 @@ export class StomachComponent implements OnInit, OnDestroy{
               private router: Router,
               private route: ActivatedRoute) { }
   ngOnInit() {
-      window.onload = () => {
-        this.router.navigate(['../petinfo'], {relativeTo: this.route});
-      };
 
     // When a food is selected, display its description
     this.stomachServ.foodSelectedEvent.subscribe(

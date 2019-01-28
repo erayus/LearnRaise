@@ -21,6 +21,7 @@ declare var $: any;
 })
 export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   isFeeding = false;
+  user: any;
   closeModalBoxSub: Subscription;
   notificationSub: Subscription;
   foodAddedSub: Subscription;
@@ -68,12 +69,18 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
     this.af.authState.subscribe(user =>{
       console.log("Auth: ", user);
       if (user && user.uid) {
-        console.log('user is logged in');
-        this.serverServ.setUpOwnerIdAndToken(user);
+        this.user = user;
+        if( !this.serverServ.isTokenExpired(this.user)){
+          this.serverServ.setUpOwnerIdAndToken(this.user);
+        }else {
+          this.authServ.logOut();
+        }
       } else {
+        this.authServ.logOut();
         console.log('user not logged in');
       }
     });
+
     // //Wait for the ownerKey to be ready first
     this.serverServ.onOwnerIdAndTokenReady.subscribe(
       ()=> {
@@ -127,7 +134,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
       } else {
         // when the user come back to the screen, check if token has been expired and update hunger time
         //If not expired
-        if (!this.serverServ.isTokenExpired()){
+        if (!this.serverServ.isTokenExpired(this.user)){
           this.petServ.checkHealthAndRetrievePet();
         //If expired, delete token
         }else{
@@ -157,12 +164,16 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-      //If not expired (e.g user press the arrow back button on the browser)
-    if (!this.serverServ.isTokenExpired()) {
-      return confirm('Are you sure you want to disconnect with your pet?');
+    //If not expired (e.g user press the arrow back button on the browser)
+    if (!this.serverServ.isTokenExpired(this.user)) {
+      if (confirm('Are you sure you want to disconnect with your pet?')){
+        this.authServ.logOut();
+      }
       //if token is expired
-    } else if (this.serverServ.isTokenExpired()) {
-      return confirm('Your pet was playful, please connect again to see him/her');
+    } else if (this.serverServ.isTokenExpired(this.user)) {
+       alert('Your pet was playful, please connect again to see him/her');
+       this.authServ.logOut();
+       return true
     }
   }
 

@@ -4,10 +4,9 @@
   width: 100%;
   margin: 0;
 }
-.food-item{
-  margin: 8px 2px;
-  width: 24%;
-}
+/*.food-item{*/
+  /*width: 24%;*/
+/*}*/
 #search{
   position: relative;
 }

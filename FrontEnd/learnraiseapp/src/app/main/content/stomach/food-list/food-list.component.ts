@@ -6,6 +6,8 @@ import {
 import {StomachService} from "../stomach.service";
 import {ServerService} from '../../../../shared/server.service';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {MainService} from '../../../main.service';
+import {Pet} from '../../../../shared/pet.model';
 declare let $: any;
 
 @Component({
@@ -23,18 +25,36 @@ export class FoodListComponent implements OnInit  {
 
   constructor(private stomachServ: StomachService,
               private serverServ: ServerService,
-              private db: AngularFireDatabase) {
+              private db: AngularFireDatabase,
+              private mainServ: MainService) {
 
   }
 
   ngOnInit() {
-    const userId = this.serverServ.getUserId();
+    console.log(this.stomachServ.getFoodsInStomach().length === 0);
+    if (this.stomachServ.getFoodsInStomach().length === 0 ){
+      this.mainServ.onPetInited.subscribe(
+        (pet: Pet) => {
+          const userId = this.serverServ.getUserId();
+          this.stomachRef$ = this.db.list(`stomachs/${userId}`);
+          // Store foods from the database to a variable
+          this.stomachRef$.valueChanges().subscribe(
+            (foods) => this.foods = foods.reverse()
+          );
+        }
+      );
+    }else{
+      this.foods = this.stomachServ.getFoodsInStomach();
 
-    this.stomachRef$ = this.db.list(`stomachs/${userId}`);
-    // Store foods from the database to a variable
-    this.stomachRef$.valueChanges().subscribe(
-      (foods) => this.foods = foods.reverse()
-    );
+      const userId = this.serverServ.getUserId();
+      this.stomachRef$ = this.db.list(`stomachs/${userId}`);
+      // Store foods from the database to a variable
+      this.stomachRef$.valueChanges().subscribe(
+        (foods) => this.foods = foods.reverse()
+      );
+    }
+
+
   }
 
 

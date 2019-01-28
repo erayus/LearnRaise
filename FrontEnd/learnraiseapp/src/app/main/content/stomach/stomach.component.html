@@ -1,27 +1,33 @@
-<div class="row stomach-container pt-3 ">
-  <!--Food list-->
-  <div class=" col-md-3 food-list-container">
-    <app-food-list></app-food-list>
+<div class="stomach-container">
+  <div class="header text-center pt-3">
+    <h1 class="primary-text">Knowledge base</h1>
+  </div>
+  <div class="main-content">
+    <!--Food list-->
+    <div class=" col-md-3 col-sm-12 food-list-container">
+      <app-food-list></app-food-list>
+    </div>
+
+    <!--Food description on landscape screens-->
+    <div class=" col-md-9 hidden-sm-down food-des-container">
+      <app-food-des
+        [food]="selectedFood "
+        *ngIf="selectedFood && displayDes; else infoText"
+      ></app-food-des>
+      <ng-template #infoText >
+        <p style="color: white">Click on the food to see how it was made;</p>
+      </ng-template>
+    </div>
+
+    <!--Food description on phone version (Pop-up version)-->
+    <div class=" modal-content  hidden-md-up food-des-container" *ngIf="selectedFood && displayDes && isSelecting">
+      <app-food-des
+        [food]="selectedFood"
+      ></app-food-des>
+    </div>
+    <div class="modal-backdrop fade show hidden-md-up" *ngIf="isSelecting" (click)="closeEditingModalBox()"></div>
   </div>
 
-  <!--Food description on landscape screens-->
-  <div class=" col-md-9 hidden-sm-down food-des-container">
-    <app-food-des
-      [food]="selectedFood "
-      *ngIf="selectedFood && displayDes; else infoText"
-    ></app-food-des>
-    <ng-template #infoText >
-      <p style="color: white">Click on the food to see how it was made;</p>
-    </ng-template>
-  </div>
-
-  <!--Food description on phone version (Pop-up version)-->
-  <div class=" modal-content  hidden-md-up food-des-container" *ngIf="selectedFood && displayDes && isSelecting">
-    <app-food-des
-      [food]="selectedFood"
-    ></app-food-des>
-  </div>
-  <div class="modal-backdrop fade show hidden-md-up" *ngIf="isSelecting" (click)="closeEditingModalBox()"></div>
 </div>
 
 

@@ -104,7 +104,10 @@ export class FeedComponent implements OnInit, AfterViewChecked {
             this.typesArray = Object.keys(this.meaningObj);
 
           },
-        (error) => alert("Oops I can't find this word for you. Please check the word again")
+        (error) => {
+            alert("Oops I can't find this word for you. Please check the word again");
+            this.state = 'auto'
+        }
       )
     }
     this.foodsToStomach = [];

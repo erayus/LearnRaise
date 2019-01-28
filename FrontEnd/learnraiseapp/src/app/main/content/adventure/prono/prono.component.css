@@ -1,0 +1,48 @@
+.result-box{
+  display: inline-block;
+  font-size: 20px;
+  border: 2px solid;
+  width: 150px;
+  height: 150px;
+  padding-top: 40px;
+  border-radius: 100%;
+}
+#correct-box{
+  border-color: #00C851;
+}
+#incorrect-box{
+  border-color: #ff4444;
+}
+
+.testing-food-container{
+  border: 2px solid dodgerblue;
+  border-radius: 12px;
+}
+
+#recording-icon{
+  width: 35px;
+  height: 35px;
+  font-size: 0;
+  background-color: red;
+  border: 0;
+  border-radius: 35px;
+  margin: 18px;
+  outline: none;
+}
+#recording-icon{
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes pulse{
+  0%{
+    box-shadow: 0px 0px 5px 0px rgba(173,0,0,.3);
+  }
+  65%{
+    box-shadow: 0px 0px 5px 13px rgba(173,0,0,.3);
+  }
+  90%{
+    box-shadow: 0px 0px 5px 13px rgba(173,0,0,0);
+  }
+}

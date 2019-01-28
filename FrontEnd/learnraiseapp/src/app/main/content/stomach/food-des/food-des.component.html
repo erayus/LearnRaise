@@ -11,7 +11,8 @@
       <h5><strong>{{foodType}}</strong></h5>
       <ul class="wordDefinition mb-3" *ngFor="let foodDef of meaningObj[foodType]" >
         <strong >Definition: </strong>{{foodDef.definition}}<br/>
-        <strong>Example: </strong>{{foodDef.example}}
+        <strong>Example: </strong>{{foodDef.example}} <br/>
+        <strong>Synonyms: </strong> {{foodDef.synonyms}}
       </ul>
     </div>
   </div>

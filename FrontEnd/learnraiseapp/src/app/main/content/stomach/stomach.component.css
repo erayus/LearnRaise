@@ -1,15 +1,28 @@
 .stomach-container{
-  height: 100% !important;
+
+  /*margin: 0 20px;*/
+  width: 100vw;
+  height: 100vh;
+  background:  url('../../../../assets/background/stomach-background.jpg') no-repeat bottom center;
+  background-size: cover;
+}
+.header h1{
+  font-size: 30px;
+}
+.main-content{
   display: flex;
   flex-wrap: nowrap;
+  width: 100%;
   justify-content: center;
+  height: 75%;
+  padding: 20px;
 }
 .food-des-container{
-  height: 39%;
+  /*height: 39%;*/
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: 12px;
-  border: 1px solid darkblue;
+  border: 1px solid #ff6b00;
   word-wrap: break-word;
   background-color: black;
   opacity: 0.8;
@@ -20,7 +33,7 @@
   overflow-x: hidden;
   margin: 0px 5px;
   border-radius: 12px;
-  border: 1px solid darkblue;
+  border: 1px solid #ff6b00;
 }
 .edit-container{
   position: absolute;
@@ -33,18 +46,22 @@
 }
 .modal-content {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left:50%;
-  min-width: 300px;
-  height: auto;
+  width: 300px;
+  min-height: 300px;
+  max-height: 500px;
   z-index: 99999999999999999;
   padding: 20px;
   transform: translate(-50%, -50%);
 }
 @media screen and (min-width: 768px){
+  .header h1{
+    font-size: 45px;
+  }
   .food-des-container,.food-list-container{
     height: 101%;
-    max-width:48%;
+    max-width:56%;
   }
   .food-list-container{
     margin-left: 10px;

@@ -1,11 +1,14 @@
 {
   "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "learnraiseapp",
   "projects": {
     "learnraiseapp": {
-      "root": "learnraiseapp",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "projectType": "application",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -160,14 +163,5 @@
       }
     }
   },
-  "cli": {},
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "css"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
-    }
-  }
+  "defaultProject": "learnraiseapp"
 }

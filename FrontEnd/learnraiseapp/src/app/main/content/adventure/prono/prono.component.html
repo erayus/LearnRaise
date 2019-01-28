@@ -1,0 +1,59 @@
+<div id="game-info">
+  <h3 class="text-center">Game Rules</h3>
+  <h5>How it works: </h5>
+  <p>
+    You will be given a word to pronounce.
+    When you see a red dot glowing, you can start pronouncing the given word.
+  </p>
+  <h5>Rewards:</h5> <p>1 correct = +1 attack points (Example for Brian)</p>
+  <h5>Obstacles:</h5> <p>1 incorrect = -2 attack points (Example for Brian)</p>
+
+  <h3 class="text-center"> Good lucks</h3>
+</div>
+
+<div id="countdown" class="text-center" style="display: none">
+  <h2>Game starts in:</h2>
+  <h1 id="countdown-time">{{countdownTime}}</h1>
+</div>
+
+<div id="game-interface" style="display:none;">
+  <div class="result-container d-flex justify-content-center ">
+    <div id="correct-box" class="result-box text-center mr-2 mr-md-5">
+      <h3>Corrects </h3>
+      <span id="correct-score">0</span>
+    </div>
+    <div id="incorrect-box" class="result-box text-center">
+      <h3>Misses</h3>
+      <span id="incorrect-score">0</span>
+    </div>
+  </div>
+
+  <div class="testing-food-container text-center my-5">
+    <h1 id="testing-food"></h1>
+  </div>
+
+  <div class="food-detected-area text-center">
+    <h3 id="detected-food"></h3>
+  </div>
+  <div id="recognition-ui" >
+    <div id="recording-area" class="text-center">
+      <div id="recording-icon" class="mx-auto"></div>
+      <h4>Listening...</h4>
+    </div>
+    <div id="ticking-area" class="text-center" style="display: none">
+      <img src="https://www.royallife.biz/images/checkmark.gif" width="50px">
+      <h4>Good job!</h4>
+    </div>
+    <div id="incorrect-area" class="text-center" style="display: none">
+      <i class="far fa-times-circle"></i>
+      <h4>Oh no, let''s try again</h4>
+    </div>
+  </div>
+</div>
+<div id="gameResult-area" style="display: none">
+  <h3 class="text-center">Game Result (Demo for Brian)</h3>
+  <p>Earning points: + <span id="earning-points"></span> attack damage</p>
+  <p>Deducting points: - <span id="losing-points"></span> attack damage</p>
+  <h5>Totals: <span id="total-points"></span></h5>
+</div>
+

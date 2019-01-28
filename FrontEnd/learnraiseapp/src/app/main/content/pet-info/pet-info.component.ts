@@ -6,6 +6,8 @@ import {Subscription} from "rxjs";
 import {StomachService} from "../stomach/stomach.service";
 import {Owner} from "../../../shared/owner.model";
 import {OwnerService} from "../../../shared/owner.service";
+import {Observable} from 'rxjs/Rx';
+import {CanComponentDeactivate} from '../../can-deactivate-guard.service';
 declare var $: any;
 
 @Component({

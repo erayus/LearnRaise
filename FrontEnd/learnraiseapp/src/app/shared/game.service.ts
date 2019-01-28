@@ -26,9 +26,6 @@ export class GameService {
           break;
         case 2:
           this.petServ.levelUp(3, 12, 54000000);
-          this.petServ.evolve('teenager');
-          this.ownerServ.gainScoreWhenEvolving();
-          alert('wow wow wow evolution!');
           break;
         case 3:
           this.petServ.levelUp(4, 18, 86400000);
@@ -37,15 +34,19 @@ export class GameService {
           this.petServ.levelUp(5, 25, 162000000);
           break;
         case 5:
-          this.petServ.levelUp(6, 35, 259200000);
-          this.petServ.evolve('mature');
+          this.petServ.evolve('teenager');
           this.ownerServ.gainScoreWhenEvolving();
           alert('wow wow wow evolution!');
           break;
         case 6:
+
           this.petServ.levelUp(7, 50, 331200000);
           break;
         case 7:
+          this.petServ.levelUp(6, 35, 259200000);
+          this.petServ.evolve('mature');
+          alert('wow wow wow evolution!');
+          this.ownerServ.gainScoreWhenEvolving();
           this.petServ.levelUp(8, 70, 136800000);
           break;
         case 8:

@@ -5,6 +5,8 @@ import {OwnerService} from "../../shared/owner.service";
 import {Pet} from "../../shared/pet.model";
 import {Owner} from "../../shared/owner.model";
 declare var $: any;
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+
 
 @Component({
   selector: 'app-page2',
@@ -21,11 +23,21 @@ export class RegistrationComponent implements OnInit {
   pet: Pet;
   petName: string;
   owner: Owner;
+  ownerRef$: AngularFireList<Owner>;
+  listOfExistingOwnersNickName: string[];
   constructor( private router: Router,
                private route: ActivatedRoute,
                private petServ: PetService,
-               private ownerServ: OwnerService) { }
+               private ownerServ: OwnerService,
+               private db: AngularFireDatabase) { }
   ngOnInit() {
+    this.ownerRef$ = this.db.list(`owners`);
+    this.ownerRef$.valueChanges().subscribe(
+      (owners: Owner[])=> {
+        this.listOfExistingOwnersNickName = owners.map((owner: Owner) => {return owner.nickName});
+        console.log(this.listOfExistingOwnersNickName)
+      }
+    )
   }
 
   onProceed(page: string){
@@ -35,8 +47,12 @@ export class RegistrationComponent implements OnInit {
         break;
       case 'avatar':
         if (this.ownerNickname !== undefined && this.ownerNickname.length > 0) {
-          this.ownerServ.setName(this.ownerNickname);
-          this.page = 'avatar';
+          if (this.listOfExistingOwnersNickName.indexOf(this.ownerNickname) !== -1){
+            alert("Sorry, this name has been taken. Please choose another one. ");
+          }else {
+            this.ownerServ.setName(this.ownerNickname);
+            this.page = 'avatar';
+          }
         }
         break;
       case 'petSelection':
@@ -56,21 +72,21 @@ export class RegistrationComponent implements OnInit {
           this.pet = this.petServ.retrivePet();
           this.owner = this.ownerServ.retrieveOwner();
           this.petName = this.pet.name;
-        } , 2000);
+        } , 1000);
         // this.router.navigate(['../petchoose'], {relativeTo: this.route});
         break;
       case 'communityAccess':
         this.petServ.setName(this.petName);
         this.petServ.updatePet();
         // this.petServ.destroyPet();
-        this.ownerServ.finishReg();
-        this.ownerServ.saveOwnerToDatabase();
         this.page = 'communityAccess';
         break;
       case 'infoAnnouncement':
         this.page = 'infoAnnouncement';
         break;
       case 'done':
+        this.ownerServ.finishReg();
+        this.ownerServ.saveOwnerToDatabase();
         // this.router.navigate(['/main', 'petinfo']);
         window.location.href = '/main/petinfo';
         break;
@@ -119,12 +135,8 @@ export class RegistrationComponent implements OnInit {
         this.ownerAvatar = '../../../assets/avatar/poop.png';
         break;
       case 4:
-        this.ownerAvatar = '../../../assets/avatar/serious.jpg';
-        break;
-      case 5:
         this.ownerAvatar = '../../../assets/avatar/images.png';
         break;
-
     }
   }
 

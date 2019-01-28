@@ -1,21 +1,25 @@
 .adventure-wrapper{
-  width: 100%;
-  height: 100%;
+  height: 100vh;
 }
-.features{
-  display: flex;
-  justify-content: space-between;
+.header h1{
+  font-size: 30px;
 }
-
-.feature{
-  width: 150px;
-  height: 150px;
-  border-radius: 100%;
-  background-color: orangered;
-  text-align: center;
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-
+.main-content{
+  height: 75%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.requirement-icon{
+  font-size: 25px;
+  color: #4285F4;
 }
 
+
+
+
+
+@media screen and (min-width: 768px) {
+  .header h1 {
+    font-size: 45px;
+  }
+}

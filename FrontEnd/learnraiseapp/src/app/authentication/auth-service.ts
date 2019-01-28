@@ -38,14 +38,9 @@ export class AuthService {
             (response) =>{
               // Initiate petObj in PetService and create Pet table
               const petData = this.petServ.createPetWithId(user.uid);
+              console.log('Pet', petData);
               // Add pet to the database using user Id
               this.serverServ.addPet( user.uid, petData).subscribe();
-              // Add example food to stomach in the database using user Id
-              // const exampleFood = new Food('example', 'noun', 'This is an example', 'This is an example of an example');
-              // this.serverServ.addFood(user.uid,exampleFood).subscribe(
-              //   console.log
-              // );
-              // Give access to the next routes
               this.loggedIn = true;
               // Navigate to petquizz
               this.router.navigate(['/adoption', 'story'])

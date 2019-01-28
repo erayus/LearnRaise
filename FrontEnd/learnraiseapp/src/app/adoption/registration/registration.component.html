@@ -3,7 +3,7 @@
 
     <div class="page-1" *ngIf=" page==='welcome'">
       <h1 class="primary-text">Welcome!</h1>
-      <p class="mb-5">
+      <p class="mb-2">
         Hi there, now you know the secret which means that you are about to embrace
         into a journey with one of AliCreas who's waiting to see their destined master.
         It's going to an adventurous journey. Are you ready?
@@ -14,33 +14,41 @@
 
     <div class="page-2" *ngIf="page=== 'userName'">
       <h5 class="primary-text">How would you like to call yourself?</h5>
-      <input class="nickname-input" name="nickname" [(ngModel)]="ownerNickname"/>
-      <span class="page-number"> Page 2/4</span>
-      <button class="btn preceed-btn secondary-btn" (click)="onPreceed('welcome')" > Back</button>
-      <button class="btn proceed-btn primary-btn" (click)="onProceed('avatar')" [disabled]="!ownerNickname || ownerNickname.length ===0"> Next</button>
+      <input class="nickname-input " name="nickname" [(ngModel)]="ownerNickname"/>
+      <div class="d-flex justify-content-center justify-content-between">
+        <button class="btn preceed-btn secondary-btn" (click)="onPreceed('welcome')" > Back</button>
+        <div class="page-number pt-2">
+         <p>Page 2/4</p>
+        </div>
+        <button class="btn proceed-btn primary-btn" (click)="onProceed('avatar')" [disabled]="!ownerNickname || ownerNickname.length ===0"> Next</button>
+      </div>
+
     </div>
 
+    <!--Page 3 - Avatar selection-->
     <div class="page-3" *ngIf="page=== 'avatar' " >
       <h5 class="primary-text">Choose your favorite avatar</h5>
       <div class="avatar-container">
-      <img class="avatar" src="../../../assets/avatar/batman.jpg" (click)="chooseAvatar(0)" />
-      <!--<img class="avatar" src="../../../assets/avatar/santa-clause-face.png"/>-->
-      <img class="avatar" src="../../../assets/avatar/priate-girl.png" (click)="chooseAvatar(1)"/>
-      <img class="avatar" src="../../../assets/avatar/cute-girl.png" (click)="chooseAvatar(2)"/>
-      <img class="avatar" src="../../../assets/avatar/poop.png" (click)="chooseAvatar(3)"/>
-      <!--<img class="avatar" src="../../../assets/avatar/serious.jpg" (click)="chooseAvatar(4)"/>-->
-      <img class="avatar" src="../../../assets/avatar/images.png" (click)="chooseAvatar(4)"/>
+        <img class="avatar" src="../../../assets/avatar/batman.jpg" (click)="chooseAvatar(0)" />
+        <img class="avatar" src="../../../assets/avatar/priate-girl.png" (click)="chooseAvatar(1)"/>
+        <img class="avatar" src="../../../assets/avatar/cute-girl.png" (click)="chooseAvatar(2)"/>
+        <img class="avatar" src="../../../assets/avatar/poop.png" (click)="chooseAvatar(3)"/>
+        <img class="avatar" src="../../../assets/avatar/images.png" (click)="chooseAvatar(4)"/>
       </div>
-      <span class="page-number"> Page 3/4</span>
-      <button class="btn preceed-btn secondary-btn" (click)="onPreceed('userName')" > Back</button>
-      <button class="btn proceed-btn primary-btn" (click)="onProceed('petSelection')" [disabled]="!ownerAvatar"> Next</button>
+      <div class="d-flex justify-content-center justify-content-between">
+        <button class="btn preceed-btn secondary-btn" (click)="onPreceed('userName')" > Back</button>
+        <div class="page-number pt-2">
+          <p>Page 3/4</p>
+        </div>
+        <button class="btn proceed-btn primary-btn" (click)="onProceed('petSelection')" [disabled]="!ownerAvatar"> Next</button>
+      </div>
+
     </div>
 
   </div>
 
   <!--Page 4 - Pet Selection-->
   <div class="page-4 mt-4"  *ngIf="page==='petSelection' ">
-    <button style="z-index: 1000" class="btn preceed-btn secondary-btn ml-4" (click)="onPreceed('avatar')" > Back</button>
     <div class="pet-selection-heading container mb-4">
       <h2 class="primary-text">Adoption</h2>
       <p class="w-75 mx-auto">
@@ -215,11 +223,14 @@
         </div>
       </div>
     </div>
+
+    <button style="z-index: 1000" class="btn preceed-btn secondary-btn float-left mt-5" (click)="onPreceed('avatar')" > Back</button>
+
   </div>
 
-  <!--Page Pet Selection - Pet set up pet name-->
-  <div class="page-5 mt-5"  *ngIf="page==='petName'">
-    <div class="petchoose-wrapper text-center mt-5" *ngIf = "pet; else searchingTempl">
+  <!--Page Pet Selection - set up pet name-->
+  <div class="page-5 mt-5 p-3"  *ngIf="page==='petName'">
+    <div class="petchoose-wrapper text-center mt-5 container-fluid" *ngIf = "pet; else searchingTempl">
 
         <div class="pet-pic" >
           <img class="img-fluid " style="width: 100%" src="{{pet.curPic}}" />
@@ -227,12 +238,12 @@
         <div class="row">
           <a class="mx-auto">
             <h6 class=" text-center" style="font-family: VT323; font-size: 1.3rem">
-              Here he is!  His name is {{pet.name}}. If you want to change it. Type it below and  Click 'Set' to continue!
-              Otherwise, press 'Continue'!
+              Here he is!  His name is {{pet.name}}. If you want to change it. Type it in the box below and press 'Continue'.
             </h6>
-            <input class="petname-input" name="petname" [(ngModel)]="petName"/>
-            <button class="btn primary-btn" (click)="onProceed('communityAccess')"   [disabled]="!petName">Set</button>
-            <button class="mt-5 btn mx-auto btn-block primary-btn w-25" (click)="onProceed('communityAccess')">Continue</button>
+            <input class="petname-input w-50" name="petname" [(ngModel)]="petName"/>
+            <button class="mt-3 mx-auto btn btn-block primary-btn w-50" (click)="onProceed('communityAccess')" [disabled]="!petName">
+              Continue
+            </button>
 
           </a>
         </div>

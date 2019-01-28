@@ -20,16 +20,24 @@ import { ToolBarComponent } from './healthExpBar/tool-bar.component';
 import { FoodFilterPipe } from './content/stomach/food-filter.pipe';
 import { ExtraNavComponent } from './extra-nav/extra-nav.component';
 import {CommunityComponent} from "./content/community/community.component";
+import {MatButtonModule, MatCheckboxModule, MatDividerModule, MatListModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PronoComponent } from './content/adventure/prono/prono.component';
+import {AdventureService} from './content/adventure/adventure.service';
+import {FoodSynonymsSpaceAdderPipe} from './feed/FoodSynonymsSpaceAdderPipe';
+
 
 @NgModule({
   declarations: [
     MainComponent,
     FeedComponent,
+    FoodSynonymsSpaceAdderPipe,
     NavBarComponent,
     ToolBarComponent,
     ContentComponent,
     CommunityComponent,
     AdventureComponent,
+    PronoComponent,
     PetInfoComponent,
     StomachComponent,
     FoodDesComponent,
@@ -41,13 +49,22 @@ import {CommunityComponent} from "./content/community/community.component";
     NotFoundComponent,
     ToolBarComponent,
     FoodFilterPipe,
-    ExtraNavComponent
+    ExtraNavComponent,
   ],
   imports: [
+    MatDialogModule,
+    MatDividerModule,
+    MatListModule,
+    MatButtonModule,
+    MatCheckboxModule,
     CommonModule,
     FormsModule,
     MainRoutingModule
+  ],
+  providers:[
+    AdventureService
   ]
 })
+
 export class MainModule {
 }

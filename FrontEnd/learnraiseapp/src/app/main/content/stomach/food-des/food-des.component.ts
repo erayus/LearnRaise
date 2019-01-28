@@ -55,11 +55,12 @@ export class FoodDesComponent implements OnInit, OnChanges{
           $(".pronounce-btn").removeClass("active");
         },
         (error) => {
+          alert("Sorry I can't pronounce that word yet");
+          $(".pronounce-btn").removeClass("active");
           console.log("mp3File Error: ", error)
         }
       );
     }
-
   }
 
 

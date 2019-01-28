@@ -28,25 +28,29 @@ import {LocalStorageManager} from "./shared/localStorageManager.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
     HomeModule,
-    AuthenticationModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
+    AuthenticationModule
   ],
 
-  providers: [AuthService,
+  providers: [
+    AuthService,
     AuthGuard,
     OwnerService,
     PetService,
@@ -56,7 +60,8 @@ import {environment} from "../environments/environment";
     StomachService,
     DictionaryService,
     GameService,
-    CanDeactivateGuard],
+    CanDeactivateGuard
+  ],
   bootstrap: [AppComponent]
 })
 
