@@ -41,8 +41,8 @@ export class AdoptionComponent implements OnInit {
       if (user && user.uid) {
         console.log('user is logged in');
         this.serverServ.setUpOwnerIdAndToken(user);
-
       } else {
+        window.location.href = '/authentication/signin';
         console.log('user not logged in');
       }
     });
@@ -59,12 +59,17 @@ export class AdoptionComponent implements OnInit {
         this.serverServ.getPet()
           .subscribe(
             (pet: Pet) => {
-              console.log("Pet: ", pet);
-              this.petServ.initPet(pet);
-            },
+              if (pet != null){
+                console.log("Pet: ", pet);
+                this.petServ.initPet(pet);
+              }else{
+                alert('Pet not found in the system')
+              }
+            }
           ),
           (error) => {console.log(error)
           }
+
       },
       (error) => {console.log("Fail setting up owner key", error)}
     );
