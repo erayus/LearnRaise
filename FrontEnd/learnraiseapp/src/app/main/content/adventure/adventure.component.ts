@@ -1,9 +1,11 @@
-import {AfterContentChecked, AfterViewChecked, Component, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, Component, OnDestroy, OnInit} from '@angular/core';
 import {StomachService} from '../stomach/stomach.service';
 import {GameService} from '../../../shared/game.service';
 import {AdventureService} from './adventure.service';
 import {MainService} from '../../main.service';
 import {Food} from '../../../shared/food.model';
+import {Subscription} from 'rxjs/Rx';
+import {Router} from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -11,38 +13,51 @@ declare var $: any;
   templateUrl: './adventure.component.html',
   styleUrls: ['./adventure.component.css']
 })
-export class AdventureComponent implements OnInit, AfterViewChecked {
+export class AdventureComponent implements OnInit, AfterViewChecked, OnDestroy {
+  isSpeechRecogIsAvailable: boolean;
   gameStatus = 'none';
   gameSelected = '';
   numberOfFoodsInStomach: number;
+  onGameCompletedSub: Subscription;
   foodNameList: string[];
+  foodsInStomach: Food[];
   constructor(private stomachServ: StomachService,
               private gameServ: GameService,
               private adventureServ: AdventureService,
-              private mainServ: MainService){}
+              private mainServ: MainService,
+              private router: Router){}
 
   ngOnInit() {
+    // Go back to pet info for correct food loading
+    window.onload =  () => {
+      this.router.navigate(['/main'])
+    };
 
-    this.adventureServ.onGameCompleted.subscribe(
-      ()=> this.gameStatus = 'completed'
+    // Subscribe to changes in the stomach
+    this.stomachServ.getFoodsObserver().subscribe(
+      (foods: Food[]) => {
+        this.foodsInStomach = foods.reverse();
+        this.foodNameList = this.adventureServ.getShuffledFoodNameList(this.foodsInStomach);
+        this.numberOfFoodsInStomach = this.foodNameList.length;
+      }
     );
-    console.log('what', this.stomachServ.getFoodsInStomach().length);
-    if (this.stomachServ.getFoodsInStomach().length > 0 ){
-      let foodsInStomach = this.stomachServ.getFoodsInStomach();
-      console.log(foodsInStomach);
-      this.foodNameList = this.retrieveAndShuffleFoodNameList(foodsInStomach);
-      this.numberOfFoodsInStomach = this.foodNameList.length;
-    }else {
-      this.stomachServ.onFoodsLoaded.subscribe(
-        (foods: Food[]) => {
-          this.foodNameList = this.retrieveAndShuffleFoodNameList(foods);
-          console.log(this.foodNameList);
-          this.numberOfFoodsInStomach = this.foodNameList.length;
-        }
-      );
+
+    this.checkIfSpeechRecognitionIsAvailable();
+
+    this.onGameCompletedSub = this.adventureServ.onGameCompleted.subscribe(
+      () => this.gameStatus = 'completed'
+    );
+  }
+
+  checkIfSpeechRecognitionIsAvailable() {
+    if ("webkitSpeechRecognition" in window) {
+      this.isSpeechRecogIsAvailable = true;
+    } else{
+      this.isSpeechRecogIsAvailable = false;
     }
   }
-  ngAfterViewChecked(){
+
+  ngAfterViewChecked() {
     //Enable tool tips
     $('[data-toggle="tooltip"]').tooltip();
     $('.requirement-icon').click( function () {
@@ -50,24 +65,12 @@ export class AdventureComponent implements OnInit, AfterViewChecked {
     })
   }
 
-  retrieveAndShuffleFoodNameList(foods: Food[]){
-    //Get the list of food in the stomach
-    let foodNameList = foods.map((food: Food) => {
-      return food.word
-    });
-    //Shuffle the list
-    for (let i = foodNameList.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [foodNameList[i], foodNameList[j]] = [foodNameList[j], foodNameList[i]];
-    }
-    return foodNameList
-  }
 
-  selectGame(game: string){
+  selectGame(game: string) {
     this.gameSelected = game;
   }
 
-  startGame(){
+  startGame() {
     this.gameStatus = 'inProgress';
     this.adventureServ.onGameStarted.next();
   }
@@ -86,4 +89,9 @@ export class AdventureComponent implements OnInit, AfterViewChecked {
       $('#gameModal').modal('hide');
     }
   }
+
+  ngOnDestroy() {
+    this.onGameCompletedSub.unsubscribe();
+  }
+
 }

@@ -21,7 +21,7 @@ import {OwnerService} from "./shared/owner.service";
 import {AuthenticationModule} from "./authentication/authentication.module";
 import {CanDeactivateGuard} from "./main/can-deactivate-guard.service";
 import {AngularFireModule} from "angularfire2";
-import {firebaseConfig} from "../environments/firebase.config";
+import {firebaseConfig, firebaseDevConfig} from '../environments/firebase.config';
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {LocalStorageManager} from "./shared/localStorageManager.service";
@@ -38,7 +38,7 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    environment.production ? AngularFireModule.initializeApp(firebaseConfig) : AngularFireModule.initializeApp(firebaseDevConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,

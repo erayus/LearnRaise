@@ -1,4 +1,3 @@
-import {Subject} from "rxjs";
 import {Food} from "../shared/food.model";
 import {Injectable} from "@angular/core";
 import {ServerService} from "../shared/server.service";
@@ -6,6 +5,7 @@ import {PetService} from "../shared/pet.service";
 import {OwnerService} from "../shared/owner.service";
 import {StomachService} from "./content/stomach/stomach.service";
 import {AuthService} from '../authentication/auth-service';
+import {Subject} from "rxjs/Rx";
 
 @Injectable()
 export class MainService {
@@ -32,11 +32,15 @@ export class MainService {
     this.serverServ.getOwner()
       .subscribe(
         (owner) => {
-          if (owner.isRegComplete) {
-            this.ownerService.initOwner(owner);
-            this.onOwnerInited.next(this.ownerService.retrieveOwner());//pass to petinfo and main component
+          if (owner != null) {
+            if (owner.isRegComplete) {
+              this.ownerService.initOwner(owner);
+              this.onOwnerInited.next(this.ownerService.retrieveOwner());//pass to petinfo and main component
+            } else {
+              window.location.href = `/adoption/story`;
+            }
           } else {
-            window.location.href = `/adoption/story`;
+           window.location.href = "/authentication/login"
           }
         },
         (error) => console.log(error)
@@ -69,7 +73,7 @@ export class MainService {
   /**
    * Load foods from in stomach service
    */
-  loadFoodsInStomach(){
+  loadFoodsInStomach() {
     this.stomachServ.loadFoodsFromDatabase();
   }
 

@@ -29,41 +29,41 @@ export class OwnerService {
   retrieveOwner() {
     return this.owner;
   }
-  setName(newName: string){
+  setName(newName: string) {
     this.owner.nickName = newName;
     console.log(this.owner.nickName);
   }
-  setAvatar(newAvatar: string){
+  setAvatar(newAvatar: string) {
     this.owner.avatar = newAvatar;
     console.log(this.owner.avatar);
   }
 
-  gainScoreWhenFeeding(){
+  gainScoreWhenFeeding() {
     this.owner.score += 1;
-    this.saveOwnerToDatabase();
+    this.saveOwnerToDatabase().subscribe();
   }
 
-  gainScoreWhenEvolving(){
+  gainScoreWhenEvolving() {
     this.owner.score += 5;
   }
-  gainScoreWhenTraining(){
+  gainScoreWhenTraining() {
     this.owner.score += 20;
   }
-  gainScoreWhenBattling(){
+  gainScoreWhenBattling() {
     this.owner.score += 50;
   }
 
-  saveOwnerToDatabase(){
-    this.serverServ.updateOwner(this.owner).subscribe();
+  saveOwnerToDatabase() {
+    return this.serverServ.updateOwner(this.owner);
   }
-  saveAndDestroyOwner(){
+  saveAndDestroyOwner()  {
     this.serverServ.updateOwner(this.owner).subscribe();
     this.owner = null;
   }
   finishReg() {
     this.owner.isRegComplete = true;
   }
-  destroyOwner(){
+  destroyOwner() {
     this.owner = null;
   }
 }

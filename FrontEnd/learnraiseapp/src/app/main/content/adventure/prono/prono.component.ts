@@ -1,18 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Food} from '../../../../shared/food.model';
 import {StomachService} from '../../stomach/stomach.service';
 import {AdventureService} from '../adventure.service';
+import {Subscription} from 'rxjs/Rx';
 declare var $: any;
 declare var webkitSpeechRecognition: any;
-declare var SpeechRecognition: any;
 
 @Component({
   selector: 'app-prono',
   templateUrl: './prono.component.html',
   styleUrls: ['./prono.component.css']
 })
-export class PronoComponent implements OnInit {
+export class PronoComponent implements OnInit, OnDestroy{
   @Input() foodNameList: string[];
+  gameStatus = "";
+  onGameStartedSub: Subscription;
   countdownTime = 3;
   detectedFood: string;
   testingFood: any;
@@ -27,39 +29,35 @@ export class PronoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.adventureServ.onGameStarted.subscribe(
-      ()=>{
+    this.onGameStartedSub = this.adventureServ.onGameStarted.subscribe(
+      () => {
         $('#game-info').hide();
+        //If the user allows us to use the mic
         navigator.mediaDevices.getUserMedia({ audio: true })
-          .then((stream)=> {
-            var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-            console.log('You let me use your mic!');
-            const recognition = new SpeechRecognition();
-            //Configure the recognition
-            recognition.continuous = false; //After getting a result, recognition will stop
+          .then((stream) => {
+            const recognition = new webkitSpeechRecognition();
+            // Configure the recognition
             recognition.lang = 'en-US';
             recognition.interimResults = false; //Just show the result at the end of the speech
             recognition.maxAlternatives = 1;  //Just show the most confident result
 
-            let $countDownArea = $('#countdown');
+            const $countDownArea = $('#countdown');
             $countDownArea.show();
 
             this.countdownInterval = setInterval(() => {
               if (this.countdownTime > 0) {
                 this.countdownTime -= 1;
-                console.log('wewr')
               } else {
-
-                //Hide the countdnwn screen
+                // Hide the countdnwn screen
                 $countDownArea.hide();
-                //Start the game
+                // Start the game
                 this.startProno( this.foodNameList, recognition)
               }
             }, 1000);
 
             $('#gameModal').on('hidden.bs.modal', (e) => {
+              this.gameStatus = 'ended';
               recognition.stop();
-              console.log('stopped');
               this.countdownTime = 3;
               clearInterval(this.countdownInterval);
               $('#gameResult-area').hide();
@@ -67,10 +65,7 @@ export class PronoComponent implements OnInit {
             });
           })
           .catch((err) => {
-            // console.log('No mic for you!');
-            // alert("Sorry the app needs to use your microphone to assess your pronunciation")
-            // this.adventureServ.onGameCompleted.next();
-            // $('#gameModal').modal('hide');
+            alert("Sorry the app needs to use your microphone to assess your pronunciation")
           });
       }
     );
@@ -81,107 +76,149 @@ export class PronoComponent implements OnInit {
     clearInterval(this.countdownInterval);
 
     $('#game-interface').show();
-    //Set current testing food
+    // Set current testing food
     this.testingFood = foodNameList[this.foodPointer];
     $('#testing-food').text(this.testingFood);
 
     //Start listening to the user
     recognition.start();
 
-    //When speech detected
+    recognition.onspeechend = function() {
+      recognition.stop();
+      $('#recording-icon').css('animation-name', 'none')
+    };
+
+    recognition.onstart = function(event) {
+      $('#recognition-status').text('Listening');
+      $('#recording-icon').css('animation-name', 'pulse')
+    };
+
+    recognition.onend = (event) => {
+      console.log('On ended event', event);
+      $('#recognition-icon').css('animation-name', 'none');
+      $('#recognition-status').text('');
+      if (this.gameStatus !== 'ended'){
+        recognition.start();
+      }
+    };
+
+    recognition.onerror = function(event) {
+      $('#recording-icon').css('animation-name', 'none');
+      console.log('error', event.error);
+      recognition.start();
+    };
+
+
+    $('#recording-icon').click(() => {
+      recognition.start();
+    });
+
+
+
+    // When speech detected
     recognition.onresult = (event) => {
+
+      const succeed = () =>{
+        // Hide recording icon and show correct icon
+        $('#recording-area').hide();
+        $('#ticking-area').show();
+        // Increase correct score and display it on the interface
+        this.correctScore += 1;
+        $('#correct-score').text(this.correctScore);
+      };
+      const fail = () => {
+        // Hide recording icon and show ticking icon
+        $('#recording-area').hide();
+        $('#incorrect-area').show();
+        this.inCorrectScore += 1;
+        $('#incorrect-score').text(this.inCorrectScore);
+
+      }
+
       // console.log("Event: ", event);
-      let last = event.results.length - 1;
-      //Get the result of speech recognition and make sure there is no space in it for exact testing
+      const last = event.results.length - 1;
+      // Get the result of speech recognition and make sure there is no space in it for exact testing
       this.detectedFood = event.results[last][0].transcript.replace(/ /g,'');
       console.log(this.detectedFood);
       $('#detected-food').text(this.detectedFood);
-      //If it's correct
+      // If it's correct
+
+
       if (this.detectedFood.toLowerCase() === this.testingFood.toLowerCase()){
-        //If this is not the last word in the last
-        if (this.foodPointer != foodNameList.length - 1){
+        // If this is not the last word in the last
+        if (this.foodPointer !== foodNameList.length - 1){
           succeed();
 
-          //Wait for the animation to finish
+          // Wait for the animation to finish
           setTimeout(()=>{
             //Set detected food to empty string
             $('#detected-food').text('');
             //Hide correct icon and show recording icon
-            recognition.start();
+            // recognition.start();
             $('#recording-area').show();
             $('#ticking-area').hide();
 
 
-            //Move the pointer to the next food in the list
+            // Move the pointer to the next food in the list
             this.foodPointer += 1;
             this.testingFood = foodNameList[this.foodPointer];
 
-            //Display the next food on the interface
+            // Display the next food on the interface
             $('#testing-food').text(this.testingFood);
 
 
           }, 2000);
           // if this is the last word in the list
-        }else{
+        } else {
           succeed();
-
-          //Wait for the animation to finish
-          setTimeout(()=>{
-            //Set detected food to empty string
+          // Wait for the animation to finish
+          setTimeout(() => {
+            // Set detected food to empty string
             $('#detected-food').text('');
-            //End the game and show the result
+            // End the game and show the result
             this.endProno(recognition);
           }, 2000);
         }
-        //If it's wrong
-      }else{
-        //Hide recording icon and show ticking icon
-        $('#recording-area').hide();
-        $('#incorrect-area').show();
-
+        // If it's wrong
+      } else {
+        fail();
         setTimeout(() => {
-          recognition.start();
+          // recognition.start();
           $('#detected-food').text(''); //Set detected food to empty string
           $('#recording-area').show();
           $('#incorrect-area').hide();
-          this.inCorrectScore += 1;
-          $('#incorrect-score').text(this.inCorrectScore)
         }, 1000);
       }
     };
-    recognition.onnomatch = function() {
-      console.log('no match');
-    };
 
-    let succeed = () =>{
-      //Hide recording icon and show correct icon
-      $('#recording-area').hide();
-      $('#ticking-area').show();
-      //Increase correct score and display it on the interface
-      this.correctScore += 1;
-      $('#correct-score').text(this.correctScore);
-    }
+
   }
 
   endProno = (recognition) => {
+    this.gameStatus = 'ended';
     // Stop recording
     recognition.stop();
-    //Hide stop-button and show close-button
+    // Hide stop-button and show close-button
     $('#stopGame-btn').hide();
     $('#closeGame-btn').show();
-    //Hide game-interface and show game-result area
+    // Hide game-interface and show game-result area
     $('#game-interface').hide();
     $('#gameResult-area').show();
 
-    let earningPoints = this.correctScore;
-    let losingPoints = this.inCorrectScore*2;
-    let totalPoints = earningPoints - losingPoints;
-    $('#earning-points').text(earningPoints);
+    const earningPoints = this.correctScore;
+    const losingPoints = this.inCorrectScore * 2;
+    const totalPoints = earningPoints - losingPoints;
+    $("#earning-points").text(earningPoints);
     $('#losing-points').text(losingPoints);
     $('#total-points').text(totalPoints);
 
 
     this.adventureServ.onGameCompleted.next();
   };
+
+ ngOnDestroy() {
+   this.onGameStartedSub.unsubscribe();
+ }
+
 
 }

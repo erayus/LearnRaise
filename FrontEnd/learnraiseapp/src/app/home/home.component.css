@@ -1,6 +1,6 @@
 .home-wrapper{
-  overflow-x: hidden;
-
+  overflow-x: hidden !important;
+  width: 100%;
 }
 .top-navbar{
   z-index: 5;

@@ -15,7 +15,7 @@ export class PetService {
   private petObj: Pet;
   private hungerInterval;
   private initedHungerInterval = false;
-  //This event is triggered whenever there is any change
+  // This event is triggered whenever there is any change
   onPetChanged = new Subject<Pet>();
   constructor(private serverServ: ServerService,
               private af: AngularFireAuth) {}

@@ -28,7 +28,7 @@
                     data-toggle="modal"
                     data-target="#gameModal"
                     (click)="selectGame('prono')"
-                    [disabled]="numberOfFoodsInStomach < 5" >
+                    [disabled]="numberOfFoodsInStomach < 5 || !isSpeechRecogIsAvailable" >
               Play
             </button>
             <span><i class="fas fa-info-circle requirement-icon"
@@ -36,6 +36,12 @@
                      data-placement="right"
                      title="Requirement: You need to have at least 5 foods in the stomach to play this game"
                      *ngIf="numberOfFoodsInStomach < 5"></i>
+            </span>
+            <span><i class="fas fa-info-circle requirement-icon"
+                     data-toggle="tooltip"
+                     data-placement="right"
+                     title="Sorry this game is not available in this browser. Please use Google Chrome instead"
+                     *ngIf="!isSpeechRecogIsAvailable"></i>
             </span>
           </div>
         </div>

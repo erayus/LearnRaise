@@ -9,6 +9,7 @@ import {OwnerService} from "../shared/owner.service";
 import {AngularFireAuth} from "angularfire2/auth"
 import {LocalStorageManager} from "../shared/localStorageManager.service";
 import {Owner} from "../shared/owner.model";
+import * as firebase from 'firebase/app'
 
 @Injectable()
 export class AuthService {
@@ -24,50 +25,11 @@ export class AuthService {
   }
 
   signupUser (email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then(
-        (response) => {
-          // Set up token  Server Service (IMPORTANCE: should be put here before creating owner and pet)
-          const user = response.user;
-          this.serverServ.setUpOwnerIdAndToken(user);
-
-          // Initiate owner in OwnerService and create Owner table in the database
-          const ownerData = this.ownerServ.createOwnerWithIdAndEmail(user.uid, user.email);
-          //Add owner first and then use owner's key to add pet and stomach
-          this.serverServ.addOwner(user.uid, ownerData).subscribe(
-            (response) =>{
-              // Initiate petObj in PetService and create Pet table
-              const petData = this.petServ.createPetWithId(user.uid);
-              console.log('Pet', petData);
-              // Add pet to the database using user Id
-              this.serverServ.addPet( user.uid, petData).subscribe();
-              this.loggedIn = true;
-              // Navigate to petquizz
-              this.router.navigate(['/adoption', 'story'])
-            },
-          (error)=>{ console.log(error)}
-          );
-
-        }
-    ).catch(
-          (error) => this.onErrorSignUp.next(error.message)
-      )
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
   };
-  signinUser (email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(
-        response => {
-          // Give access to next routes
-          this.loggedIn = true;
-          //Set up TokenAndUserId
-          // Navigate to main component
 
-          this.router.navigate(['/main']);
-        }
-      )
-      .catch(
-        error => this.onErrorSignIn.next(error.message)
-    )
+  signinUser (email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
   }
   // loginGoogle(provider) {
   //   this.afAuth.auth.signInWithPopup(provider).then(
@@ -78,13 +40,17 @@ export class AuthService {
   // }
   logOut() {
     this.petServ.saveLeaveTimeAndHungerTime();
-    this.serverServ.deleteToken();
     this.petServ.destroyPet();
     this.ownerServ.destroyOwner();
-    window.location.href = '/authentication/login';
-    this.afAuth.auth.signOut();
-    this.loggedIn = false;
+    this.serverServ.deleteToken();
+    setTimeout(() => {
+      this.afAuth.auth.signOut();
+      this.loggedIn = false;
+      window.location.href = "/authentication/login";
+    }, 2000);
   }
+
+
   isAuthenticated() {
     return this.loggedIn;
   }

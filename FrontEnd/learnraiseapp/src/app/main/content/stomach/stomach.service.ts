@@ -57,9 +57,13 @@ export class StomachService {
    * An observable of the foods table for the views (i.e food-list component) to subscribe to.
    * @return {Observable<any>}
    */
-  getFoodsObserver(): Observable<any> {
+  getFoodsObserver(): Observable<Food[]> {
     // Only return the observable when the reference is initiated in LoadFoodFromServer()
     if (this.stomachRef$ !== undefined) {
+      return this.stomachRef$.valueChanges();
+    } else {
+      const userId = this.serverServ.getUserId();
+      this.stomachRef$ = this.db.list(`stomachs/${userId}`);
       return this.stomachRef$.valueChanges();
     }
   }
@@ -72,8 +76,8 @@ export class StomachService {
   isFoodEaten(newFoodName: string) {
     console.log('Checking food', this.foodsInStomach);
     let flag = false;
-    if (this.foodsInStomach.length > 0){
-      for (const food of this.foodsInStomach){
+    if (this.foodsInStomach.length > 0) {
+      for (const food of this.foodsInStomach) {
         if ( newFoodName === food.word.toLowerCase() ) {
           flag = true;
         }

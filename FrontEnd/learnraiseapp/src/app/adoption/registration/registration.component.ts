@@ -86,9 +86,13 @@ export class RegistrationComponent implements OnInit {
         break;
       case 'done':
         this.ownerServ.finishReg();
-        this.ownerServ.saveOwnerToDatabase();
+        this.ownerServ.saveOwnerToDatabase().subscribe(
+          () => {
+            // After finishing saving the owner to the database, direct the player to the main page
+            window.location.href = "/main/petinfo";
+          }
+        );
         // this.router.navigate(['/main', 'petinfo']);
-        window.location.href = '/main/petinfo';
         break;
     }
   }

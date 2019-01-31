@@ -1,8 +1,8 @@
 
 .header{
-  color: white;
+  color: white !important;
+  font-family: Orbitron, "Helvetica Neue";
   text-align: center;
-  font-family: cursive;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }

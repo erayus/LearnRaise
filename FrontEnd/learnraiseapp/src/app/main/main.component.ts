@@ -19,7 +19,9 @@ declare var $: any;
   styleUrls: ['./main.component.css'],
   providers: []
 })
-export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
+export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+  authSub: Subscription;
+  tokenSub: Subscription;
   isFeeding = false;
   user: any;
   closeModalBoxSub: Subscription;
@@ -66,24 +68,24 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   // };
 
   ngOnInit() {
-    this.af.authState.subscribe(user =>{
+    this.authSub = this.af.authState.subscribe(user =>{
       console.log("Auth: ", user);
       if (user && user.uid) {
         this.user = user;
-        if( !this.serverServ.isTokenExpired(this.user)){
+        if (!this.serverServ.isTokenExpired(this.user)) {
           this.serverServ.setUpOwnerIdAndToken(this.user);
-        }else {
+        } else {
           this.authServ.logOut();
         }
       } else {
-        this.authServ.logOut();
+        window.location.href = 'authentication/login';
         console.log('user not logged in');
       }
     });
 
     // //Wait for the ownerKey to be ready first
-    this.serverServ.onOwnerIdAndTokenReady.subscribe(
-      ()=> {
+    this.tokenSub = this.serverServ.onOwnerIdAndTokenReady.subscribe(
+      () => {
         // Initiate owner
         this.mainServ.initOwner();
 
@@ -164,12 +166,12 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    //If not expired (e.g user press the arrow back button on the browser)
+    // If not expired (e.g user press the arrow back button on the browser)
     if (!this.serverServ.isTokenExpired(this.user)) {
       if (confirm('Are you sure you want to disconnect with your pet?')){
         this.authServ.logOut();
       }
-      //if token is expired
+      // if token is expired
     } else if (this.serverServ.isTokenExpired(this.user)) {
        alert('Your pet was playful, please connect again to see him/her');
        this.authServ.logOut();
@@ -178,7 +180,11 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate{
   }
 
   ngOnDestroy() {
-    // this.petServ.saveLeaveTimeAndHungerTime();
+    // Unsubscribe subscription
+    this.closeModalBoxSub.unsubscribe();
+    this.notificationSub.unsubscribe();
+    this.authSub.unsubscribe();
+    this.tokenSub.unsubscribe();
     this.mainServ.resetInitiation();
     this.foodAddedSub.unsubscribe();
     this.petServ.destroyPet();

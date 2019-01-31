@@ -10,11 +10,14 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .then(()=>{
+  .then(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('ngsw-worker.js')
         .then(
           () => console.log('Service Worker Registered')
       );
+    } else {
+      alert('Hint: For better experience, please use Google Chrome!');
     }
   });
+

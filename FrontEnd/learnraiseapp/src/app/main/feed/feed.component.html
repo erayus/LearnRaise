@@ -2,7 +2,7 @@
   <!--Mannual Cook Form-->
   <div class="manualCookType" *ngIf="state === 'manual' ">
     <div class="header p-2">
-      <h4>What is my food for today?</h4>
+      <h4 class="primary-text">What is my food for today?</h4>
     </div>
     <div class="feed-content">
       <form (ngSubmit)= " onFeed(f) " #f="ngForm">
@@ -72,7 +72,7 @@
   <!--AutoCook Form-->
   <div class="autoCookType" *ngIf="state === 'auto' ">
     <div class="header p-2 success-color">
-      <h4 style="  font-size: 26px">Which food are you looking for?</h4>
+      <h4  style=" font-size: 26px">Which food are you looking for?</h4>
     </div>
     <div class="feed-content">
       <form (ngSubmit)= " onLookUp(f) " #f="ngForm">

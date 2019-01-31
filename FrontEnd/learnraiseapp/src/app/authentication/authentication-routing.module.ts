@@ -13,6 +13,7 @@ const authenticationRoutes = [
     {path: 'signup', component: SignUpComponent},
   ]}
 ];
+
 @NgModule({
   imports: [
     RouterModule.forChild(authenticationRoutes)

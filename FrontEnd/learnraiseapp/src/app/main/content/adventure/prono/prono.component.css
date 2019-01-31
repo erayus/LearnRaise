@@ -20,17 +20,18 @@
 }
 
 #recording-icon{
+  cursor: pointer;
   width: 35px;
   height: 35px;
   font-size: 0;
-  background-color: red;
   border: 0;
   border-radius: 35px;
   margin: 18px;
   outline: none;
 }
 #recording-icon{
-  animation-name: pulse;
+  background-color: red;
+  /*animation-name: pulse;*/
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;

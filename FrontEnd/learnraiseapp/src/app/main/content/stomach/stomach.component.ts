@@ -23,6 +23,7 @@ export class StomachComponent implements OnInit, OnDestroy{
   ownerId: string;
   selectedFood: Food;
   editingFoodIndex: number;
+  foodsInStomach: Food[];
   isEditing = false;
   isSelecting = false;
   displayDes = false;
@@ -35,6 +36,12 @@ export class StomachComponent implements OnInit, OnDestroy{
               private router: Router,
               private route: ActivatedRoute) { }
   ngOnInit() {
+    window.onload =  () => {
+      this.router.navigate(['/main'])
+    };
+    this.stomachServ.getFoodsObserver().subscribe(
+      (foods: Food[]) => { this.foodsInStomach = foods.reverse()}
+    );
 
     // When a food is selected, display its description
     this.stomachServ.foodSelectedEvent.subscribe(

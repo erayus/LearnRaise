@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, Input,
   OnInit
 } from '@angular/core';
 
@@ -19,7 +19,7 @@ declare let $: any;
  * This class is only used to reflect the data to the view
  */
 export class FoodListComponent implements OnInit  {
-  foods = [];
+  @Input() foods = [];
   filterFood = "";
   private stomachRef$: AngularFireList<any>;
 
@@ -31,28 +31,27 @@ export class FoodListComponent implements OnInit  {
   }
 
   ngOnInit() {
-    console.log(this.stomachServ.getFoodsInStomach().length === 0);
-    if (this.stomachServ.getFoodsInStomach().length === 0 ){
-      this.mainServ.onPetInited.subscribe(
-        (pet: Pet) => {
-          const userId = this.serverServ.getUserId();
-          this.stomachRef$ = this.db.list(`stomachs/${userId}`);
-          // Store foods from the database to a variable
-          this.stomachRef$.valueChanges().subscribe(
-            (foods) => this.foods = foods.reverse()
-          );
-        }
-      );
-    }else{
-      this.foods = this.stomachServ.getFoodsInStomach();
-
-      const userId = this.serverServ.getUserId();
-      this.stomachRef$ = this.db.list(`stomachs/${userId}`);
-      // Store foods from the database to a variable
-      this.stomachRef$.valueChanges().subscribe(
-        (foods) => this.foods = foods.reverse()
-      );
-    }
+    // if (this.stomachServ.getFoodsInStomach().length === 0 ){
+    //   this.mainServ.onPetInited.subscribe(
+    //     (pet: Pet) => {
+    //       const userId = this.serverServ.getUserId();
+    //       this.stomachRef$ = this.db.list(`stomachs/${userId}`);
+    //       // Store foods from the database to a variable
+    //       this.stomachRef$.valueChanges().subscribe(
+    //         (foods) => this.foods = foods.reverse()
+    //       );
+    //     }
+    //   );
+    // }else{
+    //   this.foods = this.stomachServ.getFoodsInStomach();
+    //
+    //   const userId = this.serverServ.getUserId();
+    //   this.stomachRef$ = this.db.list(`stomachs/${userId}`);
+    //   // Store foods from the database to a variable
+    //   this.stomachRef$.valueChanges().subscribe(
+    //     (foods) => this.foods = foods.reverse()
+    //   );
+    // }
 
 
   }

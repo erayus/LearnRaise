@@ -48,7 +48,7 @@ export class ToolBarComponent implements OnInit, OnDestroy {
     this.changesInDatabaseSub = this.petService.onPetChanged.subscribe(
       (upToDatePet) => {
         this.petObj = upToDatePet;
-        this.estimation = Math.ceil(this.petObj.hungerTime[0]/ 3600000);
+        this.estimation = Math.ceil(this.petObj.hungerTime[0] / 3600000);
         this.updateBarsUI()
       }
     );

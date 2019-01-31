@@ -61,7 +61,7 @@ import {FoodSynonymsSpaceAdderPipe} from './feed/FoodSynonymsSpaceAdderPipe';
     FormsModule,
     MainRoutingModule
   ],
-  providers:[
+  providers: [
     AdventureService
   ]
 })
