@@ -171,10 +171,10 @@ export class PetService {
     if ( newHungerTime > this.petObj.hungerTime[1]) {
       const amountToFill =  this.petObj.hungerTime[1] - this.petObj.hungerTime[0]; //calculate the amount of time to fill the bar
       this.petObj.hungerTime[0] += amountToFill;
-    }else {
+    } else {
       this.petObj.hungerTime[0] = newHungerTime;
     }
-    //Notify other components that there is something changed in pet Obj (tool bar components)
+    // Notify other components that there is something changed in pet Obj (tool bar components)
     this.onPetChanged.next(this.petObj)
   }
 
@@ -183,10 +183,10 @@ export class PetService {
     if (this.initedHungerInterval === false) {
       this.initedHungerInterval = true;
       this.hungerInterval = setInterval(() => {
-        //If the pet is still alive
+        // If the pet is still alive
         if (this.petObj.hungerTime[0] > 0 ) {
           this.petObj.hungerTime[0] -= 60000;
-          //Notify other components that there is something changed in pet Obj (tool bar components)
+          // Notify other components that there is something changed in pet Obj (tool bar components)
           this.onPetChanged.next(this.petObj);
         } else {
           clearInterval(this.hungerInterval);

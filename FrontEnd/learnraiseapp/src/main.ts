@@ -11,8 +11,9 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .then(() => {
+    // ngsw-worker.js
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('ngsw-worker.js')
+      navigator.serviceWorker.register('service-worker.js')
         .then(
           () => console.log('Service Worker Registered')
       );

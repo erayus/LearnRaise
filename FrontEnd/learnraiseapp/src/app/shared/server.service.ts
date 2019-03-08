@@ -32,7 +32,6 @@ export class ServerService {
               private db: AngularFireDatabase,
               private afAuth: AngularFireAuth
               ) {
-    console.log(" inside serverService", this.firebaseCon);
   }
   /**
    * Retrieve Token from local storage and store it a variable so that it can be used later to make request to the server

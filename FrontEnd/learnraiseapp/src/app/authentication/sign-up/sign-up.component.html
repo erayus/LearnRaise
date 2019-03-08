@@ -2,7 +2,7 @@
   <h1 class="text-center primary-text" > Sign Up  </h1>
   <h3 class="text-center primary-text" > To Learn and Grow With Your Fantasy Pet</h3>
   <div class="form-container">
-    <form  autocomplete="off"  #f="ngForm" >
+    <div  autocomplete="off"  >
       <div id="user-data">
         <div class="form-group">
           <label for="email">Email</label>
@@ -16,7 +16,7 @@
                  required
                  email
                  #userEmail="ngModel">
-          <span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('Password') == -1 && f.dirty">{{errorMessage}}  </span>
+          <span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('Password') == -1">{{errorMessage}}  </span>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -29,19 +29,18 @@
                  ngModel
                  required
                  #userPassword="ngModel">
-          <span class="form-text error-message" *ngIf="errorMessage !== 'none'   && f.submitted === true && errorMessage.search('Password') !== -1 ">{{errorMessage}}  </span>
+          <span class="form-text error-message" *ngIf="errorMessage !== 'none'   && errorMessage.search('Password') !== -1 ">{{errorMessage}}  </span>
         </div>
       </div>
       <div class="col-sm-12">
       </div>
-      <button type="button" class="btn btn-block signUpBtn" style="cursor: pointer" [disabled]="f.invalid" (click)="onSignUp(f)">Sign Up</button>
+      <button type="button" class="btn btn-block signUpBtn" style="cursor: pointer"  (click)="onSignUp()">Sign Up</button>
       <h6 class="text-center my-3 " style="color: white"> Or </h6>
       <!--<hr>-->
       <!--<button class="btn btn-block loginBtn loginBtn&#45;&#45;google" (click)="onLogInGoogle()">Login with Google </button>-->
-    </form>
+    </div>
     <div class="col-sm-12 mt-2 text-center">
       <a (click)="changeToLogIn()" style="text-decoration: underline; cursor: pointer; color: orange">Already got a buddy? Connect now! </a>
     </div>
   </div>
 </div>
-

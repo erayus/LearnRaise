@@ -29,14 +29,16 @@ export class SignUpComponent implements OnInit, OnDestroy {
     //   (error: string) => this.errorMessage = error
     // );
   }
-  onSignUp(form: NgForm) {
-    const email = form.value.email;
-    const password = form.value.password;
+  onSignUp() {
+    // const email = form.value.email;
+    // const password = form.value.password;
+    const email = $("#email").val();
+    const password = $("#password").val();
+
     this.authService.signupUser(email, password).then(
       (response) => {
             // Set up token  Server Service (IMPORTANCE: should be put here before creating owner and pet)
             const user = response.user;
-            console.log("user ID after signing up", user.uid);
             this.serverServ.setUpOwnerIdAndToken(user);
             // Initiate owner in OwnerService and create Owner table in the database
             const ownerData = this.ownerServ.createOwnerWithIdAndEmail(user.uid, user.email);

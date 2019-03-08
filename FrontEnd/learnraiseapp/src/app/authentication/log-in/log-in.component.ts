@@ -38,7 +38,6 @@ export class LogInComponent implements OnInit, OnDestroy {
     const password = form.value.password;
     this.authService.signinUser(email, password).then(
       response => {
-        alert("sign in");
         // Give access to next routes
         // this.loggedIn = true;
         // Set up TokenAndUserId

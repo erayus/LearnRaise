@@ -13,8 +13,7 @@ export class DictionaryService {
       .map(
         (response) => {
           // Format response into an object
-          const result = response[0];
-          return result;
+         return response[0];
         }
       )
   }

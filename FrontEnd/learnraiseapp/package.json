@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pwa": "ng build --prod --aot && cd dist && http-server -c-1 -P http://localhost:9000 ."
+    "pwa": "ng build --prod --aot && cd dist && http-server -c-1 -P http://localhost:9000 .",
+    "pwa-new": "ng build --prod && sw-precache --root=dist --config=precache-config.js"
   },
   "private": true,
   "dependencies": {
