@@ -9,7 +9,7 @@ import {CommunityComponent} from "./content/community/community.component";
 
 
 const mainRoutes: Routes = [
-  {path: '', component: MainComponent,canDeactivate:[CanDeactivateGuard], children: [
+  {path: '', component: MainComponent, canDeactivate: [CanDeactivateGuard], children: [
     {path: '', redirectTo: 'petinfo', pathMatch: 'full'},
     {path: 'petinfo', component: PetInfoComponent},
     {path: 'adventure', component: AdventureComponent},
@@ -18,7 +18,6 @@ const mainRoutes: Routes = [
   ]},
   {path: '**', redirectTo: '/authentication/login' }
 ];
-
 
 
 @NgModule({
