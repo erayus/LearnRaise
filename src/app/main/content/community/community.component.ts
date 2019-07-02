@@ -13,9 +13,7 @@ import {AngularFireDatabase} from "angularfire2/database";
 export class CommunityComponent implements OnInit {
   viewRankBoard = false;
   rankList = [];
-  constructor(private authServ: AuthService,
-              private serverServ: ServerService,
-              private db: AngularFireDatabase) {
+  constructor(private serverServ: ServerService) {
 
   }
 
@@ -23,12 +21,16 @@ export class CommunityComponent implements OnInit {
     this.viewRankBoard = true;
     this.serverServ.getAllOwners().subscribe(
       (ownerList: Owner[]) => {
-        this.rankList.push(...ownerList);
+        this.getAllOwners(ownerList)
+      }
+    );
+  }
+
+  getAllOwners(ownerList: Owner[]){
+    this.rankList.push(...ownerList);
         this.rankList.sort(function(a, b) {
           return  b.score - a.score ;
         });
-      }
-    );
   }
 
 }

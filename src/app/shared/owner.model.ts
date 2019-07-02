@@ -1,7 +1,7 @@
 /**
  * Created by imrte on 22/11/2017.
  */
-export class Owner{
+export class Owner {
   constructor(
     public oId: string,
     public oEmail: string,
@@ -9,6 +9,6 @@ export class Owner{
     public avatar: string,
     public score: number,
     public isRegComplete: boolean
-  ){}
+  ) {}
 }
 

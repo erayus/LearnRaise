@@ -22,9 +22,7 @@ export class AdventureComponent implements OnInit, AfterViewChecked, OnDestroy {
   foodNameList: string[];
   foodsInStomach: Food[];
   constructor(private stomachServ: StomachService,
-              private gameServ: GameService,
               private adventureServ: AdventureService,
-              private mainServ: MainService,
               private router: Router){}
 
   ngOnInit() {

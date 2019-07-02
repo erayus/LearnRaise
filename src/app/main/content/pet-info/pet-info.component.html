@@ -7,7 +7,7 @@
 
   <div class="main-content row mt-5">
     <!--Information box-->
-    <div class="pet-info  col-md-4 pl-5 hidden-md-down">
+    <!-- <div class="pet-info  col-md-4 pl-5 hidden-md-down">
       <div class="card">
         <h3 class="card-header"></h3>
         <div class="card-block">
@@ -16,12 +16,12 @@
           <div class="height-icon my-2"><span><img src="../../../../assets/in-app%20icons/height.png" width="30px" height="30px"/>{{petObj.height}} cm</span></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--Picture box-->
     <div class="pet-pic-container col-md-4 text-center mx-auto">
       <img class="pet-pic" src="{{petObj.curPic}}"/>
     </div>
-    <!--Mission box-->
+    <!-- Mission box
     <div class="pet-statistic col-md-4 pr-5 hidden-md-down">
       <div class="card">
         <h3 class="card-header"></h3>
@@ -34,8 +34,8 @@
       </div>
     </div>
 
-    <!--Phone version  -->
-    <div class="toggler-button-container mt-2 hidden-lg-up">
+    Phone version  -->
+    <!-- <div class="toggler-button-container mt-2 hidden-lg-up">
       <div class="toggler-button mr-4 text-center" (click)="toggleBox('info')" >
         <i class="fa fa-info" aria-hidden="true"></i>
       </div>
@@ -43,10 +43,10 @@
         <i class="fas fa-file-alt"></i>
       </div>
     </div>
-    <div class="modal-backdrop fade show hidden-lg-up" *ngIf="viewInfo || viewStatus" (click)="closeModalBox()"></div>
+    <div class="modal-backdrop fade show hidden-lg-up" *ngIf="viewInfo || viewStatus" (click)="closeModalBox()"></div> -->
 
     <!--Information box-->
-    <div class=" modal-content pet-info-container hidden-lg-up " *ngIf="viewInfo">
+    <!-- <div class=" modal-content pet-info-container hidden-lg-up " *ngIf="viewInfo">
       <div class="card-modal">
         <h3 class="card-header">Information</h3>
         <div class="card-block">
@@ -55,9 +55,9 @@
           <div class="height-icon my-2"><span><img src="../../../../assets/in-app%20icons/height.png" width="30px"  height="30px"/>{{petObj.height}} cm</span></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--Statistic box-->
-    <div class=" modal-content pet-statistic hidden-lg-up " *ngIf="viewStatus">
+    <!-- <div class=" modal-content pet-statistic hidden-lg-up " *ngIf="viewStatus">
       <div class="card-modal">
         <h3 class="card-header">Status:</h3>
         <div class="card-block">
@@ -66,7 +66,7 @@
           <div class=" my-2 "><span><img src="../../../../assets/in-app%20icons/heart-beat-2-icon.png" width="30px" height="30px"/></span> {{petObj.noOfLives}} lives left </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
 

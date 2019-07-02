@@ -20,6 +20,7 @@ declare var $: any;
   providers: []
 })
 export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+  loading = true;
   authSub: Subscription;
   tokenSub: Subscription;
   isFeeding = false;
@@ -53,12 +54,9 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
     }
   })();
   constructor(private mainServ: MainService,
-              private stomachServ: StomachService,
               private petServ: PetService,
-              private gameServ: GameService,
               private serverServ: ServerService,
               private authServ: AuthService,
-              private dicServ: DictionaryService,
               private af: AngularFireAuth
               ) {
   }
@@ -69,11 +67,12 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
 
   ngOnInit() {
     this.authSub = this.af.authState.subscribe(user =>{
-      console.log("Auth: ", user);
       if (user && user.uid) {
         this.user = user;
         if (!this.serverServ.isTokenExpired(this.user)) {
+          // Set up token so that it can be used to interact with the database
           this.serverServ.setUpOwnerIdAndToken(this.user);
+          this.loading = false;
         } else {
           this.authServ.logOut();
         }
@@ -83,18 +82,10 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
       }
     });
 
-    // //Wait for the ownerKey to be ready first
+    // //Wait for the ownerKey to be ready first before performing orchestration to load owner, pet and stomach
     this.tokenSub = this.serverServ.onOwnerIdAndTokenReady.subscribe(
       () => {
-        // Initiate owner
-        this.mainServ.initOwner();
-
-        // Initiate pet
-        this.mainServ.initPet();
-        this.petServ.startGettingHungry();
-
-        // Load food from the server to stomach
-        this.mainServ.loadFoodsInStomach();
+        this.init()
       }
 
     );
@@ -120,8 +111,7 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
     // To be able to add food at any component within main
     this.foodAddedSub = this.mainServ.onFeedPet.subscribe(
       (food) => {
-        this.stomachServ.addFood(food);
-        this.gameServ.onFoodAdded();
+        this.mainServ.feedPet(food);
       }
     );
 
@@ -140,11 +130,26 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
           this.petServ.checkHealthAndRetrievePet();
         //If expired, delete token
         }else{
-          window.location.href = '/authentication/login';
-          this.serverServ.deleteToken()
+          this.authServ.logOut()
         }
       }
     })
+  }
+
+  /**
+   * Invoked after token is set up
+   * Purpose: Orchestrate the initiation process
+   */
+  init(){
+    // Initiate owner
+    this.mainServ.initOwner();
+
+    // Initiate pet
+    this.mainServ.initPet();
+    this.petServ.startGettingHungry();
+
+    // Load food from the server to stomach
+    this.mainServ.loadFoodsInStomach();
   }
 
   // $(document).on('keydown', 'ctrl+enter', () => {

@@ -1,10 +1,9 @@
-<div class="container-fluid main">
-
+<div class="container-fluid main" *ngIf="!loading">
 
 
   <!--Content-->
   <div class="content-container" >
-    <router-outlet></router-outlet>
+    <router-outlet ></router-outlet>
   </div>
 
   <!--Extra Navigation-->

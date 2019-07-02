@@ -1,15 +1,10 @@
-// import * as firebase from 'firebase';
 import {Injectable} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject} from "rxjs";
 import {ServerService} from "../shared/server.service";
 import {PetService} from "../shared/pet.service";
-import {Food} from "../shared/food.model";
 import {OwnerService} from "../shared/owner.service";
 import {AngularFireAuth} from "angularfire2/auth"
-import {LocalStorageManager} from "../shared/localStorageManager.service";
-import {Owner} from "../shared/owner.model";
-import * as firebase from 'firebase/app'
 
 @Injectable()
 export class AuthService {
@@ -46,7 +41,6 @@ export class AuthService {
     setTimeout(() => {
       this.afAuth.auth.signOut();
       this.loggedIn = false;
-      window.location.href = "/authentication/login";
     }, 2000);
   }
 
