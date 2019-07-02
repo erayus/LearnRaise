@@ -6,6 +6,7 @@ import {OwnerService} from "../shared/owner.service";
 import {StomachService} from "./content/stomach/stomach.service";
 import {AuthService} from '../authentication/auth-service';
 import {Subject} from "rxjs/Rx";
+import { GameService } from './../shared/game.service';
 
 @Injectable()
 export class MainService {
@@ -19,7 +20,9 @@ export class MainService {
               private ownerService: OwnerService,
               private petService: PetService,
               private stomachServ: StomachService,
-              private authServ: AuthService
+              private authServ: AuthService,
+              private gameServ: GameService
+
               ) {
   }
 
@@ -75,6 +78,11 @@ export class MainService {
    */
   loadFoodsInStomach() {
     this.stomachServ.loadFoodsFromDatabase();
+  }
+
+  feedPet(food: Food) {
+    this.stomachServ.addFood(food);
+    this.gameServ.onFoodAdded();
   }
 
   resetInitiation() {

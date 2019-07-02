@@ -24,7 +24,7 @@ import {AngularFireModule} from "angularfire2";
 import {firebaseConfig, firebaseDevConfig} from '../environments/firebase.config';
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
-import {LocalStorageManager} from "./shared/localStorageManager.service";
+
 import {HttpClientModule} from "@angular/common/http";
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
@@ -55,7 +55,6 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
     OwnerService,
     PetService,
     ServerService,
-    LocalStorageManager,
     MainService,
     StomachService,
     DictionaryService,
@@ -64,7 +63,6 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
   ],
   bootstrap: [AppComponent]
 })
-
 
 
 export class AppModule { }

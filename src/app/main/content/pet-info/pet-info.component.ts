@@ -44,9 +44,7 @@ export class PetInfoComponent implements OnInit, AfterViewChecked, OnDestroy{
   // });
 
   constructor(private petService: PetService,
-              private mainServ: MainService,
-              private stomachServ: StomachService,
-              private ownerServ: OwnerService) {
+              private mainServ: MainService) {
   }
   ngOnInit() {
     this.petPromise.then((pet: Pet) => {
