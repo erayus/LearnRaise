@@ -9,7 +9,7 @@
     </div>
 
     <!--Food description on landscape screens-->
-    <div class=" col-md-9 hidden-sm-down food-des-container">
+    <div class=" col-md-9 d-none d-md-block food-des-container">
       <app-food-des
         [food]="selectedFood "
         *ngIf="selectedFood && displayDes; else infoText"
@@ -20,12 +20,12 @@
     </div>
 
     <!--Food description on phone version (Pop-up version)-->
-    <div class=" modal-content  hidden-md-up food-des-container" *ngIf="selectedFood && displayDes && isSelecting">
+    <div class=" modal-content d-md-none food-des-container" *ngIf="selectedFood && displayDes && isSelecting">
       <app-food-des
         [food]="selectedFood"
       ></app-food-des>
     </div>
-    <div class="modal-backdrop fade show hidden-md-up" *ngIf="isSelecting" (click)="closeEditingModalBox()"></div>
+    <div class="modal-backdrop fade show d-md-none" *ngIf="isSelecting" (click)="closeEditingModalBox()"></div>
   </div>
 
 </div>
