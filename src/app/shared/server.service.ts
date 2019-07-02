@@ -5,7 +5,6 @@ import {Pet} from "./pet.model";
 import {Owner} from "./owner.model";
 import {firebaseConfig, firebaseDevConfig} from "../../environments/firebase.config"
 import {AngularFireDatabase} from "angularfire2/database";
-import {LocalStorageManager} from "./localStorageManager.service";
 import {Subject} from "rxjs";
 import {AngularFireAuth} from "angularfire2/auth";
 import {HttpClient} from "@angular/common/http";
@@ -28,18 +27,19 @@ export class ServerService {
   private tokenExpirationTime: number;
   onOwnerIdAndTokenReady = new Subject();
   constructor(private httpClient: HttpClient,
-              private lsManager: LocalStorageManager,
               private db: AngularFireDatabase,
               private afAuth: AngularFireAuth
               ) {
   }
   /**
-   * Retrieve Token from local storage and store it a variable so that it can be used later to make request to the server
+   * Check if token is expired
    */
   isTokenExpired (user) {
     this.tokenExpirationTime = user.h.c;
     const currentTime = Date.now();
+    console.log('Time now: ', currentTime)
     // check if the token has been expired
+    console.log('token time: ', this.tokenExpirationTime)
     if (currentTime > this.tokenExpirationTime ) { // if expired
       return true // for canDeativative component
     } else {
@@ -119,9 +119,6 @@ export class ServerService {
   addFood(userId, newFood: Food) {
     return this.httpClient.post(`${this.firebaseCon.databaseURL}/stomachs/${userId}.json?auth=${this.token}`, newFood)
   }
-  // getFoods() {
-  //    return this.db.list(`stomachs/${this.ownerKey}`).valueChanges();
-  // }
 
 
 }

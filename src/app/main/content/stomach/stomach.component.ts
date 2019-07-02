@@ -31,10 +31,7 @@ export class StomachComponent implements OnInit, OnDestroy{
   foodAddedSub: Subscription;
   closingEditModal: Subscription;
   constructor(private stomachServ: StomachService,
-              private petServ: PetService,
-              private mainServ: MainService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private router: Router) { }
   ngOnInit() {
     window.onload =  () => {
       this.router.navigate(['/main'])

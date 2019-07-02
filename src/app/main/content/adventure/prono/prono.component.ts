@@ -84,8 +84,9 @@ export class PronoComponent implements OnInit, OnDestroy{
     recognition.start();
 
     recognition.onspeechend = function() {
-      recognition.stop();
-      $('#recording-icon').css('animation-name', 'none')
+      console.log('[On Speech end]');
+      $('#recording-icon').css('animation-name', 'none');
+      $('#recognition-status').text('');
     };
 
     recognition.onstart = function(event) {
@@ -95,17 +96,17 @@ export class PronoComponent implements OnInit, OnDestroy{
 
     recognition.onend = (event) => {
       console.log('On ended event', event);
+      $('#recognition-status').text('');
       $('#recognition-icon').css('animation-name', 'none');
       $('#recognition-status').text('');
-      if (this.gameStatus !== 'ended'){
-        recognition.start();
-      }
+      // if (this.gameStatus !== 'ended'){
+      //   recognition.start();
+      // }
     };
 
     recognition.onerror = function(event) {
       $('#recording-icon').css('animation-name', 'none');
       console.log('error', event.error);
-      recognition.start();
     };
 
 
@@ -117,33 +118,15 @@ export class PronoComponent implements OnInit, OnDestroy{
 
     // When speech detected
     recognition.onresult = (event) => {
+      $('#recognition-status').text('');
 
-      const succeed = () =>{
-        // Hide recording icon and show correct icon
-        $('#recording-area').hide();
-        $('#ticking-area').show();
-        // Increase correct score and display it on the interface
-        this.correctScore += 1;
-        $('#correct-score').text(this.correctScore);
-      };
-      const fail = () => {
-        // Hide recording icon and show ticking icon
-        $('#recording-area').hide();
-        $('#incorrect-area').show();
-        this.inCorrectScore += 1;
-        $('#incorrect-score').text(this.inCorrectScore);
-
-      }
-
-      // console.log("Event: ", event);
       const last = event.results.length - 1;
       // Get the result of speech recognition and make sure there is no space in it for exact testing
       this.detectedFood = event.results[last][0].transcript.replace(/ /g,'');
       console.log(this.detectedFood);
       $('#detected-food').text(this.detectedFood);
+
       // If it's correct
-
-
       if (this.detectedFood.toLowerCase() === this.testingFood.toLowerCase()){
         // If this is not the last word in the last
         if (this.foodPointer !== foodNameList.length - 1){
@@ -158,16 +141,15 @@ export class PronoComponent implements OnInit, OnDestroy{
             $('#recording-area').show();
             $('#ticking-area').hide();
 
-
             // Move the pointer to the next food in the list
             this.foodPointer += 1;
             this.testingFood = foodNameList[this.foodPointer];
 
             // Display the next food on the interface
             $('#testing-food').text(this.testingFood);
-
-
           }, 2000);
+
+
           // if this is the last word in the list
         } else {
           succeed();
@@ -183,13 +165,29 @@ export class PronoComponent implements OnInit, OnDestroy{
       } else {
         fail();
         setTimeout(() => {
-          // recognition.start();
           $('#detected-food').text(''); //Set detected food to empty string
           $('#recording-area').show();
           $('#incorrect-area').hide();
         }, 1000);
       }
     };
+
+    const succeed = () =>{
+      // Hide recording icon and show correct icon
+      $('#recording-area').hide();
+      $('#ticking-area').show();
+      // Increase correct score and display it on the interface
+      this.correctScore += 1;
+      $('#correct-score').text(this.correctScore);
+    };
+    const fail = () => {
+      // Hide recording icon and show ticking icon
+      $('#recording-area').hide();
+      $('#incorrect-area').show();
+      this.inCorrectScore += 1;
+      $('#incorrect-score').text(this.inCorrectScore);
+
+    }
 
 
   }

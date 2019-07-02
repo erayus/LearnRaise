@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {AngularFireAuth} from "angularfire2/auth";
-import {LocalStorageManager} from "../shared/localStorageManager.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
 
@@ -10,9 +9,9 @@ import {Subscription} from "rxjs/Rx";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  loading =  true;
   authSubscription: Subscription;
-  constructor(private lsManager: LocalStorageManager,
-              private router: Router,
+  constructor( private router: Router,
               private af: AngularFireAuth) { }
 
   ngOnInit() {
@@ -21,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log('user is logged in');
         window.location.href = "/main/petinfo"
       } else {
+        this.loading = false;
         console.log('user not logged in');
       }
     });

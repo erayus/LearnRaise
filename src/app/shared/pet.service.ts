@@ -198,10 +198,12 @@ export class PetService {
   }
 
   saveLeaveTimeAndHungerTime() {
-    const leaveTimeData = Date.now();
-    this.petObj.leaveTime = leaveTimeData;
-    const currentHungerTime = this.petObj.hungerTime;
-    this.serverServ.saveLeaveTimeAndHungerTime(this.petObj.userId, leaveTimeData, currentHungerTime);
+    if (this.petObj){
+      const leaveTimeData = Date.now();
+      this.petObj.leaveTime = leaveTimeData;
+      const currentHungerTime = this.petObj.hungerTime;
+      this.serverServ.saveLeaveTimeAndHungerTime(this.petObj.userId, leaveTimeData, currentHungerTime);
+    }
   }
   destroyPet() {
     this.petObj = null;

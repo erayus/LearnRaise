@@ -4,10 +4,7 @@ import {PetService} from "../../../shared/pet.service";
 import {MainService} from "../../main.service";
 import {Subscription} from "rxjs";
 import {StomachService} from "../stomach/stomach.service";
-import {Owner} from "../../../shared/owner.model";
 import {OwnerService} from "../../../shared/owner.service";
-import {Observable} from 'rxjs/Rx';
-import {CanComponentDeactivate} from '../../can-deactivate-guard.service';
 declare var $: any;
 
 @Component({
@@ -47,9 +44,7 @@ export class PetInfoComponent implements OnInit, AfterViewChecked, OnDestroy{
   // });
 
   constructor(private petService: PetService,
-              private mainServ: MainService,
-              private stomachServ: StomachService,
-              private ownerServ: OwnerService) {
+              private mainServ: MainService) {
   }
   ngOnInit() {
     this.petPromise.then((pet: Pet) => {

@@ -12,7 +12,6 @@ const appRoutes: Routes = [
   {path: 'main', loadChildren: './main/main.module#MainModule'}
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
