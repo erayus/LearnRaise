@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "deploy": "deploy.sh",
+    "deploy": "npm run pwa-new && webotron sync ./dist learnraise.erayus.com",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

@@ -57,7 +57,7 @@ export class PronoComponent implements OnInit, OnDestroy{
 
             $('#gameModal').on('hidden.bs.modal', (e) => {
               this.gameStatus = 'ended';
-              recognition.stop();
+              recognition.abort();
               this.countdownTime = 3;
               clearInterval(this.countdownInterval);
               $('#gameResult-area').hide();
@@ -86,22 +86,18 @@ export class PronoComponent implements OnInit, OnDestroy{
     recognition.onspeechend = function() {
       console.log('[On Speech end]');
       $('#recording-icon').css('animation-name', 'none');
-      $('#recognition-status').text('');
+      $('#recognition-status').text(" ");
     };
 
     recognition.onstart = function(event) {
+      $('#recording-icon').css('animation-name', 'pulse');
       $('#recognition-status').text('Listening');
-      $('#recording-icon').css('animation-name', 'pulse')
     };
 
     recognition.onend = (event) => {
       console.log('On ended event', event);
-      $('#recognition-status').text('');
       $('#recognition-icon').css('animation-name', 'none');
-      $('#recognition-status').text('');
-      // if (this.gameStatus !== 'ended'){
-      //   recognition.start();
-      // }
+      $('#recognition-status').text("");
     };
 
     recognition.onerror = function(event) {
@@ -118,13 +114,11 @@ export class PronoComponent implements OnInit, OnDestroy{
 
     // When speech detected
     recognition.onresult = (event) => {
-      $('#recognition-status').text('');
-
       const last = event.results.length - 1;
       // Get the result of speech recognition and make sure there is no space in it for exact testing
       this.detectedFood = event.results[last][0].transcript.replace(/ /g,'');
-      console.log(this.detectedFood);
       $('#detected-food').text(this.detectedFood);
+      $('#recognition-status').text('');
 
       // If it's correct
       if (this.detectedFood.toLowerCase() === this.testingFood.toLowerCase()){
@@ -137,7 +131,6 @@ export class PronoComponent implements OnInit, OnDestroy{
             //Set detected food to empty string
             $('#detected-food').text('');
             //Hide correct icon and show recording icon
-            // recognition.start();
             $('#recording-area').show();
             $('#ticking-area').hide();
 
@@ -147,9 +140,9 @@ export class PronoComponent implements OnInit, OnDestroy{
 
             // Display the next food on the interface
             $('#testing-food').text(this.testingFood);
+
+            recognition.start();
           }, 2000);
-
-
           // if this is the last word in the list
         } else {
           succeed();
@@ -168,6 +161,7 @@ export class PronoComponent implements OnInit, OnDestroy{
           $('#detected-food').text(''); //Set detected food to empty string
           $('#recording-area').show();
           $('#incorrect-area').hide();
+          recognition.start();
         }, 1000);
       }
     };
@@ -195,7 +189,7 @@ export class PronoComponent implements OnInit, OnDestroy{
   endProno = (recognition) => {
     this.gameStatus = 'ended';
     // Stop recording
-    recognition.stop();
+    recognition.abort();
     // Hide stop-button and show close-button
     $('#stopGame-btn').hide();
     $('#closeGame-btn').show();
