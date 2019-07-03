@@ -1,6 +1,9 @@
 .adventure-wrapper{
   height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80');
+  background-size: cover;
 }
+
 .header h1{
   font-size: 30px;
 }

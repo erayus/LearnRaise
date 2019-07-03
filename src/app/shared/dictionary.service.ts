@@ -23,8 +23,7 @@ export class DictionaryService {
       .map(
         (response) => {
           // Format response into an object
-          console.log(response);
-          const mp3FileUrl = response[0].fileUrl.replace('http', 'https');
+          const mp3FileUrl = response[0].fileUrl.replace('http:', 'https:');
           return mp3FileUrl;
         }
       )
