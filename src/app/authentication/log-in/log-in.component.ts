@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {AuthService} from "../auth-service";
 import {Router} from "@angular/router";
+import { AngularFireAuth } from 'angularfire2/auth';
 declare var $: any;
 @Component({
   selector: 'app-log-in',
@@ -16,12 +17,24 @@ export class LogInComponent implements OnInit, OnDestroy {
   errorSignInSubscription: Subscription;
   errorSignUpSubscription: Subscription;
   errorMessage = 'none';
+  loading = true;
+  authSubscription: Subscription;
   // isSigningIn = true;
   // googleProvider: any;
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private af: AngularFireAuth) { }
 
   ngOnInit() {
+    // this.authSubscription = this.af.authState.subscribe(user => {
+    //   if (user && user.uid) {
+    //     console.log('user is logged in');
+    //     window.location.href = "/main/petinfo";
+    //   } else {
+    //     this.loading = false;
+    //     console.log('user not logged in');
+    //   }
+    // });
     // // this.googleProvider =  new firebase.auth.GoogleAuthProvider;
     // this.errorSignInSubscription =  this.authService.onErrorSignIn.subscribe(
     //   (error: string) => this.errorMessage = error
@@ -31,7 +44,7 @@ export class LogInComponent implements OnInit, OnDestroy {
     // );
   }
   ngOnDestroy() {
-
+    // this.authSubscription.unsubscribe();
   }
   onLogin(form: NgForm) {
     const email = form.value.email;
