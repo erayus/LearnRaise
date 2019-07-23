@@ -32,14 +32,14 @@ export class PronoComponent implements OnInit, OnDestroy{
     this.onGameStartedSub = this.adventureServ.onGameStarted.subscribe(
       () => {
         $('#game-info').hide();
-        //If the user allows us to use the mic
+        // If the user allows us to use the mic
         navigator.mediaDevices.getUserMedia({ audio: true })
           .then((stream) => {
             const recognition = new webkitSpeechRecognition();
             // Configure the recognition
             recognition.lang = 'en-US';
-            recognition.interimResults = false; //Just show the result at the end of the speech
-            recognition.maxAlternatives = 1;  //Just show the most confident result
+            recognition.interimResults = false; // Just show the result at the end of the speech
+            recognition.maxAlternatives = 1;  // Just show the most confident result
 
             const $countDownArea = $('#countdown');
             $countDownArea.show();
