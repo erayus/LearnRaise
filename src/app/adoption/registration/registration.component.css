@@ -1,6 +1,8 @@
 .quizz-pages-container{
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 50px;
   text-align: center;
   position: relative;
 }

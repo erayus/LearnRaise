@@ -40,7 +40,7 @@
         <div class="page-number pt-2">
           <p>Page 3/4</p>
         </div>
-        <button class="btn proceed-btn primary-btn" (click)="onProceed('petSelection')" [disabled]="!ownerAvatar"> Next</button>
+        <button class="btn proceed-btn primary-btn" (click)="onProceed('petSelection')" [disabled]="ownerAvatar == ''"> Next</button>
       </div>
 
     </div>
@@ -224,7 +224,7 @@
       </div>
     </div>
 
-    <button style="z-index: 1000" class="btn preceed-btn secondary-btn float-left mt-5" (click)="onPreceed('avatar')" > Back</button>
+    <button style="z-index: 1000; margin-top: -40px" class="btn preceed-btn secondary-btn float-left" (click)="onPreceed('avatar')" > Back</button>
 
   </div>
 

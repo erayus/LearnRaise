@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
 
   page = 'welcome';
   ownerNickname: string;
-  ownerAvatar: string;
+  ownerAvatar = '';
   ownerPet = {name:'', species:'', element:'', story: '',weight: 0, height: 0, pictureURL:[]};
 
   pet: Pet;
@@ -122,24 +122,25 @@ export class RegistrationComponent implements OnInit {
     }
   }
   chooseAvatar(id: number){
+    this.ownerAvatar = '';
     const selectedPicEl = $('.avatar-container').children()[id];
     $('.avatar-container').children().removeClass('selected');
     selectedPicEl.classList.toggle('selected');
     switch (id){
       case 0:
-        this.ownerAvatar = '../../../assets/avatar/batman.jpg';
+        this.ownerAvatar = '../../../assets/avatar/batman.jpg' ;
         break;
       case 1:
-        this.ownerAvatar = '../../../assets/avatar/priate-girl.png';
+        this.ownerAvatar =  '../../../assets/avatar/priate-girl.png' ;
         break;
       case 2:
-        this.ownerAvatar = '../../../assets/avatar/cute-girl.png';
+        this.ownerAvatar =  '../../../assets/avatar/cute-girl.png' ;
         break;
       case 3:
-        this.ownerAvatar = '../../../assets/avatar/poop.png';
+        this.ownerAvatar =  '../../../assets/avatar/poop.png';
         break;
       case 4:
-        this.ownerAvatar = '../../../assets/avatar/images.png';
+        this.ownerAvatar =  '../../../assets/avatar/images.png';
         break;
     }
   }

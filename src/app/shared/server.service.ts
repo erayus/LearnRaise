@@ -119,6 +119,4 @@ export class ServerService {
   addFood(userId, newFood: Food) {
     return this.httpClient.post(`${this.firebaseCon.databaseURL}/stomachs/${userId}.json?auth=${this.token}`, newFood)
   }
-
-
 }
