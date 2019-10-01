@@ -3,10 +3,13 @@
 Make learning never feel like learning again
 
 ## Technology
-1. Angular 6
+1. Angular 8
 2. AngularFire
 3. Firebase
-4. Material Design Bootstrap 
+4. Material Design Bootstrap
+5. AWS S3
+6. AWS Route 53
+7. AWS CloudFront
 
 ## Development server
 
