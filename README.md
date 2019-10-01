@@ -1,3 +1,5 @@
+![alt text](https://learnraise.erayus.com/assets/logo.png)
+
 # Location: https://learnraise.erayus.com/
 # Mission 
 Make learning never feel like learning again
