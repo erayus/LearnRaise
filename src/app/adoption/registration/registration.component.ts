@@ -122,7 +122,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
   chooseAvatar(id: number){
-    this.ownerAvatar = '';
+    this.ownerAvatar = '';9
     const selectedPicEl = $('.avatar-container').children()[id];
     $('.avatar-container').children().removeClass('selected');
     selectedPicEl.classList.toggle('selected');
