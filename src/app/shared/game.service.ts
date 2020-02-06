@@ -25,13 +25,13 @@ export class GameService {
           this.petServ.levelUp(2, 8, 36000000); // 3 parameters are newLevel, newExp and newHungerTime
           break;
         case 2:
-          this.petServ.levelUp(3, 12, 54000000);
+          this.petServ.levelUp(3, 16, 54000000);
           break;
         case 3:
-          this.petServ.levelUp(4, 18, 86400000);
+          this.petServ.levelUp(4, 28, 86400000);
           break;
         case 4:
-          this.petServ.levelUp(5, 25, 162000000);
+          this.petServ.levelUp(5, 40, 162000000);
           break;
         case 5:
           this.petServ.evolve('teenager');
@@ -39,10 +39,10 @@ export class GameService {
           alert('wow wow wow evolution!');
           break;
         case 6:
-          this.petServ.levelUp(7, 50, 331200000);
+          this.petServ.levelUp(6, 50, 331200000);
           break;
         case 7:
-          this.petServ.levelUp(6, 35, 259200000);
+          this.petServ.levelUp(7, 35, 259200000);
           this.petServ.evolve('mature');
           alert('wow wow wow evolution!');
           this.ownerServ.gainScoreWhenEvolving();

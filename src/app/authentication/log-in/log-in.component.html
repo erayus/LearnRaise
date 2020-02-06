@@ -29,7 +29,7 @@
         <span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>
       </div>
     </div>
-    <button type="button" class="login-btn btn btn-block"   [disabled] = "!fIn.dirty" (click)="onLogin(fIn)">Log In</button>
+    <button type="button" class="login-btn btn btn-block btn-success"   [disabled] = "!fIn.dirty" (click)="onLogin(fIn)">Log In</button>
 
   </form>
   <div class="col-sm-12 mt-2 text-center">
