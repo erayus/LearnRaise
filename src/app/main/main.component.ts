@@ -11,6 +11,7 @@ import {AuthService} from "../authentication/auth-service";
 import {DictionaryService} from "../shared/dictionary.service";
 // import {r} from "@angular/core/src/render3";
 import {AngularFireAuth} from "angularfire2/auth"
+import { AlertifyService } from 'app/shared/alertify.service';
 
 declare var $: any;
 @Component({
@@ -57,7 +58,8 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
               private petServ: PetService,
               private serverServ: ServerService,
               private authServ: AuthService,
-              private af: AngularFireAuth
+              private af: AngularFireAuth,
+              private alertify: AlertifyService
               ) {
   }
   // @HostListener('window:beforeunload', ['$event'])
@@ -159,9 +161,9 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
   }
 
   onLogOut() {
-    if (confirm('Are you sure you want to disconnect with your pet?')) {
-          this.authServ.logOut();
-    }
+    this.alertify.confirm("Are you sure you want to disconnect with your pet?", () => {
+      this.authServ.logOut();
+    })
   }
   closeModalBox() {
     $('.modal-backdrop').removeClass('modal-backdrop');
