@@ -1,6 +1,7 @@
 import {AfterViewChecked, Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {StomachService} from "../../stomach.service";
 import {Subscription} from "rxjs";
+import { AlertifyService } from 'app/shared/alertify.service';
 
 declare var $: any;
 @Component({
@@ -14,7 +15,8 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   isCooked = true;
   typesArray: string[];
   checkIfIsCookedSub: Subscription;
-  constructor(private stomachServ: StomachService) { }
+  constructor(private stomachServ: StomachService,
+              private alertify: AlertifyService) { }
 
   //If there is any change on any food item, ngOnInit will be called on all food item
   ngOnInit() {
@@ -53,10 +55,9 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    if (confirm('Are you sure you want to delete this food?')) {
-      console.log(this.foodIndex);
+    this.alertify.confirm("Are you sure you want to delete this food?", () => {
       this.stomachServ.deleteFoodWithIndex(this.foodIndex);
-    }
+    })
   }
 
   ngOnDestroy() {

@@ -4,6 +4,7 @@ import {Subject, Observable} from "rxjs";
 import {ServerService} from "../../../shared/server.service";
 import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
 import {forEach} from '@angular/router/src/utils/collection';
+import { AlertifyService } from "app/shared/alertify.service";
 
 
 @Injectable()
@@ -21,7 +22,8 @@ export class StomachService {
   foodChangedEvent = new Subject();
 
   constructor(private serverServ: ServerService,
-              private db: AngularFireDatabase) {
+              private db: AngularFireDatabase,
+              private alertify: AlertifyService) {
   };
 
   /**
@@ -74,7 +76,6 @@ export class StomachService {
    * @return {boolean}
    */
   isFoodEaten(newFoodName: string) {
-    console.log('Checking food', this.foodsInStomach);
     let flag = false;
     if (this.foodsInStomach.length > 0) {
       for (const food of this.foodsInStomach) {
@@ -108,10 +109,10 @@ export class StomachService {
     this.stomachRef$.update(this.keys[index], newFood);
   }
 
-  deleteFoodWithIndex(index: number) {
+  async deleteFoodWithIndex(index: number) {
     // Looking for index if deleting food in the foodsInStomach
-    this.stomachRef$.remove(this.keys[index]);
-
+    await this.stomachRef$.remove(this.keys[index]);
+    this.alertify.success("Food deleted!");
     // Notify stomach component to update description box (must pass with empty parameter)
     this.foodChangedEvent.next();
   }
