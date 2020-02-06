@@ -1,13 +1,15 @@
 import {Injectable} from "@angular/core";
 import {PetService} from "./pet.service";
 import {OwnerService} from "./owner.service";
+import { AlertifyService } from "./alertify.service";
 /**
  * Created by imrtee on 14/11/2017.
  */
 @Injectable()
 export class GameService {
   constructor(private petServ: PetService,
-              private ownerServ: OwnerService) {
+              private ownerServ: OwnerService,
+              private alertify: AlertifyService) {
   }
 
   onFoodAdded() {
@@ -18,6 +20,7 @@ export class GameService {
     if (currentExp < totalExp) { // if still not enough food to level up
       this.petServ.gainExpAndPower();
       this.ownerServ.gainScoreWhenFeeding();
+      this.alertify.success("+1 hour");
     } else { // Level Up mechanism
       const currentLevel = this.petServ.getCurrentLevel();
       switch (currentLevel) {

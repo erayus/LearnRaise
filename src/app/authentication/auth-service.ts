@@ -5,6 +5,7 @@ import {ServerService} from "../shared/server.service";
 import {PetService} from "../shared/pet.service";
 import {OwnerService} from "../shared/owner.service";
 import {AngularFireAuth} from "angularfire2/auth"
+import { AlertifyService } from "app/shared/alertify.service";
 
 @Injectable()
 export class AuthService {
@@ -16,6 +17,7 @@ export class AuthService {
                private petServ: PetService,
                private serverServ: ServerService,
                private afAuth: AngularFireAuth,
+               private alertify: AlertifyService
                ) {
   }
 
@@ -34,6 +36,7 @@ export class AuthService {
   //     });
   // }
   logOut() {
+    this.alertify.success("See you again soon!");
     this.petServ.saveLeaveTimeAndHungerTime();
     this.petServ.destroyPet();
     this.ownerServ.destroyOwner();

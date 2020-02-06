@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireAuth} from "angularfire2/auth"
 
 import {AuthService} from "../authentication/auth-service";
+import { AlertifyService } from "./alertify.service";
 
 @Injectable()
 export class PetService {
@@ -18,7 +19,9 @@ export class PetService {
   // This event is triggered whenever there is any change
   onPetChanged = new Subject<Pet>();
   constructor(private serverServ: ServerService,
-              private af: AngularFireAuth) {}
+              private af: AngularFireAuth,
+              private alertify: AlertifyService)
+              {}
 
 
   createPetWithId(userId: string): Pet {
@@ -112,6 +115,7 @@ export class PetService {
   gainExpAndPower() {
     this.petObj.experience[0] += 1;
     this.petObj.power += 1;
+
   }
 
   getCurrentLevel() {

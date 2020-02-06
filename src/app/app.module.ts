@@ -30,6 +30,7 @@ import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { AlertifyService } from './shared/alertify.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
     PetService,
     ServerService,
     MainService,
+    AlertifyService,
     StomachService,
     DictionaryService,
     GameService,
