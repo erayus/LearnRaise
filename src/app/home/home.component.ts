@@ -17,11 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authSubscription = this.af.authState.subscribe(user => {
       if (user && user.uid) {
-        console.log('user is logged in');
         window.location.href = "/main/petinfo"
       } else {
         this.loading = false;
-        console.log('user not logged in');
       }
     });
   }

@@ -115,6 +115,8 @@ export class PetService {
   gainExpAndPower() {
     this.petObj.experience[0] += 1;
     this.petObj.power += 1;
+    this.alertify.success("Pet gains 1 experience");
+    this.alertify.success("Pet gains 1 power");
 
   }
 
@@ -131,7 +133,8 @@ export class PetService {
     this.petObj.hungerTime[1] = newHungerTime;
     this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
     this.petObj.power += 5;
-    //update pet in the database
+
+    // Update pet in the database
     this.updatePet();
   }
 

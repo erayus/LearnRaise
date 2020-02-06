@@ -13,7 +13,6 @@ export class FoodFilterPipe implements PipeTransform {
     const resultArr = [];
     for (const item of value) {
       const filterStrLength = filterString.length;
-      console.log(item[propName.substr(0, filterStrLength)]);
       if (item[propName].toLowerCase() === filterString.toLowerCase()) {
         resultArr.push(item);
       }else if (item[propName].substr(0, filterStrLength).toLowerCase() === filterString) {

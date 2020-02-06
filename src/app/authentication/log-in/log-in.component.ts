@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {AuthService} from "../auth-service";
 import {Router} from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AlertifyService } from "app/shared/alertify.service";
 declare var $: any;
 @Component({
   selector: 'app-log-in',
@@ -23,7 +24,7 @@ export class LogInComponent implements OnInit, OnDestroy {
   // googleProvider: any;
   constructor(private authService: AuthService,
               private router: Router,
-              private af: AngularFireAuth) { }
+              private alertify: AlertifyService) { }
 
   ngOnInit() {
     // this.authSubscription = this.af.authState.subscribe(user => {
@@ -49,25 +50,21 @@ export class LogInComponent implements OnInit, OnDestroy {
   onLogin(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
+    this.alertify.success("Verifying...");
     this.authService.signinUser(email, password).then(
       response => {
         // Give access to next routes
         // this.loggedIn = true;
         // Set up TokenAndUserId
         // Navigate to main component
-        this.router.navigate(['/main']);
+        this.alertify.success("Verified! Connecting to your pet")
+       this.router.navigate(['/main']);
       }
     )
       .catch(
         error => this.errorMessage = error.message
   );
   }
-  // onLogInGoogle() {
-  //   document.body.classList.remove('modal-open');
-  //   const shadowEl = document.getElementsByClassName('modal-backdrop');
-  //   shadowEl[0].remove();
-  //   this.authService.loginGoogle(this.googleProvider);
-  // }
   changeToSignUp() {
     this.router.navigate(["/authentication/signup"])
   }

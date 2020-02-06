@@ -41,13 +41,10 @@ export class AdoptionComponent implements OnInit, OnDestroy {
   }
   refresh = () => {
     this.authSub = this.af.authState.subscribe(user =>{
-      console.log("Auth: ", user);
       if (user && user.uid) {
-        console.log('user is logged in');
         this.serverServ.setUpOwnerIdAndToken(user);
       } else {
         window.location.href = '/authentication/login';
-        console.log('user not logged in');
       }
     });
     this.tokenSub = this.serverServ.onOwnerIdAndTokenReady.subscribe(
@@ -55,7 +52,6 @@ export class AdoptionComponent implements OnInit, OnDestroy {
         this.serverServ.getOwner()
           .subscribe(
             (owner: Owner) => {
-              console.log("Owner: ", owner);
               this.ownerServ.initOwner(owner);
             },
             (error) => {console.log(error)}
@@ -64,7 +60,6 @@ export class AdoptionComponent implements OnInit, OnDestroy {
           .subscribe(
             (pet: Pet) => {
               if (pet != null) {
-                console.log("Pet: ", pet);
                 this.petServ.initPet(pet);
               } else {
                 alert('Pet not found in the system')

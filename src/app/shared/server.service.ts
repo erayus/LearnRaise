@@ -37,9 +37,7 @@ export class ServerService {
   isTokenExpired (user) {
     this.tokenExpirationTime = user.h.c;
     const currentTime = Date.now();
-    console.log('Time now: ', currentTime)
     // check if the token has been expired
-    console.log('token time: ', this.tokenExpirationTime)
     if (currentTime > this.tokenExpirationTime ) { // if expired
       return true // for canDeativative component
     } else {

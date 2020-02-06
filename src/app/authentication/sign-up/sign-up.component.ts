@@ -47,7 +47,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
               (response) => {
                 // Initiate petObj in PetService and create Pet table
                 const petData = this.petServ.createPetWithId(user.uid);
-                console.log("Pet", petData);
                 // Add pet to the database using user Id
                 this.serverServ.addPet(user.uid, petData).subscribe(() => {
                   // this.loggedIn = true;

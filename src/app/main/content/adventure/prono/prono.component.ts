@@ -102,7 +102,6 @@ export class PronoComponent implements OnInit, OnDestroy{
 
     recognition.onerror = function(event) {
       $('#recording-icon').css('animation-name', 'none');
-      console.log('error', event.error);
     };
 
 

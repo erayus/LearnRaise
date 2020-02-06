@@ -4,10 +4,12 @@
 import {Injectable} from "@angular/core";
 import {Owner} from "./owner.model";
 import {ServerService} from "./server.service";
+import { AlertifyService } from "./alertify.service";
 @Injectable()
 export class OwnerService {
   private owner: Owner;
-  constructor(private serverServ: ServerService) {}
+  constructor(private serverServ: ServerService,
+              private alertify: AlertifyService) {}
 
   createOwnerWithIdAndEmail(id: string, email: string) : Owner {
     // Create owner Object
@@ -31,7 +33,6 @@ export class OwnerService {
   }
   setName(newName: string) {
     this.owner.nickName = newName;
-    console.log(this.owner.nickName);
   }
   setAvatar(newAvatar: string) {
     this.owner.avatar = newAvatar;
@@ -39,6 +40,7 @@ export class OwnerService {
   }
 
   gainScoreWhenFeeding() {
+    this.alertify.success("You gain 1 point");
     this.owner.score += 1;
     this.saveOwnerToDatabase().subscribe();
   }

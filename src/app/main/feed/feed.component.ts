@@ -96,7 +96,6 @@ export class FeedComponent implements OnInit, AfterViewChecked {
       this.state = 'result';
       this.dictionaryServ.lookUpFood(foodNameLU.toLowerCase()).subscribe(
           (response: any) => {
-            console.log(response);
             // switch to result box
             this.state = 'result';
 

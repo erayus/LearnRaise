@@ -16,7 +16,6 @@ export class AlertifyService {
     })
   }
   success(message: string) {
-    console.log("vnbcghfhc");
     alertify.success(message);
   }
   error(message: string) {

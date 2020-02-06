@@ -78,7 +78,6 @@ export class MainComponent implements OnInit, OnDestroy, CanComponentDeactivate 
         }
       } else {
         window.location.href = 'authentication/login';
-        console.log('user not logged in');
       }
     });
 
