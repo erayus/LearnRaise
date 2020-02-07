@@ -98,7 +98,7 @@ export class PetService {
       } else if (petCurrentHungerTime <= 0 && this.petObj.noOfLives > 1 ) {
         this.petObj.noOfLives -= 1;
         this.petObj.hungerTime[0] = this.petObj.hungerTime[1];
-        alert(`Your pet was gone and recovered, number of lives left: ${this.petObj.noOfLives}`);
+        this.alertify.message(`Your pet was gone and recovered, number of lives left: ${this.petObj.noOfLives}`);
         this.startGettingHungry();
         this.updatePet();
         return this.petObj;

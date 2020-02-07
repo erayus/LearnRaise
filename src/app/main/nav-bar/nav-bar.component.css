@@ -78,6 +78,13 @@
   background-color: darkblue;
 }
 
+.nav-item:nth-child(4).active div i.fa-users,.nav-item:nth-child(4):hover,
+.nav-item:nth-child(3).active div i.fa-gamepad,.nav-item:nth-child(3):hover,
+.nav-item:nth-child(1).active div i.fa-paws, .nav-item:nth-child(1):hover
+{
+  color: white
+}
+
 .nav-text{
   position: absolute;
   top: 50%;
