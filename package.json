@@ -37,7 +37,7 @@
     "core-js": "^2.6.10",
     "firebase": "^5.11.1",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mdbootstrap": "^4.8.11",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
